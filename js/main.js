@@ -318,15 +318,18 @@
     var firstScript = document.getElementsByTagName('script')[0];
     firstScript.parentNode.insertBefore(tag, firstScript);
 
-    playerEl.parentElement.title = 'Click to toggle sound';
-    playerEl.parentElement.addEventListener('click', function () {
+    var toggleSound = function () {
       if (!backgroundPlayer) return;
       if (backgroundPlayer.isMuted()) {
         backgroundPlayer.unMute();
       } else {
         backgroundPlayer.mute();
       }
-    });
+    };
+
+    playerEl.parentElement.title = 'Click to toggle sound';
+    playerEl.parentElement.addEventListener('click', toggleSound);
+    playerEl.addEventListener('click', toggleSound);
 
     window.onYouTubeIframeAPIReady = function () {
       backgroundPlayer = new YT.Player('player', {
