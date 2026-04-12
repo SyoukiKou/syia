@@ -374,14 +374,15 @@ body.is-loaded .top-explore{opacity:1}
 }
 @media only screen and (min-width:769px){
   .top-explore__button:after{margin-left:15px}
-  .top-explore__button{background:#000;padding:38px 68px;text-align:right;line-height:2.3}
+  .top-explore__button{padding:0;text-align:right;line-height:2.3}
   .top-explore__button:hover:after{transform:translateX(10px)}
   .top-explore__button:hover .top-explore__text:after{animation:explore-slide .5s cubic-bezier(.77,0,.175,1)}
 }
 @keyframes explore-slide{0%,100%{transform:translateX(0)}50%{transform:translateX(100%)}51%{transform:translateX(-100%)}}
 .top-explore__text{
   font-family:Prompt,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-weight:400;
-  display:inline-block;position:relative;overflow:hidden;letter-spacing:.03em
+  display:inline-block;position:relative;overflow:hidden;letter-spacing:.03em;
+  background:#000;padding:10px 16px 12px
 }
 @media only screen and (min-width:769px){.top-explore__text{font-weight:300}}
 @media only screen and (max-width:768px){.top-explore__text{padding-bottom:8px}}
@@ -396,11 +397,10 @@ body.is-loaded .top-explore{opacity:1}
 body.is-loaded .top-footer{opacity:1}
 @media only screen and (min-width:769px){.top-footer{left:6.94444vw;bottom:42px;letter-spacing:.03em}}
 @media only screen and (max-width:768px){.top-footer{bottom:42px}}
+.top-footer__sns{margin-bottom:12px}
 .top-footer__links{font-family:Prompt,sans-serif;font-weight:400;font-size:9pt}
 @media only screen and (min-width:769px){.top-footer__links{font-weight:200;margin-bottom:9pt}}
-@media only screen and (max-width:768px){.top-footer__links{display:flex}}
-@media only screen and (max-width:768px){.top-footer__links>li:first-child:after{content:"/";margin:0 9px 0 6px}}
-@media only screen and (min-width:769px){.top-footer__links>li:first-child{display:none}}
+@media only screen and (max-width:768px){.top-footer__links{display:block}}
 .top-footer__links>li>a{text-decoration:none;display:inline-block;transition:all .3s cubic-bezier(.77,0,.175,1)}
 @media only screen and (min-width:769px){.top-footer__links>li>a:hover{opacity:.3}}
 .top-footer__copyright>small{font-size:10px;font-family:Prompt,sans-serif;font-weight:400}
