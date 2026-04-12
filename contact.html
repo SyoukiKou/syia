@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact | Artist Portfolio</title>
+  <meta name="description" content="Contact" />
+  <link rel="stylesheet" href="css/master.css" />
+</head>
+<body class="is-loaded" style="overflow-y:auto">
+  <div class="loading" id="loading"><div class="loading__background"></div><canvas class="loading__eeg" id="loadingEeg"></canvas><div class="loading__mask-text" id="loadingMaskText"><span>S</span><span>Y</span><span>I</span><span>A</span></div></div>
+
+  <header class="header">
+    <span class="header__nav-trigger">♪</span>
+    <nav class="header__nav">
+      <ul class="header__nav__list has-current">
+        <li><a href="information.html">Information</a></li>
+        <li><a href="art.html">Art</a></li>
+        <li><a href="concert.html">Concert</a></li>
+        <li><a href="artist-statement.html">Artist Statement</a></li>
+        <li><a href="biography.html">Biography</a></li>
+        <li><a href="contact.html" class="is-current">Contact</a></li>
+      </ul>
+    </nav>
+    <a class="header__title" href="index.html">SYIA</a>
+    <button class="header__button" type="button">Menu</button>
+  </header>
+
+  <div class="menu">
+    <div class="menu__container">
+      <div class="menu__header"><a class="menu__title" href="index.html">SYIA</a><button class="menu__button" type="button">Close</button></div>
+      <nav class="menu__nav">
+        <ul class="menu__nav__list">
+          <li><a href="information.html">Information</a></li><li><a href="art.html">Art</a></li><li><a href="concert.html">Concert</a></li><li><a href="artist-statement.html">Artist Statement</a></li><li><a href="biography.html">Biography</a></li><li><a href="contact.html">Contact</a></li>
+        </ul>
+        <ul class="menu__links"><li><a href="sitepolicy.html">Site Policy</a></li></ul>
+      </nav>
+      <div class="menu__information menu__information--ja">
+        <div class="menu__information__background">
+          <div class="menu__information__background__slide" style="background-image:url('https://images.unsplash.com/photo-1518998053901-5348d3961a04?w=1200&q=80')"></div>
+        </div>
+        <div class="menu__information__lang">
+          <button class="menu__information__lang__button menu__information__lang__button--ja is-active">jp</button><span class="menu__information__lang__separator">/</span><button class="menu__information__lang__button menu__information__lang__button--en">en</button>
+        </div>
+        <ul class="menu__information__list"></ul>
+      </div>
+      <ul class="menu__sns sns-list"><li><a href="#" target="_blank">Instagram</a></li><li><a href="#" target="_blank">Twitter</a></li></ul>
+      <p class="menu__copyright"><small>&copy; SYIA</small></p>
+    </div>
+  </div>
+
+  <div class="contact-header">
+    <h1 class="contact-header__title"><span class="page-title-anim">Contact</span></h1>
+  </div>
+
+  <div class="contact-content">
+    <div class="reveal">
+      <p style="font-family:'Noto Serif JP',serif;font-weight:400;font-size:13px;line-height:2;letter-spacing:.05em;margin-bottom:2em">
+        作品に関するお問い合わせ、展覧会のご依頼、取材のご相談など、下記フォームよりお気軽にご連絡ください。<br><br>
+        For inquiries about artworks, exhibition requests, or press inquiries, please feel free to contact us through the form below.
+      </p>
+      <form class="contact-form" onsubmit="return false;">
+        <div class="contact-form__group">
+          <label class="contact-form__label" for="name">Name / お名前</label>
+          <input class="contact-form__input" type="text" id="name" name="name" required />
+        </div>
+        <div class="contact-form__group">
+          <label class="contact-form__label" for="email">Email / メールアドレス</label>
+          <input class="contact-form__input" type="email" id="email" name="email" required />
+        </div>
+        <div class="contact-form__group">
+          <label class="contact-form__label" for="subject">Subject / 件名</label>
+          <input class="contact-form__input" type="text" id="subject" name="subject" required />
+        </div>
+        <div class="contact-form__group">
+          <label class="contact-form__label" for="message">Message / メッセージ</label>
+          <textarea class="contact-form__textarea" id="message" name="message" rows="6" required></textarea>
+        </div>
+        <button class="contact-form__submit" type="submit">Send</button>
+      </form>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer__content">
+      <div class="footer__content__col">
+        <ul class="footer__nav">
+          <li><a href="information.html">Information</a></li><li><a href="art.html">Art</a></li><li><a href="concert.html">Concert</a></li><li><a href="artist-statement.html">Artist Statement</a></li><li><a href="biography.html">Biography</a></li><li><a href="contact.html" class="is-current">Contact</a></li>
+        </ul>
+        <ul class="footer__links"><li><a href="sitepolicy.html">Site Policy</a></li></ul>
+        <div class="footer__sns"><ul class="sns-list"><li><a href="#">Instagram</a></li><li><a href="#">Twitter</a></li><li><a href="#">Youtube</a></li></ul></div>
+      </div>
+      <div class="footer__content__col footer__content__col--bottom-group">
+        <p class="footer__copyright"><small>&copy; SYIA</small></p>
+        <div class="footer__autograph"></div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="canvas" id="canvas"></div>
+  <script src="js/main.js"></script>
+</body>
+</html>

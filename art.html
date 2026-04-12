@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Art | Artist Portfolio</title>
+  <link rel="stylesheet" href="css/master.css" />
+</head>
+<body class="is-loaded" style="overflow-y:auto">
+  <!-- Loading -->
+  <div class="loading" id="loading">
+    <div class="loading__background"></div>
+    <canvas class="loading__eeg" id="loadingEeg"></canvas>
+    <div class="loading__mask-text" id="loadingMaskText"><span>S</span><span>Y</span><span>I</span><span>A</span></div>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <span class="header__nav-trigger">♪</span>
+    <nav class="header__nav">
+      <ul class="header__nav__list has-current">
+        <li><a href="information.html">Information</a></li>
+        <li><a href="art.html" class="is-current">Art</a></li>
+        <li><a href="concert.html">Concert</a></li>
+        <li><a href="artist-statement.html">Artist Statement</a></li>
+        <li><a href="biography.html">Biography</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <a class="header__title" href="index.html">SYIA</a>
+    <button class="header__button" type="button">Menu</button>
+  </header>
+
+  <!-- Menu -->
+  <div class="menu">
+    <div class="menu__container">
+      <div class="menu__header">
+        <a class="menu__title" href="index.html">SYIA</a>
+        <button class="menu__button" type="button">Close</button>
+      </div>
+      <nav class="menu__nav">
+        <ul class="menu__nav__list">
+          <li><a href="information.html">Information</a></li>
+          <li><a href="art.html">Art</a></li>
+          <li><a href="concert.html">Concert</a></li>
+          <li><a href="artist-statement.html">Artist Statement</a></li>
+          <li><a href="biography.html">Biography</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <ul class="menu__links"><li><a href="sitepolicy.html">Site Policy</a></li></ul>
+      </nav>
+      <div class="menu__information menu__information--ja">
+        <div class="menu__information__background">
+          <div class="menu__information__background__slide" style="background-image:url('https://images.unsplash.com/photo-1518998053901-5348d3961a04?w=1200&q=80')"></div>
+          <div class="menu__information__background__slide" style="background-image:url('https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=1200&q=80')"></div>
+          <div class="menu__information__background__slide" style="background-image:url('https://images.unsplash.com/photo-1547891654-e66ed7ebb968?w=1200&q=80')"></div>
+        </div>
+        <div class="menu__information__lang">
+          <button class="menu__information__lang__button menu__information__lang__button--ja is-active">jp</button>
+          <span class="menu__information__lang__separator">/</span>
+          <button class="menu__information__lang__button menu__information__lang__button--en">en</button>
+        </div>
+        <ul class="menu__information__list">
+          <li><a href="concert.html"><p class="menu__information__list__date"><time datetime="2026-04-01">Apr.01,2026</time></p><p class="menu__information__list__title menu__information__list__title--ja">個展「光と影の対話」が東京都現代美術館にて開催されます。</p><p class="menu__information__list__title menu__information__list__title--en">Solo exhibition "Dialogue of Light and Shadow".</p></a></li>
+        </ul>
+      </div>
+      <ul class="menu__sns sns-list">
+        <li><a href="#" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+        <li><a href="#" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+        <li><a href="#" target="_blank" rel="noopener noreferrer">Youtube</a></li>
+      </ul>
+      <p class="menu__copyright"><small>&copy; SYIA</small></p>
+    </div>
+  </div>
+
+  <!-- Art Index Header -->
+  <div class="art-index-hgroup">
+    <h1 class="art-index-hgroup__title"><span class="page-title-anim">Index</span></h1>
+    <p class="art-index-hgroup__text">作品一覧</p>
+  </div>
+
+  <!-- Art Index Content: Filter (left) + List (right) -->
+  <div class="art-index-content">
+    <!-- Left Filter Sidebar -->
+    <aside class="art-filter">
+      <button class="art-filter__button" id="artFilterBtn"><span class="art-filter__button__text">Filter by</span></button>
+      <div class="art-filter__content" id="artFilterContent">
+        <h2 class="art-filter__title u-sp">Filter on</h2>
+
+        <h3 class="art-filter__heading">Title</h3>
+        <ul class="art-filter__list" id="artFilterTitleList">
+          <li><a href="#"><span class="art-filter__list__serif">Digital Nature Series</span><span class="art-filter__list__sub">デジタルネイチャーシリーズ</span></a></li>
+          <li><a href="#"><span class="art-filter__list__serif">Light Sculpture</span><span class="art-filter__list__sub">光の彫刻</span></a></li>
+          <li><a href="#"><span class="art-filter__list__serif">Transformation of Material</span><span class="art-filter__list__sub">物化</span></a></li>
+          <li><a href="#"><span class="art-filter__list__serif">Resonance — Sound and Matter</span><span class="art-filter__list__sub">共鳴 — 音と物質</span></a></li>
+          <li><a href="#"><span class="art-filter__list__serif">Computational Nature</span><span class="art-filter__list__sub">計算機自然</span></a></li>
+          <li><a href="#"><span class="art-filter__list__serif">Void</span><span class="art-filter__list__sub">虚空</span></a></li>
+          <li><a href="#"><span class="art-filter__list__serif">Re-Materialization of Waves</span><span class="art-filter__list__sub">波の再物質化</span></a></li>
+          <li><a href="#"><span class="art-filter__list__serif">Mirrored Gate of Emergence</span><span class="art-filter__list__sub">即今鏡門</span></a></li>
+        </ul>
+
+        <ul class="art-filter__pager" id="artFilterPager">
+          <li><span>Prev</span></li>
+          <li><a href="#">Next</a></li>
+        </ul>
+
+        <hr class="art-filter__divider">
+        <h3 class="art-filter__heading">Category</h3>
+        <ul class="art-filter__list art-filter__list--vertical" id="artCategoryFilter">
+          <li><a href="#" class="is-selected" data-category="all">All</a></li>
+          <li><a href="#" data-category="mixed-media">Mixed Media</a></li>
+          <li><a href="#" data-category="sculpture">Sculpture</a></li>
+          <li><a href="#" data-category="video">Video</a></li>
+          <li><a href="#" data-category="print">Print</a></li>
+          <li><a href="#" data-category="performing">Performing</a></li>
+        </ul>
+
+        <hr class="art-filter__divider">
+        <h3 class="art-filter__heading">Year</h3>
+        <ul class="art-filter__list art-filter__list--vertical" id="artYearFilter">
+          <li><a href="#" data-year="2026">2026</a></li>
+          <li><a href="#" data-year="2025">2025</a></li>
+          <li><a href="#" data-year="2024">2024</a></li>
+          <li><a href="#" data-year="2023">2023</a></li>
+          <li><a href="#" data-year="2022">2022</a></li>
+          <li><a href="#" data-year="2021">2021</a></li>
+          <li><a href="#" data-year="2020">2020</a></li>
+        </ul>
+
+        <hr class="art-filter__divider">
+        <button class="art-filter__close" id="artFilterClose">Close</button>
+      </div>
+    </aside>
+
+    <!-- Right Art List Grid -->
+    <ul class="art-list" id="artList">
+      <li data-category="video" data-year="2026">
+        <div class="art-list__thumbnail">
+          <div class="art-list__thumbnail__background" style="background-image:url('https://images.unsplash.com/photo-1518998053901-5348d3961a04?w=800&q=80')"></div>
+          <a class="art-list__thumbnail__image" href="#" style="background-image:url('https://images.unsplash.com/photo-1518998053901-5348d3961a04?w=800&q=80')">Digital Nature Series</a>
+        </div>
+        <p class="art-list__title art-list__title--serif">Digital Nature Series</p>
+        <p class="art-list__title art-list__title--sub">デジタルネイチャーシリーズ</p>
+        <p class="art-list__year">2026</p>
+        <p class="art-list__category">Video</p>
+      </li>
+      <li data-category="mixed-media" data-year="2025">
+        <div class="art-list__thumbnail">
+          <div class="art-list__thumbnail__background" style="background-image:url('https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=800&q=80')"></div>
+          <a class="art-list__thumbnail__image" href="#" style="background-image:url('https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=800&q=80')">Light Sculpture</a>
+        </div>
+        <p class="art-list__title art-list__title--serif">Light Sculpture</p>
+        <p class="art-list__title art-list__title--sub">光の彫刻</p>
+        <p class="art-list__year">2025</p>
+        <p class="art-list__category">Mixed Media</p>
+      </li>
+      <li data-category="sculpture" data-year="2025">
+        <div class="art-list__thumbnail">
+          <div class="art-list__thumbnail__background" style="background-image:url('https://images.unsplash.com/photo-1547891654-e66ed7ebb968?w=800&q=80')"></div>
+          <a class="art-list__thumbnail__image" href="#" style="background-image:url('https://images.unsplash.com/photo-1547891654-e66ed7ebb968?w=800&q=80')">Transformation of Material</a>
+        </div>
+        <p class="art-list__title art-list__title--serif">Transformation of Material</p>
+        <p class="art-list__title art-list__title--sub">物化</p>
+        <p class="art-list__year">2025</p>
+        <p class="art-list__category">Sculpture</p>
+      </li>
+      <li data-category="mixed-media" data-year="2024">
+        <div class="art-list__thumbnail">
+          <div class="art-list__thumbnail__background" style="background-image:url('https://images.unsplash.com/photo-1482160549825-59d1b23cb208?w=800&q=80')"></div>
+          <a class="art-list__thumbnail__image" href="#" style="background-image:url('https://images.unsplash.com/photo-1482160549825-59d1b23cb208?w=800&q=80')">Resonance</a>
+        </div>
+        <p class="art-list__title art-list__title--serif">Resonance — Sound and Matter</p>
+        <p class="art-list__title art-list__title--sub">共鳴 — 音と物質</p>
+        <p class="art-list__year">2024</p>
+        <p class="art-list__category">Mixed Media</p>
+      </li>
+      <li data-category="video" data-year="2024">
+        <div class="art-list__thumbnail">
+          <div class="art-list__thumbnail__background" style="background-image:url('https://images.unsplash.com/photo-1549490349-8643362247b5?w=800&q=80')"></div>
+          <a class="art-list__thumbnail__image" href="#" style="background-image:url('https://images.unsplash.com/photo-1549490349-8643362247b5?w=800&q=80')">Computational Nature</a>
+        </div>
+        <p class="art-list__title art-list__title--serif">Computational Nature</p>
+        <p class="art-list__title art-list__title--sub">計算機自然</p>
+        <p class="art-list__year">2024</p>
+        <p class="art-list__category">Video</p>
+      </li>
+      <li data-category="print" data-year="2023">
+        <div class="art-list__thumbnail">
+          <div class="art-list__thumbnail__background" style="background-image:url('https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=800&q=80')"></div>
+          <a class="art-list__thumbnail__image" href="#" style="background-image:url('https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=800&q=80')">Void</a>
+        </div>
+        <p class="art-list__title art-list__title--serif">Void</p>
+        <p class="art-list__title art-list__title--sub">虚空</p>
+        <p class="art-list__year">2023</p>
+        <p class="art-list__category">Print</p>
+      </li>
+      <li data-category="print" data-year="2022">
+        <div class="art-list__thumbnail">
+          <div class="art-list__thumbnail__background" style="background-image:url('https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=800&q=80')"></div>
+          <a class="art-list__thumbnail__image" href="#" style="background-image:url('https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=800&q=80')">Re-Materialization of Waves</a>
+        </div>
+        <p class="art-list__title art-list__title--serif">Re-Materialization of Waves</p>
+        <p class="art-list__title art-list__title--sub">波の再物質化</p>
+        <p class="art-list__year">2022</p>
+        <p class="art-list__category">Print</p>
+      </li>
+      <li data-category="mixed-media" data-year="2022">
+        <div class="art-list__thumbnail">
+          <div class="art-list__thumbnail__background" style="background-image:url('https://images.unsplash.com/photo-1511735111819-9a3f7709049c?w=800&q=80')"></div>
+          <a class="art-list__thumbnail__image" href="#" style="background-image:url('https://images.unsplash.com/photo-1511735111819-9a3f7709049c?w=800&q=80')">Mirrored Gate of Emergence</a>
+        </div>
+        <p class="art-list__title art-list__title--serif">Mirrored Gate of Emergence</p>
+        <p class="art-list__title art-list__title--sub">即今鏡門</p>
+        <p class="art-list__year">2022</p>
+        <p class="art-list__category">Mixed Media</p>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Bottom Pager -->
+  <div class="pager" id="artPager">
+    <div class="pager__content" id="artPagerContent">
+      <ul class="pager__list">
+        <li><span class="page-numbers current">1</span></li>
+        <li><a class="page-numbers" href="#">2</a></li>
+        <li><a class="page-numbers" href="#">3</a></li>
+      </ul>
+      <div class="pager__separation">
+        <span class="pager__prev">Prev</span>
+        <a class="pager__next" href="#">Next</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer__content">
+      <div class="footer__content__col">
+        <ul class="footer__nav">
+          <li><a href="information.html">Information</a></li>
+          <li><a href="art.html" class="is-current">Art</a></li>
+          <li><a href="concert.html">Concert</a></li>
+          <li><a href="artist-statement.html">Artist Statement</a></li>
+          <li><a href="biography.html">Biography</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <ul class="footer__links"><li><a href="sitepolicy.html">Site Policy</a></li></ul>
+        <div class="footer__sns">
+          <ul class="sns-list">
+            <li><a href="#" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+            <li><a href="#" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+            <li><a href="#" target="_blank" rel="noopener noreferrer">Youtube</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__content__col footer__content__col--bottom-group">
+        <p class="footer__copyright"><small>&copy; SYIA</small></p>
+        <div class="footer__autograph"></div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="canvas" id="canvas"></div>
+  <script src="js/main.js"></script>
+</body>
+</html>

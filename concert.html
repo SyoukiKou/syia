@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Concert | SYIA Official Portfolio</title>
+  <meta name="description" content="SYIA - Concert / 演奏会情報" />
+  <link rel="stylesheet" href="css/master.css" />
+</head>
+<body class="is-loaded" style="overflow-y:auto">
+  <!-- Loading -->
+  <div class="loading" id="loading">
+    <div class="loading__background"></div>
+    <canvas class="loading__eeg" id="loadingEeg"></canvas>
+    <div class="loading__mask-text" id="loadingMaskText"><span>S</span><span>Y</span><span>I</span><span>A</span></div>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <span class="header__nav-trigger">♪</span>
+    <nav class="header__nav">
+      <ul class="header__nav__list has-current">
+        <li><a href="information.html">Information</a></li>
+        <li><a href="art.html">Art</a></li>
+        <li><a href="concert.html" class="is-current">Concert</a></li>
+        <li><a href="artist-statement.html">Artist Statement</a></li>
+        <li><a href="biography.html">Biography</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <a class="header__title" href="index.html">SYIA</a>
+    <button class="header__button" type="button">Menu</button>
+  </header>
+
+  <!-- Menu -->
+  <div class="menu">
+    <div class="menu__container">
+      <div class="menu__header">
+        <a class="menu__title" href="index.html">SYIA</a>
+        <button class="menu__button" type="button">Close</button>
+      </div>
+      <nav class="menu__nav">
+        <ul class="menu__nav__list">
+          <li><a href="information.html">Information</a></li>
+          <li><a href="art.html">Art</a></li>
+          <li><a href="concert.html">Concert</a></li>
+          <li><a href="artist-statement.html">Artist Statement</a></li>
+          <li><a href="biography.html">Biography</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <ul class="menu__links"><li><a href="sitepolicy.html">Site Policy</a></li></ul>
+      </nav>
+      <div class="menu__information menu__information--ja">
+        <div class="menu__information__background">
+          <div class="menu__information__background__slide" style="background-image:url('https://images.unsplash.com/photo-1518998053901-5348d3961a04?w=1200&q=80')"></div>
+          <div class="menu__information__background__slide" style="background-image:url('https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=1200&q=80')"></div>
+          <div class="menu__information__background__slide" style="background-image:url('https://images.unsplash.com/photo-1547891654-e66ed7ebb968?w=1200&q=80')"></div>
+        </div>
+        <div class="menu__information__lang">
+          <button class="menu__information__lang__button menu__information__lang__button--ja is-active">jp</button>
+          <span class="menu__information__lang__separator">/</span>
+          <button class="menu__information__lang__button menu__information__lang__button--en">en</button>
+        </div>
+        <ul class="menu__information__list">
+          <li><a href="concert.html"><p class="menu__information__list__date"><time datetime="2026-02-07">Feb.07,2026</time></p><p class="menu__information__list__title menu__information__list__title--ja">Regulative Art Experience 体験会のお知らせ</p><p class="menu__information__list__title menu__information__list__title--en">Regulative Art Experience event notice</p></a></li>
+        </ul>
+      </div>
+      <ul class="menu__sns sns-list">
+        <li class="sns-list__instagram"><a href="https://www.instagram.com/syiaviolin/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+        <li class="sns-list__twitter"><a href="https://x.com/syiaviolin" target="_blank" rel="noopener noreferrer">X (Twitter)</a></li>
+        <li class="sns-list__facebook"><a href="https://www.facebook.com/syiaviolin/" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+      </ul>
+      <p class="menu__copyright"><small>&copy; SYIA</small></p>
+    </div>
+  </div>
+
+  <!-- Archive Header -->
+  <div class="archive-header">
+    <h1 class="archive-header__title"><span class="page-title-anim">Concert</span></h1>
+  </div>
+
+  <!-- Concert List -->
+  <ul class="exhibition-list concert-list">
+    <li class="reveal">
+      <a class="exhibition-item" href="#">
+        <div class="exhibition-item__image">
+          <img src="https://images.unsplash.com/photo-1507838153414-b4b713384a76?w=600&q=80" alt="Regulative Art Experience">
+        </div>
+        <div class="exhibition-item__content">
+          <p class="exhibition-item__date">2026</p>
+          <h3 class="exhibition-item__title">Regulative Art Experience 体験会のお知らせ</h3>
+        </div>
+      </a>
+    </li>
+    <li class="reveal">
+      <a class="exhibition-item" href="#">
+        <div class="exhibition-item__image">
+          <img src="https://images.unsplash.com/photo-1465847899585-d00f4be20dc7?w=600&q=80" alt="Violin & Piano Showcase">
+        </div>
+        <div class="exhibition-item__content">
+          <p class="exhibition-item__date">2026</p>
+          <h3 class="exhibition-item__title">Violin &amp; Piano Showcase 出演のお知らせ</h3>
+        </div>
+      </a>
+    </li>
+    <li class="reveal">
+      <a class="exhibition-item" href="#">
+        <div class="exhibition-item__image">
+          <img src="https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=600&q=80" alt="BLUE FANTASY Special Showcase">
+        </div>
+        <div class="exhibition-item__content">
+          <p class="exhibition-item__date">2025</p>
+          <h3 class="exhibition-item__title">BLUE FANTASY Special Showcase 出演のお知らせ</h3>
+        </div>
+      </a>
+    </li>
+    <li class="reveal">
+      <a class="exhibition-item" href="#">
+        <div class="exhibition-item__image">
+          <img src="https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=600&q=80" alt="Marunouchi Street Park 2025 winter">
+        </div>
+        <div class="exhibition-item__content">
+          <p class="exhibition-item__date">2025</p>
+          <h3 class="exhibition-item__title">Marunouchi Street Park 2025 winter ストリート演奏のお知らせ</h3>
+        </div>
+      </a>
+    </li>
+    <li class="reveal">
+      <a class="exhibition-item" href="#">
+        <div class="exhibition-item__image">
+          <img src="https://images.unsplash.com/photo-1511192336575-5a79af67a629?w=600&q=80" alt="ブエノスアイレスの四季 Showcase">
+        </div>
+        <div class="exhibition-item__content">
+          <p class="exhibition-item__date">2025</p>
+          <h3 class="exhibition-item__title">&quot;ブエノスアイレスの四季&quot; Showcase 出演のお知らせ</h3>
+        </div>
+      </a>
+    </li>
+    <li class="reveal">
+      <a class="exhibition-item" href="#">
+        <div class="exhibition-item__image">
+          <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&q=80" alt="Marunouchi Street Park 2025 summer">
+        </div>
+        <div class="exhibition-item__content">
+          <p class="exhibition-item__date">2025</p>
+          <h3 class="exhibition-item__title">Marunouchi Street Park 2025 summer ストリート演奏のお知らせ</h3>
+        </div>
+      </a>
+    </li>
+    <li class="reveal">
+      <a class="exhibition-item" href="#">
+        <div class="exhibition-item__image">
+          <img src="https://images.unsplash.com/photo-1549488344-cbb6c34cf1ac?w=600&q=80" alt="偉大な芸術家の思い出 Showcase">
+        </div>
+        <div class="exhibition-item__content">
+          <p class="exhibition-item__date">2025</p>
+          <h3 class="exhibition-item__title">&quot;偉大な芸術家の思い出&quot; Showcase 出演のお知らせ</h3>
+        </div>
+      </a>
+    </li>
+    <li class="reveal">
+      <a class="exhibition-item" href="#">
+        <div class="exhibition-item__image">
+          <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=600&q=80" alt="It's Saturday Night Live !">
+        </div>
+        <div class="exhibition-item__content">
+          <p class="exhibition-item__date">2025</p>
+          <h3 class="exhibition-item__title">It's Saturday Night Live ! 出演のお知らせ</h3>
+          <p class="exhibition-item__venue">The Foreign Correspondents' Club of Japan (FCCJ)</p>
+        </div>
+      </a>
+    </li>
+    <li class="reveal">
+      <a class="exhibition-item" href="#">
+        <div class="exhibition-item__image">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&q=80" alt="Violin Duo & Piano Showcase">
+        </div>
+        <div class="exhibition-item__content">
+          <p class="exhibition-item__date">2025</p>
+          <h3 class="exhibition-item__title">Violin Duo &amp; Piano Showcase 出演のお知らせ</h3>
+        </div>
+      </a>
+    </li>
+    <li class="reveal">
+      <a class="exhibition-item" href="#">
+        <div class="exhibition-item__image">
+          <img src="https://images.unsplash.com/photo-1415201364774-f6f0bb35f28f?w=600&q=80" alt="ラ・フォル・ジュルネ TOKYO 2025">
+        </div>
+        <div class="exhibition-item__content">
+          <p class="exhibition-item__date">2025</p>
+          <h3 class="exhibition-item__title">ラ・フォル・ジュルネ TOKYO 2025 出演のお知らせ</h3>
+        </div>
+      </a>
+    </li>
+    <li class="reveal">
+      <a class="exhibition-item" href="#">
+        <div class="exhibition-item__image">
+          <img src="https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?w=600&q=80" alt="Marunouchi Street Park 2025 spring">
+        </div>
+        <div class="exhibition-item__content">
+          <p class="exhibition-item__date">2025</p>
+          <h3 class="exhibition-item__title">Marunouchi Street Park 2025 spring ストリート演奏のお知らせ</h3>
+        </div>
+      </a>
+    </li>
+    <li class="reveal">
+      <a class="exhibition-item" href="#">
+        <div class="exhibition-item__image">
+          <img src="https://images.unsplash.com/photo-1513883049090-d0b7439799bf?w=600&q=80" alt="Violin Duo & Piano Showcase (May)">
+        </div>
+        <div class="exhibition-item__content">
+          <p class="exhibition-item__date">2025</p>
+          <h3 class="exhibition-item__title">Violin Duo &amp; Piano Showcase 出演のお知らせ</h3>
+        </div>
+      </a>
+    </li>
+    <li class="reveal">
+      <a class="exhibition-item" href="#">
+        <div class="exhibition-item__image">
+          <img src="https://images.unsplash.com/photo-1507838153414-b4b713384a76?w=600&q=80" alt="早稲田大学卒業記念リサイタル">
+        </div>
+        <div class="exhibition-item__content">
+          <p class="exhibition-item__date">2025</p>
+          <h3 class="exhibition-item__title">《卒業前最終公演》早稲田大学卒業記念リサイタル開催のお知らせ</h3>
+        </div>
+      </a>
+    </li>
+    <li class="reveal">
+      <a class="exhibition-item" href="#">
+        <div class="exhibition-item__image">
+          <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=600&q=80" alt="Bright Street Ice Skating Show">
+        </div>
+        <div class="exhibition-item__content">
+          <p class="exhibition-item__date">2024</p>
+          <h3 class="exhibition-item__title">Bright Street Ice Skating Show 生演奏出演のお知らせ</h3>
+        </div>
+      </a>
+    </li>
+    <li class="reveal">
+      <a class="exhibition-item" href="#">
+        <div class="exhibition-item__image">
+          <img src="https://images.unsplash.com/photo-1501612780327-45045538702b?w=600&q=80" alt="Marunouchi Street Park 2024 winter">
+        </div>
+        <div class="exhibition-item__content">
+          <p class="exhibition-item__date">2024</p>
+          <h3 class="exhibition-item__title">Marunouchi Street Park 2024 winter ストリート演奏のお知らせ</h3>
+        </div>
+      </a>
+    </li>
+    <li class="reveal">
+      <a class="exhibition-item" href="#">
+        <div class="exhibition-item__image">
+          <img src="https://images.unsplash.com/photo-1465847899585-d00f4be20dc7?w=600&q=80" alt="Duo Concert">
+        </div>
+        <div class="exhibition-item__content">
+          <p class="exhibition-item__date">2023</p>
+          <h3 class="exhibition-item__title">Duo Concert開催のお知らせ</h3>
+        </div>
+      </a>
+    </li>
+    <li class="reveal">
+      <a class="exhibition-item" href="#">
+        <div class="exhibition-item__image">
+          <img src="https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=600&q=80" alt="ラ・フォル・ジュルネ TOKYO 2023">
+        </div>
+        <div class="exhibition-item__content">
+          <p class="exhibition-item__date">2023</p>
+          <h3 class="exhibition-item__title">ラ・フォル・ジュルネ TOKYO 2023 出演のお知らせ</h3>
+        </div>
+      </a>
+    </li>
+  </ul>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer__content">
+      <div class="footer__content__col">
+        <ul class="footer__nav">
+          <li><a href="information.html">Information</a></li>
+          <li><a href="art.html">Art</a></li>
+          <li><a href="concert.html" class="is-current">Concert</a></li>
+          <li><a href="artist-statement.html">Artist Statement</a></li>
+          <li><a href="biography.html">Biography</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <ul class="footer__links"><li><a href="sitepolicy.html">Site Policy</a></li></ul>
+        <div class="footer__sns">
+          <ul class="sns-list">
+            <li><a href="https://www.instagram.com/syiaviolin/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+            <li><a href="https://x.com/syiaviolin" target="_blank" rel="noopener noreferrer">X (Twitter)</a></li>
+            <li><a href="https://www.facebook.com/syiaviolin/" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__content__col footer__content__col--bottom-group">
+        <p class="footer__copyright"><small>&copy; SYIA</small></p>
+        <div class="footer__autograph"></div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="canvas" id="canvas"></div>
+  <script src="js/main.js"></script>
+</body>
+</html>

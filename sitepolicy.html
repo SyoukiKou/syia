@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Site Policy | Artist Portfolio</title>
+  <meta name="description" content="Site Policy" />
+  <link rel="stylesheet" href="css/master.css" />
+</head>
+<body class="is-loaded" style="overflow-y:auto">
+  <div class="loading" id="loading"><div class="loading__background"></div><canvas class="loading__eeg" id="loadingEeg"></canvas><div class="loading__mask-text" id="loadingMaskText"><span>S</span><span>Y</span><span>I</span><span>A</span></div></div>
+
+  <header class="header">
+    <span class="header__nav-trigger">♪</span>
+    <nav class="header__nav">
+      <ul class="header__nav__list">
+        <li><a href="information.html">Information</a></li>
+        <li><a href="art.html">Art</a></li>
+        <li><a href="concert.html">Concert</a></li>
+        <li><a href="artist-statement.html">Artist Statement</a></li>
+        <li><a href="biography.html">Biography</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <a class="header__title" href="index.html">SYIA</a>
+    <button class="header__button" type="button">Menu</button>
+  </header>
+
+  <div class="menu">
+    <div class="menu__container">
+      <div class="menu__header"><a class="menu__title" href="index.html">SYIA</a><button class="menu__button" type="button">Close</button></div>
+      <nav class="menu__nav">
+        <ul class="menu__nav__list">
+          <li><a href="information.html">Information</a></li><li><a href="art.html">Art</a></li><li><a href="concert.html">Concert</a></li><li><a href="artist-statement.html">Artist Statement</a></li><li><a href="biography.html">Biography</a></li><li><a href="contact.html">Contact</a></li>
+        </ul>
+        <ul class="menu__links"><li><a href="sitepolicy.html">Site Policy</a></li></ul>
+      </nav>
+      <div class="menu__information menu__information--ja">
+        <div class="menu__information__background">
+          <div class="menu__information__background__slide" style="background-image:url('https://images.unsplash.com/photo-1518998053901-5348d3961a04?w=1200&q=80')"></div>
+        </div>
+        <div class="menu__information__lang">
+          <button class="menu__information__lang__button menu__information__lang__button--ja is-active">jp</button><span class="menu__information__lang__separator">/</span><button class="menu__information__lang__button menu__information__lang__button--en">en</button>
+        </div>
+        <ul class="menu__information__list"></ul>
+      </div>
+      <ul class="menu__sns sns-list"><li><a href="#" target="_blank">Instagram</a></li><li><a href="#" target="_blank">Twitter</a></li></ul>
+      <p class="menu__copyright"><small>&copy; SYIA</small></p>
+    </div>
+  </div>
+
+  <div class="sitepolicy-header">
+    <h1 class="sitepolicy-title"><span class="page-title-anim">Site Policy</span></h1>
+  </div>
+
+  <div class="sitepolicy-content">
+    <div class="reveal">
+      <h2>著作権について</h2>
+      <p>当サイトに掲載されているすべてのコンテンツ（テキスト、画像、映像、音声等）の著作権は、当サイト運営者または正当な権利を有する第三者に帰属します。無断転載・複製を禁じます。</p>
+
+      <h2>免責事項</h2>
+      <p>当サイトの情報は可能な限り正確を期しておりますが、その正確性や完全性を保証するものではありません。当サイトの利用により生じたいかなる損害についても、責任を負いかねます。</p>
+
+      <h2>リンクについて</h2>
+      <p>当サイトへのリンクは、原則として自由です。ただし、フレーム内表示やその他当サイトのコンテンツであることが不明確となるリンクの設定はご遠慮ください。</p>
+
+      <h2>Copyright</h2>
+      <p>All content published on this website, including text, images, videos, and audio, is the property of the site operator or legitimate rights holders. Unauthorized reproduction or redistribution is prohibited.</p>
+
+      <h2>Disclaimer</h2>
+      <p>While every effort is made to ensure the accuracy of the information on this site, we do not guarantee its accuracy or completeness. We shall not be held responsible for any damages arising from the use of this site.</p>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer__content">
+      <div class="footer__content__col">
+        <ul class="footer__nav">
+          <li><a href="information.html">Information</a></li><li><a href="art.html">Art</a></li><li><a href="concert.html">Concert</a></li><li><a href="artist-statement.html">Artist Statement</a></li><li><a href="biography.html">Biography</a></li><li><a href="contact.html">Contact</a></li>
+        </ul>
+        <ul class="footer__links"><li><a href="sitepolicy.html">Site Policy</a></li></ul>
+        <div class="footer__sns"><ul class="sns-list"><li><a href="#">Instagram</a></li><li><a href="#">Twitter</a></li><li><a href="#">Youtube</a></li></ul></div>
+      </div>
+      <div class="footer__content__col footer__content__col--bottom-group">
+        <p class="footer__copyright"><small>&copy; SYIA</small></p>
+        <div class="footer__autograph"></div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="canvas" id="canvas"></div>
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Artist Statement | Artist Portfolio</title>
+  <meta name="description" content="Artist Statement" />
+  <link rel="stylesheet" href="css/master.css" />
+</head>
+<body class="is-loaded" style="overflow-y:auto">
+  <!-- Loading -->
+  <div class="loading" id="loading">
+    <div class="loading__background"></div>
+    <canvas class="loading__eeg" id="loadingEeg"></canvas>
+    <div class="loading__mask-text" id="loadingMaskText"><span>S</span><span>Y</span><span>I</span><span>A</span></div>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <span class="header__nav-trigger">♪</span>
+    <nav class="header__nav">
+      <ul class="header__nav__list has-current">
+        <li><a href="information.html">Information</a></li>
+        <li><a href="art.html">Art</a></li>
+        <li><a href="concert.html">Concert</a></li>
+        <li><a href="artist-statement.html" class="is-current">Artist Statement</a></li>
+        <li><a href="biography.html">Biography</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <a class="header__title" href="index.html">SYIA</a>
+    <button class="header__button" type="button">Menu</button>
+  </header>
+
+  <!-- Menu -->
+  <div class="menu">
+    <div class="menu__container">
+      <div class="menu__header">
+        <a class="menu__title" href="index.html">SYIA</a>
+        <button class="menu__button" type="button">Close</button>
+      </div>
+      <nav class="menu__nav">
+        <ul class="menu__nav__list">
+          <li><a href="information.html">Information</a></li>
+          <li><a href="art.html">Art</a></li>
+          <li><a href="concert.html">Concert</a></li>
+          <li><a href="artist-statement.html">Artist Statement</a></li>
+          <li><a href="biography.html">Biography</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <ul class="menu__links"><li><a href="sitepolicy.html">Site Policy</a></li></ul>
+      </nav>
+      <div class="menu__information menu__information--ja">
+        <div class="menu__information__background">
+          <div class="menu__information__background__slide" style="background-image:url('https://images.unsplash.com/photo-1518998053901-5348d3961a04?w=1200&q=80')"></div>
+          <div class="menu__information__background__slide" style="background-image:url('https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=1200&q=80')"></div>
+          <div class="menu__information__background__slide" style="background-image:url('https://images.unsplash.com/photo-1547891654-e66ed7ebb968?w=1200&q=80')"></div>
+        </div>
+        <div class="menu__information__lang">
+          <button class="menu__information__lang__button menu__information__lang__button--ja is-active">jp</button>
+          <span class="menu__information__lang__separator">/</span>
+          <button class="menu__information__lang__button menu__information__lang__button--en">en</button>
+        </div>
+        <ul class="menu__information__list">
+          <li><a href="concert.html"><p class="menu__information__list__date"><time datetime="2026-04-01">Apr.01,2026</time></p><p class="menu__information__list__title menu__information__list__title--ja">個展「光と影の対話」が東京都現代美術館にて開催されます。</p><p class="menu__information__list__title menu__information__list__title--en">Solo exhibition "Dialogue of Light and Shadow" at Museum of Contemporary Art Tokyo.</p></a></li>
+          <li><a href="concert.html"><p class="menu__information__list__date"><time datetime="2026-03-15">Mar.15,2026</time></p><p class="menu__information__list__title menu__information__list__title--ja">作品が「デジタルネイチャー展」にて展示されます。</p><p class="menu__information__list__title menu__information__list__title--en">Art installation exhibited at "Digital Nature Exhibition".</p></a></li>
+        </ul>
+      </div>
+      <ul class="menu__sns sns-list">
+        <li><a href="#" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+        <li><a href="#" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+        <li><a href="#" target="_blank" rel="noopener noreferrer">Youtube</a></li>
+      </ul>
+      <p class="menu__copyright"><small>&copy; SYIA</small></p>
+    </div>
+  </div>
+
+  <!-- Profile Header - title with reveal animation -->
+  <div class="profile-header">
+    <h1 class="profile-header__title"><span class="page-title-anim">Artist Statement</span></h1>
+  </div>
+
+  <!-- Profile Front Content -->
+  <div class="profile-front">
+    <figure class="profile-front__image">
+      <img class="profile-front__image__image" src="https://images.unsplash.com/photo-1518998053901-5348d3961a04?w=1200&q=80" alt="Artist main image">
+    </figure>
+
+    <div class="profile-front__header">
+      <h2 class="profile-front__header__title">
+        物化，計算機自然<br>
+        風景，共感覚<br>
+        映像と物質，<br class="u-sp">質量への憧憬
+      </h2>
+      <p class="profile-front__header__text">Transformation of Material Things in Digital Nature Scenery with Synesthesia Image and Matter, Sehnsucht nach Masse</p>
+    </div>
+
+    <div class="profile-front__ja-text reveal">
+      <p>物化する計算機自然と対峙し，<br class="u-pc">質量と映像の間にある憧憬や情念を反芻する．</p>
+      <p>研究や芸術活動の枠を自由に越境し，<br class="u-pc">探求と表現を継続している．<br class="u-pc">メディア装置の発明やメディアのコンテクストを含む<br class="u-pc">メタ的な芸術活動としてのメディアアートを行いながら，<br class="u-pc">質量のある物質的な世界と質量のないデータの世界の<br class="u-pc">融和する計算機自然という世界観への思考を続けている．</p>
+      <p>作品の根本に，老子・荘子から連続する<br class="u-pc">東洋的な物化（万物が変化し定型を持たず循環する）の思想を通底し，<br class="u-pc">19世紀以降の映像装置とメディア装置，<br class="u-pc">計算機と東洋的な物化との関係性，<br class="u-pc">自然現象とデータの相似性を考えながら，<br class="u-pc">空間に没入するようなインスタレーションの構築を得意とする．</p>
+      <p>作品の主題と副題には以下のものが内包される：<br class="u-pc">映像と物質の境界と融和，計算機と自然の類似性，<br class="u-pc">質量性のあるものと非質量性のあるものの調停．<br class="u-pc">ポスト工業社会，計算機自然社会における侘びと寂び，<br class="u-pc">デジタルから見た質量への憧憬という概念提示．</p>
+    </div>
+
+    <div class="profile-front__en-group reveal">
+      <div class="ordered-group">
+        <div class="ordered-group__section">
+          <p>Freely crossing the boundaries of research and artistic activity, continuing to explore and express philosophy. While engaging in media art as a meta-artistic activity that includes the invention of media devices and media contexts, continuing to think about the worldview of the Digital Nature, in which the material world with mass and the digital world of massless data melt together.</p>
+        </div>
+        <div class="ordered-group__section">
+          <p>Based on the idea of oriental materialization (all things change and circulate without any formality), which is derived from Laozi and Zhuangzi, the works are rooted in the idea of the relationship between imaging devices and media devices since the 19th century, digital transformation and oriental materialization, and the similarity of natural phenomena and data.</p>
+        </div>
+        <div class="ordered-group__section">
+          <p>The subjects and sub-titles of the work encompass the following: the boundaries and harmonization of image and matter, the analogy between computation and nature, and the mediation of the massive and the immaterial. The post-industrial society, wabi and sabi in the Digital Nature society, and the concept of the Sehnsucht nach Masse (Longing for mass) from a Digital perspective.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Page Links -->
+  <div class="page-links">
+    <div class="page-links__content">
+      <a class="page-links__prev" href="art.html">Art</a>
+      <a class="page-links__next" href="biography.html">Biography</a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer__content">
+      <div class="footer__content__col">
+        <ul class="footer__nav">
+          <li><a href="information.html">Information</a></li>
+          <li><a href="art.html">Art</a></li>
+          <li><a href="concert.html">Concert</a></li>
+          <li><a href="artist-statement.html" class="is-current">Artist Statement</a></li>
+          <li><a href="biography.html">Biography</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <ul class="footer__links"><li><a href="sitepolicy.html">Site Policy</a></li></ul>
+        <div class="footer__sns">
+          <ul class="sns-list">
+            <li><a href="#" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+            <li><a href="#" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+            <li><a href="#" target="_blank" rel="noopener noreferrer">Youtube</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__content__col footer__content__col--bottom-group">
+        <p class="footer__copyright"><small>&copy; SYIA</small></p>
+        <div class="footer__autograph"></div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="canvas" id="canvas"></div>
+  <script src="js/main.js"></script>
+</body>
+</html>
