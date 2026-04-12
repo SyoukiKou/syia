@@ -255,6 +255,12 @@ hr{border:0}
 @media only screen and (min-width:769px){.menu__information__list__date{font-weight:200;opacity:.4;font-size:9pt}}
 .menu__information__list__title{margin-top:3px;font-family:"Noto Serif JP",sans-serif,serif;font-weight:400}
 @media only screen and (min-width:769px){.menu__information__list__title{font-weight:200}}
+.menu__information__list__date,.menu__information__list__title{
+  display:table;width:auto;
+  background:rgba(0,0,0,.42);
+  padding:2px 8px;
+  border-radius:2px
+}
 
 /* Menu SNS / Copyright */
 .menu__sns{font-weight:300;display:flex;flex-wrap:wrap}

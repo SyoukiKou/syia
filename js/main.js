@@ -301,6 +301,8 @@
   // ========================================
   var playerEl = document.getElementById('player');
   if (playerEl && isHomePage) {
+    var backgroundPlayer = null;
+
     // Create fallback background
     var fallback = document.createElement('div');
     fallback.className = 'top-background-video__fallback';
@@ -316,18 +318,29 @@
     var firstScript = document.getElementsByTagName('script')[0];
     firstScript.parentNode.insertBefore(tag, firstScript);
 
+    playerEl.parentElement.title = 'Click to toggle sound';
+    playerEl.parentElement.addEventListener('click', function () {
+      if (!backgroundPlayer) return;
+      if (backgroundPlayer.isMuted()) {
+        backgroundPlayer.unMute();
+      } else {
+        backgroundPlayer.mute();
+      }
+    });
+
     window.onYouTubeIframeAPIReady = function () {
-      new YT.Player('player', {
-        videoId: 'dQw4w9WgXcQ', // Replace with your video ID
+      backgroundPlayer = new YT.Player('player', {
+        videoId: 'ye4q25buANs',
         playerVars: {
           autoplay: 1, mute: 1, controls: 0, loop: 1,
-          playlist: 'dQw4w9WgXcQ', modestbranding: 1, rel: 0,
+          playlist: 'ye4q25buANs', modestbranding: 1, rel: 0,
           showinfo: 0, playsinline: 1, disablekb: 1, iv_load_policy: 3,
           origin: window.location.origin
         },
         events: {
           onReady: function (e) {
             e.target.setPlaybackQuality('hd720');
+            e.target.mute();
             if (fallback) {
               fallback.style.opacity = '0';
               setTimeout(function () { fallback.remove(); }, 2000);
