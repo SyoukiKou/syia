@@ -754,10 +754,10 @@ span.pager__prev:hover,span.pager__next:hover{opacity:.2}
 .footer__links>li:not(:last-child){margin-bottom:1px}
 .footer__links>li>a{text-decoration:none;font-size:14px;opacity:.3;transition:opacity .3s cubic-bezier(.77,0,.175,1)}
 .footer__links>li>a:hover{opacity:1}
-.footer__sns{margin-top:40px;padding:40px 0;border-top:1px solid #232323;border-bottom:1px solid #232323}
-@media only screen and (min-width:769px){.footer__sns{margin-top:25px;border:none;padding:0}}
+.footer__sns{margin-top:2px;padding:0;border-top:none;border-bottom:none}
+@media only screen and (min-width:769px){.footer__sns{margin-top:0;border:none;padding:0}}
 .footer__sns .sns-list>li>a:not(:hover){opacity:.3}
-.footer__copyright{margin-top:35px}
+.footer__copyright{margin-top:2px}
 @media only screen and (min-width:769px){.footer__copyright{margin-top:0;font-weight:300;display:flex;align-items:flex-end}}
 .footer__copyright>small{font-size:10px}
 @media only screen and (min-width:769px){
