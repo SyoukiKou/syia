@@ -323,7 +323,7 @@ hr{border:0}
 .top-header{position:absolute;z-index:1;margin:auto;left:0;right:0;opacity:0;transition:opacity 1.2s ease .5s}
 body.is-loaded .top-header{opacity:1}
 @media only screen and (max-width:768px){.top-header{top:calc(50% - 65px);text-align:center}}
-@media only screen and (min-width:769px){.top-header{bottom:21%;padding:0 12.5vw}}
+@media only screen and (min-width:769px){.top-header{bottom:21%;padding:0 6.94444vw}}
 .top-header__title{display:none}
 @media only screen and (max-width:768px){.top-header__body{display:inline-block}}
 .top-header__autograph{display:block;width:220px;height:115px}
@@ -359,9 +359,9 @@ body.is-loaded .top-header{opacity:1}
 
 /* ====== Explore Button ====== */
 /* ====== Top Footer ====== */
-.top-footer{position:absolute;z-index:1;left:12.5vw;opacity:0;transition:opacity 1s ease 1.2s}
+.top-footer{position:absolute;z-index:1;left:6.94444vw;opacity:0;transition:opacity 1s ease 1.2s}
 body.is-loaded .top-footer{opacity:1}
-@media only screen and (min-width:769px){.top-footer{left:12.5vw;bottom:42px;letter-spacing:.03em}}
+@media only screen and (min-width:769px){.top-footer{left:6.94444vw;bottom:42px;letter-spacing:.03em}}
 @media only screen and (max-width:768px){.top-footer{bottom:42px}}
 .top-footer__sns{margin-bottom:2px}
 .top-footer__links{font-family:Prompt,sans-serif;font-weight:400;font-size:9pt}
