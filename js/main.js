@@ -306,7 +306,7 @@
     // Create fallback background
     var fallback = document.createElement('div');
     fallback.className = 'top-background-video__fallback';
-    fallback.style.backgroundImage = "url('https://images.unsplash.com/photo-1518998053901-5348d3961a04?w=1600&q=80')";
+    fallback.style.backgroundImage = "url('images/home-masthead.jpg')";
     fallback.style.opacity = '0';
     fallback.style.transition = 'opacity 2s ease';
     playerEl.parentElement.appendChild(fallback);
@@ -434,6 +434,26 @@
     }
     setTimeout(animateParticles, 2000);
   }
+
+  // ========================================
+  // Contact Form (Contact, Lesson)
+  // No form backend on this static site: hand the message to the visitor's mail app
+  // ========================================
+  document.querySelectorAll('.contact-form').forEach(function (form) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var value = function (name) {
+        return form.elements[name] ? form.elements[name].value.trim() : '';
+      };
+      var subject = value('subject') || form.dataset.subject || 'お問い合わせ';
+      var body = value('message') + '\n\n' + value('name') + '\n' + value('email');
+      window.location.href = 'mailto:syiaviolin@gmail.com' +
+        '?subject=' + encodeURIComponent(subject) +
+        '&body=' + encodeURIComponent(body);
+      var note = form.querySelector('.contact-form__note');
+      if (note) note.hidden = false;
+    });
+  });
 
   // ========================================
   // Information Page: Year Filter & Pagination

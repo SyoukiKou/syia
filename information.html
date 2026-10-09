@@ -3,8 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Information | Artist Portfolio</title>
+  <title>Information | SYIA Official Portfolio</title>
   <meta name="description" content="Information and News" />
+  <link rel="icon" href="images/favicon.png" />
+  <link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
   <link rel="stylesheet" href="css/master.css" />
 </head>
 <body class="is-loaded" style="overflow-y:auto">
@@ -23,6 +25,7 @@
         <li><a href="information.html" class="is-current">Information</a></li>
         <li><a href="art.html">Art</a></li>
         <li><a href="concert.html">Concert</a></li>
+        <li><a href="lesson.html">Lesson</a></li>
         <li><a href="artist-statement.html">Artist Statement</a></li>
         <li><a href="biography.html">Biography</a></li>
         <li><a href="contact.html">Contact</a></li>
@@ -44,6 +47,7 @@
           <li><a href="information.html">Information</a></li>
           <li><a href="art.html">Art</a></li>
           <li><a href="concert.html">Concert</a></li>
+          <li><a href="lesson.html">Lesson</a></li>
           <li><a href="artist-statement.html">Artist Statement</a></li>
           <li><a href="biography.html">Biography</a></li>
           <li><a href="contact.html">Contact</a></li>
@@ -61,8 +65,9 @@
           <button class="menu__information__lang__button menu__information__lang__button--en">en</button>
         </div>
         <ul class="menu__information__list">
-          <li><a href="concert.html"><p class="menu__information__list__date"><time datetime="2026-04-01">Apr.01,2026</time></p><p class="menu__information__list__title menu__information__list__title--ja">個展「光と影の対話」が東京都現代美術館にて開催されます。</p><p class="menu__information__list__title menu__information__list__title--en">Solo exhibition "Dialogue of Light and Shadow" at Museum of Contemporary Art Tokyo.</p></a></li>
-          <li><a href="concert.html"><p class="menu__information__list__date"><time datetime="2026-03-15">Mar.15,2026</time></p><p class="menu__information__list__title menu__information__list__title--ja">作品が「デジタルネイチャー展」にて展示されます。</p><p class="menu__information__list__title menu__information__list__title--en">Art installation exhibited at "Digital Nature Exhibition".</p></a></li>
+          <li><a href="showcase202603.html"><p class="menu__information__list__date"><time datetime="2026-03-22">Mar.22,2026</time></p><p class="menu__information__list__title menu__information__list__title--ja">Violin &amp; Piano Showcase 出演のお知らせ</p><p class="menu__information__list__title menu__information__list__title--en">Performing at Violin &amp; Piano Showcase</p></a></li>
+          <li><a href="violin-piano-showcase.html"><p class="menu__information__list__date"><time datetime="2026-01-29">Jan.29,2026</time></p><p class="menu__information__list__title menu__information__list__title--ja">Regulative Art Experience 体験会のお知らせ</p><p class="menu__information__list__title menu__information__list__title--en">Regulative Art Experience: hands-on session</p></a></li>
+          <li><a href="showcase20251222.html"><p class="menu__information__list__date"><time datetime="2025-12-22">Dec.22,2025</time></p><p class="menu__information__list__title menu__information__list__title--ja">BLUE FANTASY Special Showcase 出演のお知らせ</p><p class="menu__information__list__title menu__information__list__title--en">Performing at BLUE FANTASY Special Showcase</p></a></li>
         </ul>
       </div>
       <ul class="menu__sns sns-list">
@@ -94,8 +99,6 @@
       <li><a href="#" data-year="2025">2025</a></li>
       <li><a href="#" data-year="2024">2024</a></li>
       <li><a href="#" data-year="2023">2023</a></li>
-      <li><a href="#" data-year="2022">2022</a></li>
-      <li><a href="#" data-year="2021">2021</a></li>
     </ul>
     <div class="archive-filter__close">
       <button class="archive-filter__close__button" id="archiveFilterClose">Close</button>
@@ -107,164 +110,155 @@
   <!-- Information List -->
   <ul class="information-list" id="informationList">
     <li data-year="2026">
-      <a class="information-item" href="concert.html">
+      <a class="information-item" href="showcase202603.html">
         <div class="information-item__content">
-          <p class="information-item__date"><time datetime="2026-04-01">Apr.01,2026</time></p>
-          <h3 class="information-item__title">個展「光と影の対話」が東京都現代美術館にて開催されます。(2026年5月1日-7月31日)</h3>
-          <p class="information-item__en-title">Solo exhibition "Dialogue of Light and Shadow" at Museum of Contemporary Art Tokyo. (May.1-Jul.31, 2026)</p>
+          <p class="information-item__date"><time datetime="2026-03-22">Mar.22,2026</time></p>
+          <h3 class="information-item__title">Violin &amp; Piano Showcase 出演のお知らせ</h3>
+          <p class="information-item__en-title">Performing at Violin &amp; Piano Showcase</p>
         </div>
       </a>
     </li>
     <li data-year="2026">
-      <a class="information-item" href="concert.html">
+      <a class="information-item" href="violin-piano-showcase.html">
         <div class="information-item__content">
-          <p class="information-item__date"><time datetime="2026-03-15">Mar.15,2026</time></p>
-          <h3 class="information-item__title">作品が「デジタルネイチャー展」にて展示されます。(2026年4月10日 – 6月30日)</h3>
-          <p class="information-item__en-title">Art installation exhibited at "Digital Nature Exhibition". (Apr.10 - Jun.30, 2026)</p>
-        </div>
-      </a>
-    </li>
-    <li data-year="2026">
-      <a class="information-item" href="#">
-        <div class="information-item__content">
-          <p class="information-item__date"><time datetime="2026-02-01">Feb.01,2026</time></p>
-          <h3 class="information-item__title">新刊『アートとテクノロジーの未来』が発売されます。予約受付中！</h3>
-          <p class="information-item__en-title">New book "The Future of Art and Technology" released. Pre-orders available!</p>
+          <p class="information-item__date"><time datetime="2026-01-29">Jan.29,2026</time></p>
+          <h3 class="information-item__title">Regulative Art Experience 体験会のお知らせ</h3>
+          <p class="information-item__en-title">Regulative Art Experience: hands-on session</p>
         </div>
       </a>
     </li>
     <li data-year="2025">
-      <a class="information-item" href="concert.html">
+      <a class="information-item" href="showcase20251222.html">
         <div class="information-item__content">
-          <p class="information-item__date"><time datetime="2025-12-10">Dec.10,2025</time></p>
-          <h3 class="information-item__title">作品が「Mission∞infinity | Space + Quantum + Art」にて展示されます。(2026年1月31日 – 5月6日)</h3>
-          <p class="information-item__en-title">Art installation will be exhibited at "Mission∞infinity | Space + Quantum + Art". (Jan.31 - May.6, 2026)</p>
+          <p class="information-item__date"><time datetime="2025-12-22">Dec.22,2025</time></p>
+          <h3 class="information-item__title">BLUE FANTASY Special Showcase 出演のお知らせ</h3>
+          <p class="information-item__en-title">Performing at BLUE FANTASY Special Showcase</p>
         </div>
       </a>
     </li>
     <li data-year="2025">
-      <a class="information-item" href="concert.html">
+      <a class="information-item" href="msp2025winter.html">
         <div class="information-item__content">
-          <p class="information-item__date"><time datetime="2025-10-15">Oct.15,2025</time></p>
-          <h3 class="information-item__title">「Transformation of Material Things」がHong Kong Arts Centreで開催されます。(2025年10月15日 – 12月20日)</h3>
-          <p class="information-item__en-title">"Transformation of Material Things" held at Hong Kong Arts Centre. (Oct.15 - Dec.20, 2025)</p>
+          <p class="information-item__date"><time datetime="2025-11-22">Nov.22 – Dec.25,2025</time></p>
+          <h3 class="information-item__title">Marunouchi Street Park 2025 winter ストリート演奏のお知らせ</h3>
+          <p class="information-item__en-title">Street performances at Marunouchi Street Park 2025 winter</p>
         </div>
       </a>
     </li>
     <li data-year="2025">
-      <a class="information-item" href="concert.html">
+      <a class="information-item" href="showcase202510.html">
         <div class="information-item__content">
-          <p class="information-item__date"><time datetime="2025-07-01">Jul.01,2025</time></p>
-          <h3 class="information-item__title">「Computational Nature — Beyond the Frame」が金沢21世紀美術館にて開催されます。(2025年7月1日 – 9月30日)</h3>
-          <p class="information-item__en-title">"Computational Nature — Beyond the Frame" at 21st Century Museum of Contemporary Art, Kanazawa. (Jul.1 - Sep.30, 2025)</p>
+          <p class="information-item__date"><time datetime="2025-10-30">Oct.30,2025</time></p>
+          <h3 class="information-item__title">&quot;ブエノスアイレスの四季&quot; Showcase 出演のお知らせ</h3>
+          <p class="information-item__en-title">Performing at &quot;The Four Seasons of Buenos Aires&quot; Showcase</p>
         </div>
       </a>
     </li>
     <li data-year="2025">
-      <a class="information-item" href="concert.html">
+      <a class="information-item" href="showcase202509.html">
         <div class="information-item__content">
-          <p class="information-item__date"><time datetime="2025-03-01">Mar.01,2025</time></p>
-          <h3 class="information-item__title">「Resonance — Sound and Matter」がICCにて開催されます。(2025年3月1日 – 5月31日)</h3>
-          <p class="information-item__en-title">"Resonance — Sound and Matter" at ICC, Tokyo. (Mar.1 - May.31, 2025)</p>
+          <p class="information-item__date"><time datetime="2025-09-14">Sep.14,2025</time></p>
+          <h3 class="information-item__title">&quot;偉大な芸術家の思い出&quot; Showcase 出演のお知らせ</h3>
+          <p class="information-item__en-title">Performing at &quot;In Memory of a Great Artist&quot; Showcase</p>
+        </div>
+      </a>
+    </li>
+    <li data-year="2025">
+      <a class="information-item" href="fccj2025.html">
+        <div class="information-item__content">
+          <p class="information-item__date"><time datetime="2025-09-13">Sep.13,2025</time></p>
+          <h3 class="information-item__title">It's Saturday Night Live ! 出演のお知らせ</h3>
+          <p class="information-item__en-title">Performing at It's Saturday Night Live !</p>
+        </div>
+      </a>
+    </li>
+    <li data-year="2025">
+      <a class="information-item" href="msp2025summer.html">
+        <div class="information-item__content">
+          <p class="information-item__date"><time datetime="2025-09-06">Sep.06 – Sep.21,2025</time></p>
+          <h3 class="information-item__title">Marunouchi Street Park 2025 summer ストリート演奏のお知らせ</h3>
+          <p class="information-item__en-title">Street performances at Marunouchi Street Park 2025 summer</p>
+        </div>
+      </a>
+    </li>
+    <li data-year="2025">
+      <a class="information-item" href="violin-duo-piano-showcase.html">
+        <div class="information-item__content">
+          <p class="information-item__date"><time datetime="2025-08-03">Aug.03,2025</time></p>
+          <h3 class="information-item__title">Violin Duo &amp; Piano Showcase 出演のお知らせ</h3>
+          <p class="information-item__en-title">Performing at Violin Duo &amp; Piano Showcase</p>
+        </div>
+      </a>
+    </li>
+    <li data-year="2025">
+      <a class="information-item" href="showcase202505.html">
+        <div class="information-item__content">
+          <p class="information-item__date"><time datetime="2025-05-11">May.11,2025</time></p>
+          <h3 class="information-item__title">Violin Duo &amp; Piano Showcase 出演のお知らせ</h3>
+          <p class="information-item__en-title">Performing at Violin Duo &amp; Piano Showcase</p>
+        </div>
+      </a>
+    </li>
+    <li data-year="2025">
+      <a class="information-item" href="lfj2025.html">
+        <div class="information-item__content">
+          <p class="information-item__date"><time datetime="2025-05-05">May.05,2025</time></p>
+          <h3 class="information-item__title">ラ・フォル・ジュルネ TOKYO 2025 出演のお知らせ</h3>
+          <p class="information-item__en-title">Performing at La Folle Journée TOKYO 2025</p>
+        </div>
+      </a>
+    </li>
+    <li data-year="2025">
+      <a class="information-item" href="msp2025spring.html">
+        <div class="information-item__content">
+          <p class="information-item__date"><time datetime="2025-04-26">Apr.26 – May.11,2025</time></p>
+          <h3 class="information-item__title">Marunouchi Street Park 2025 spring ストリート演奏のお知らせ</h3>
+          <p class="information-item__en-title">Street performances at Marunouchi Street Park 2025 spring</p>
+        </div>
+      </a>
+    </li>
+    <li data-year="2025">
+      <a class="information-item" href="39-2025.html">
+        <div class="information-item__content">
+          <p class="information-item__date"><time datetime="2025-03-09">Mar.09,2025</time></p>
+          <h3 class="information-item__title">《卒業前最終公演》早稲田大学卒業記念リサイタル開催のお知らせ</h3>
+          <p class="information-item__en-title">Waseda University graduation recital</p>
         </div>
       </a>
     </li>
     <li data-year="2024">
-      <a class="information-item" href="concert.html">
+      <a class="information-item" href="iss2024.html">
         <div class="information-item__content">
-          <p class="information-item__date"><time datetime="2024-08-06">Aug.06,2024</time></p>
-          <h3 class="information-item__title">個展が BAG-Brillia Art Gallery- にて開催されます。(2024年9月7日 – 10月27日)</h3>
-          <p class="information-item__en-title">Solo exhibition held at BAG-Brillia Art Gallery-. (Sep.7 - Oct.27, 2024)</p>
+          <p class="information-item__date"><time datetime="2024-12-24">Dec.24,2024</time></p>
+          <h3 class="information-item__title">Bright Street Ice Skating Show 生演奏出演のお知らせ</h3>
+          <p class="information-item__en-title">Live performance at Bright Street Ice Skating Show</p>
         </div>
       </a>
     </li>
     <li data-year="2024">
-      <a class="information-item" href="concert.html">
+      <a class="information-item" href="msp2024winter.html">
         <div class="information-item__content">
-          <p class="information-item__date"><time datetime="2024-07-19">Jul.19,2024</time></p>
-          <h3 class="information-item__title">新作「リキッドユニバース」が「海とつながる。アートをめぐる。」にて展示されます。(2024年8月2日 – 18日)</h3>
-          <p class="information-item__en-title">New art installation "Liquid Universe" exhibited at "Harmony with Nature". (Aug.2-18, 2024)</p>
-        </div>
-      </a>
-    </li>
-    <li data-year="2024">
-      <a class="information-item" href="concert.html">
-        <div class="information-item__content">
-          <p class="information-item__date"><time datetime="2024-07-19">Jul.19,2024</time></p>
-          <h3 class="information-item__title">作品「オブジェクト指向菩薩」が「開創1150年記念 醍醐寺 国宝展」にて展示されます。(2024年7月24日 – 8月22日)</h3>
-          <p class="information-item__en-title">"The Object-Oriented Bodhisattva" exhibited at "Celebrating the 1150th anniversary of the Founding of Daigoji Temple". (Jul.24 - Aug.22, 2024)</p>
-        </div>
-      </a>
-    </li>
-    <li data-year="2024">
-      <a class="information-item" href="concert.html">
-        <div class="information-item__content">
-          <p class="information-item__date"><time datetime="2024-06-10">Jun.10,2024</time></p>
-          <h3 class="information-item__title">「光の彫刻 — Sculptures of Light」がMuseum of Contemporary Art, Shanghaiにて開催。</h3>
-          <p class="information-item__en-title">"Sculptures of Light" at Museum of Contemporary Art, Shanghai. (Jun.10 - Aug.31, 2024)</p>
+          <p class="information-item__date"><time datetime="2024-11-24">Nov.24 – Dec.25,2024</time></p>
+          <h3 class="information-item__title">Marunouchi Street Park 2024 winter ストリート演奏のお知らせ</h3>
+          <p class="information-item__en-title">Street performances at Marunouchi Street Park 2024 winter</p>
         </div>
       </a>
     </li>
     <li data-year="2023">
-      <a class="information-item" href="concert.html">
+      <a class="information-item" href="duo2023.html">
         <div class="information-item__content">
-          <p class="information-item__date"><time datetime="2023-11-01">Nov.01,2023</time></p>
-          <h3 class="information-item__title">「Void — The Space Between」が国立新美術館にて開催されます。(2023年11月1日 – 2024年1月15日)</h3>
-          <p class="information-item__en-title">"Void — The Space Between" at The National Art Center, Tokyo. (Nov.1, 2023 - Jan.15, 2024)</p>
+          <p class="information-item__date"><time datetime="2023-09-24">Sep.24,2023</time></p>
+          <h3 class="information-item__title">Duo Concert開催のお知らせ</h3>
+          <p class="information-item__en-title">Duo Concert</p>
         </div>
       </a>
     </li>
     <li data-year="2023">
-      <a class="information-item" href="#">
+      <a class="information-item" href="lfj2023.html">
         <div class="information-item__content">
-          <p class="information-item__date"><time datetime="2023-09-15">Sep.15,2023</time></p>
-          <h3 class="information-item__title">Ars Electronica Festival にて作品を発表しました。</h3>
-          <p class="information-item__en-title">Works presented at Ars Electronica Festival.</p>
-        </div>
-      </a>
-    </li>
-    <li data-year="2023">
-      <a class="information-item" href="#">
-        <div class="information-item__content">
-          <p class="information-item__date"><time datetime="2023-06-01">Jun.01,2023</time></p>
-          <h3 class="information-item__title">SIGGRAPH Art Gallery にて「Computational Nature」を発表。</h3>
-          <p class="information-item__en-title">"Computational Nature" presented at SIGGRAPH Art Gallery.</p>
-        </div>
-      </a>
-    </li>
-    <li data-year="2022">
-      <a class="information-item" href="#">
-        <div class="information-item__content">
-          <p class="information-item__date"><time datetime="2022-10-01">Oct.01,2022</time></p>
-          <h3 class="information-item__title">「Re-Materialization of Waves」シリーズのプリント作品を発表。</h3>
-          <p class="information-item__en-title">"Re-Materialization of Waves" series print works released.</p>
-        </div>
-      </a>
-    </li>
-    <li data-year="2022">
-      <a class="information-item" href="#">
-        <div class="information-item__content">
-          <p class="information-item__date"><time datetime="2022-05-20">May.20,2022</time></p>
-          <h3 class="information-item__title">「Mirrored Gate of Emergence」がヴェネツィア・ビエンナーレにて展示。</h3>
-          <p class="information-item__en-title">"Mirrored Gate of Emergence" exhibited at Venice Biennale.</p>
-        </div>
-      </a>
-    </li>
-    <li data-year="2021">
-      <a class="information-item" href="#">
-        <div class="information-item__content">
-          <p class="information-item__date"><time datetime="2021-11-15">Nov.15,2021</time></p>
-          <h3 class="information-item__title">Asia Art Foundation より Young Artist Award を受賞。</h3>
-          <p class="information-item__en-title">Received Young Artist Award from Asia Art Foundation.</p>
-        </div>
-      </a>
-    </li>
-    <li data-year="2021">
-      <a class="information-item" href="#">
-        <div class="information-item__content">
-          <p class="information-item__date"><time datetime="2021-07-01">Jul.01,2021</time></p>
-          <h3 class="information-item__title">「Digital Nature — 計算機自然の哲学」オンライン講演を開催。</h3>
-          <p class="information-item__en-title">"Digital Nature — Philosophy" online lecture held.</p>
+          <p class="information-item__date"><time datetime="2023">2023</time></p>
+          <h3 class="information-item__title">ラ・フォル・ジュルネ TOKYO 2023 出演のお知らせ</h3>
+          <p class="information-item__en-title">Performing at La Folle Journée TOKYO 2023</p>
         </div>
       </a>
     </li>
@@ -284,6 +278,7 @@
           <li><a href="information.html" class="is-current">Information</a></li>
           <li><a href="art.html">Art</a></li>
           <li><a href="concert.html">Concert</a></li>
+          <li><a href="lesson.html">Lesson</a></li>
           <li><a href="artist-statement.html">Artist Statement</a></li>
           <li><a href="biography.html">Biography</a></li>
           <li><a href="contact.html">Contact</a></li>

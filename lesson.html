@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lesson | SYIA Official Portfolio</title>
+  <meta name="description" content="SYIA - Lesson / 脳科学と身体論の視点からアプローチするヴァイオリンレッスン" />
+  <meta property="og:title" content="Lesson | SYIA" />
+  <meta property="og:description" content="日本在住ヴァイオリニスト&quot;SYIA&quot;(しあ)の公式サイト。主に演奏会情報を発信しています。" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://syiaviolin.com/images/lesson-01.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="images/favicon.png" />
+  <link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
+  <link rel="stylesheet" href="css/master.css" />
+</head>
+<body class="is-loaded" style="overflow-y:auto">
+  <!-- Loading -->
+  <div class="loading" id="loading">
+    <div class="loading__background"></div>
+    <canvas class="loading__eeg" id="loadingEeg"></canvas>
+    <div class="loading__mask-text" id="loadingMaskText"><span>S</span><span>Y</span><span>I</span><span>A</span></div>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <span class="header__nav-trigger">♪</span>
+    <nav class="header__nav">
+      <ul class="header__nav__list has-current">
+        <li><a href="information.html">Information</a></li>
+        <li><a href="art.html">Art</a></li>
+        <li><a href="concert.html">Concert</a></li>
+        <li><a href="lesson.html" class="is-current">Lesson</a></li>
+        <li><a href="artist-statement.html">Artist Statement</a></li>
+        <li><a href="biography.html">Biography</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <a class="header__title" href="index.html">SYIA</a>
+    <button class="header__button" type="button">Menu</button>
+  </header>
+
+  <!-- Menu -->
+  <div class="menu">
+    <div class="menu__container">
+      <div class="menu__header">
+        <a class="menu__title" href="index.html">SYIA</a>
+        <button class="menu__button" type="button">Close</button>
+      </div>
+      <nav class="menu__nav">
+        <ul class="menu__nav__list">
+          <li><a href="information.html">Information</a></li>
+          <li><a href="art.html">Art</a></li>
+          <li><a href="concert.html">Concert</a></li>
+          <li><a href="lesson.html">Lesson</a></li>
+          <li><a href="artist-statement.html">Artist Statement</a></li>
+          <li><a href="biography.html">Biography</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="menu__information menu__information--ja">
+        <div class="menu__information__background">
+          <div class="menu__information__background__slide" style="background-image:url('syia.png')"></div>
+          <div class="menu__information__background__slide" style="background-image:url('syia_sign.png')"></div>
+          <div class="menu__information__background__slide" style="background-image:url('syia.png')"></div>
+        </div>
+        <div class="menu__information__lang">
+          <button class="menu__information__lang__button menu__information__lang__button--ja is-active">jp</button>
+          <span class="menu__information__lang__separator">/</span>
+          <button class="menu__information__lang__button menu__information__lang__button--en">en</button>
+        </div>
+        <ul class="menu__information__list">
+          <li><a href="showcase202603.html"><p class="menu__information__list__date"><time datetime="2026-03-22">Mar.22,2026</time></p><p class="menu__information__list__title menu__information__list__title--ja">Violin &amp; Piano Showcase 出演のお知らせ</p><p class="menu__information__list__title menu__information__list__title--en">Performing at Violin &amp; Piano Showcase</p></a></li>
+          <li><a href="violin-piano-showcase.html"><p class="menu__information__list__date"><time datetime="2026-01-29">Jan.29,2026</time></p><p class="menu__information__list__title menu__information__list__title--ja">Regulative Art Experience 体験会のお知らせ</p><p class="menu__information__list__title menu__information__list__title--en">Regulative Art Experience: hands-on session</p></a></li>
+          <li><a href="showcase20251222.html"><p class="menu__information__list__date"><time datetime="2025-12-22">Dec.22,2025</time></p><p class="menu__information__list__title menu__information__list__title--ja">BLUE FANTASY Special Showcase 出演のお知らせ</p><p class="menu__information__list__title menu__information__list__title--en">Performing at BLUE FANTASY Special Showcase</p></a></li>
+        </ul>
+      </div>
+      <ul class="menu__sns sns-list">
+        <li><a href="https://www.instagram.com/syiaviolin/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+        <li><a href="https://x.com/syiaviolin" target="_blank" rel="noopener noreferrer">X</a></li>
+        <li><a href="https://www.facebook.com/syiaviolin/" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+        <li><a href="mailto:syiaviolin@gmail.com">mail</a></li>
+      </ul>
+      <ul class="menu__links"><li><a href="sitepolicy.html">Site Policy</a></li></ul>
+      <p class="menu__copyright"><small>&copy;2024 SYIA. All rights reserved.</small></p>
+    </div>
+  </div>
+
+  <!-- Archive Header -->
+  <div class="archive-header">
+    <h1 class="archive-header__title"><span class="page-title-anim">Lesson</span></h1>
+  </div>
+
+  <!-- Lesson -->
+  <article class="article">
+    <figure class="article__figure reveal">
+      <img src="images/lesson-01.jpg" alt="ヴァイオリンレッスン" width="1080" height="236">
+    </figure>
+    <div class="article__text reveal">
+      <h2 class="article__heading">科学的アプローチで、音楽の「本質」に出会う。</h2>
+      <p class="article__lead">― 脳と身体を知るからこそできる、響きのレッスン ―</p>
+      <p>楽器がうまくなりたい。もっと自然に、もっと自由に音楽を表現したい...<br>そう願うあなたにこそ届けたい、脳科学と身体論の視点からアプローチする、全く新しいレッスンです。</p>
+    </div>
+    <div class="article__text reveal">
+      <h3 class="article__subheading">■ なぜ、脳と身体なのか？</h3>
+      <p>音楽は、心で感じ、身体で奏でるもの。<br>しかし多くの人が、「想い」はあるのに「音」がついてこないと感じています。</p>
+      <p>その原因は、「努力不足」ではなく、<br>脳や身体のメカニズムを知らないまま練習していることかもしれません。</p>
+      <p>このレッスンでは、以下のような知見をベースに指導を行います：</p>
+      <p>脳科学：集中力や緊張、ミスの原因を科学的に理解し、対処</p>
+      <p>身体論：身体の使い方を根本から見直し、無理のない動きを習得</p>
+      <p>演奏心理学・認知科学：記憶、イメージ、聴覚の働きを活かした演奏法</p>
+    </div>
+    <div class="article__text reveal">
+      <h3 class="article__subheading">■ レッスンで得られること</h3>
+      <p>「音が変わった！」が実感できる</p>
+      <p>無理のない身体の使い方を学び、「響き」が豊かになる</p>
+      <p>練習の質が変わる</p>
+      <p>脳の仕組みに沿った練習法で、短時間でも成果が出やすくなる</p>
+      <p>本番で力を発揮できるようになる</p>
+      <p>緊張や焦りへの対応力が身につき、自信がつく</p>
+      <p>自分の演奏に「意味」と「物語」が宿る</p>
+      <p>単なるテクニックではなく、「なぜこの音を出すのか」が明確に</p>
+    </div>
+    <div class="article__text reveal">
+      <h3 class="article__subheading">■ レッスン対象</h3>
+      <p>趣味で演奏しているけれど「壁」を感じている方</p>
+      <p>これから新しくヴァイオリンを始めたい方</p>
+      <p>音楽と身体・心のつながりに興味があるすべての方</p>
+    </div>
+    <div class="article__text reveal">
+      <h3 class="article__subheading">■ ご案内・料金</h3>
+      <p>初心者レッスン：¥3,500〜 / 回（40分）</p>
+      <p>中上級者レッスン：¥5,000〜 / 回（60分）</p>
+      <p>※対面／オンライン選択可<br>※体験レッスン(30分)も受け付けております<br>※詳細はお問い合わせください</p>
+    </div>
+    <div class="article__text reveal">
+      <h3 class="article__subheading">■ お申し込み・お問い合わせ</h3>
+      <p>演奏に、もっと意味と自由を。<br>あなたの「今ここ」の音と真摯に向き合う時間を、一緒に作りましょう。</p>
+    </div>
+    <div class="reveal">
+      <form class="contact-form" data-subject="レッスンのお申し込み・お問い合わせ">
+        <div class="contact-form__group">
+          <label class="contact-form__label" for="name">Name / お名前</label>
+          <input class="contact-form__input" type="text" id="name" name="name" required />
+        </div>
+        <div class="contact-form__group">
+          <label class="contact-form__label" for="email">Email / メールアドレス</label>
+          <input class="contact-form__input" type="email" id="email" name="email" required />
+        </div>
+        <div class="contact-form__group">
+          <label class="contact-form__label" for="message">Message / メッセージ</label>
+          <textarea class="contact-form__textarea" id="message" name="message" rows="6" required></textarea>
+        </div>
+        <button class="contact-form__submit" type="submit">Send</button>
+        <p class="contact-form__note" hidden>メールアプリが開きます。開かない場合は <a href="mailto:syiaviolin@gmail.com">syiaviolin@gmail.com</a> まで直接ご連絡ください。</p>
+      </form>
+    </div>
+  </article>
+
+  <!-- Page Links -->
+  <div class="page-links">
+    <div class="page-links__content">
+      <a class="page-links__prev" href="concert.html">Concert</a>
+      <a class="page-links__next" href="contact.html">Contact</a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer__content">
+      <div class="footer__content__col">
+        <ul class="footer__nav">
+          <li><a href="information.html">Information</a></li>
+          <li><a href="art.html">Art</a></li>
+          <li><a href="concert.html">Concert</a></li>
+          <li><a href="lesson.html" class="is-current">Lesson</a></li>
+          <li><a href="artist-statement.html">Artist Statement</a></li>
+          <li><a href="biography.html">Biography</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        
+        <div class="footer__sns">
+          <ul class="sns-list">
+            <li><a href="https://www.instagram.com/syiaviolin/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+            <li><a href="https://x.com/syiaviolin" target="_blank" rel="noopener noreferrer">X</a></li>
+            <li><a href="https://www.facebook.com/syiaviolin/" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+            <li><a href="mailto:syiaviolin@gmail.com">mail</a></li>
+          </ul>
+        </div>
+      
+      </div>
+      <div class="footer__content__col footer__content__col--bottom-group">
+        <p class="footer__copyright"><small>&copy;2024 SYIA. All rights reserved.</small></p>
+        <div class="footer__autograph"></div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="canvas" id="canvas"></div>
+  <script src="js/main.js"></script>
+</body>
+</html>

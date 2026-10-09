@@ -12,13 +12,15 @@ Artist portfolio website for **SYIA** (しあ), a Japan-based violinist. This is
 
 ### Pages
 1. **index.html** — Home page with loading animation, YouTube background video, particle effects, autograph canvas, explore button, and top-footer
-2. **information.html** — News/announcements with year filter (All/2026-2021) and pagination (6 items per page)
-3. **art.html** — Art index with left sidebar filter (Title list, Category in vertical list, Year in vertical list), right grid of artworks, and pagination
-4. **concert.html** — Concert page with all 17 events from [syiaviolin.com/concert](https://syiaviolin.com/concert) including titles from the Wayback Machine archive (2026–2023 events, image cards with hover zoom)
-5. **artist-statement.html** — Artist statement with main image, Japanese/English text sections, and description blocks
-6. **biography.html** — Biography with artist photo displayed on the right side (sticky on desktop), Profile/Education/Awards/Collections sections
-7. **contact.html** — Contact form with Name, Email, Subject, Message fields
-8. **sitepolicy.html** — Site policy with copyright, disclaimer, and link policy sections
+2. **information.html** — The 17 announcements from the old site (event date, Japanese/English title, link to the detail page) with year filter (All/2026-2023) and pagination (6 items per page)
+3. **art.html** — Shows 「準備中」(Coming Soon). The art index built earlier (left sidebar filter, grid of artworks, pagination) is kept in the file inside a `<div hidden>` wrapper
+4. **concert.html** — Concert page with all 17 events from [syiaviolin.com/concert](https://syiaviolin.com/concert) (2026–2023; cover image, event date, title and venue), each linking to its detail page
+5. **Concert detail pages** — One page per event, named after the old site's URL slug (e.g. `showcase202603.html`, `msp2025winter.html`, `lfj2023.html`): text, images, flyers, performer profiles, maps and links migrated from the old site
+6. **lesson.html** — Lesson information migrated from [syiaviolin.com/lesson](https://syiaviolin.com/lesson), with an inquiry form
+7. **artist-statement.html** — Artist statement with main image, Japanese/English text sections, and description blocks
+8. **biography.html** — Biography with artist photo displayed on the right side (sticky on desktop), Profile/Activities/Education sections (profile text from the old site's home page)
+9. **contact.html** — Contact form with Name, Email, Subject, Message fields
+10. **sitepolicy.html** — Site policy with copyright, disclaimer, and link policy sections
 
 ### Design & Interaction
 - Responsive layout with mobile/desktop breakpoints (768px/769px)
@@ -34,6 +36,8 @@ Artist portfolio website for **SYIA** (しあ), a Japan-based violinist. This is
 index.html              — Home page
 art.html                — Art index
 concert.html            — Concert listing (from syiaviolin.com)
+<slug>.html             — Concert detail pages, one per event (17 files, e.g. showcase202603.html)
+lesson.html             — Lesson information and inquiry form
 artist-statement.html   — Artist statement
 biography.html          — Biography with artist photo
 information.html        — News with year filter & pagination
@@ -42,7 +46,14 @@ sitepolicy.html         — Site policy
 css/
   └── master.css        — All styles (reset, layout, animations, responsive)
 js/
-  └── main.js           — All JavaScript (loading, menu, filters, particles, EEG animation)
+  └── main.js           — All JavaScript (loading, menu, filters, particles, EEG animation, contact form)
+images/                 — All images from the old site, in one flat folder
+  ├── <slug>-cover.*    — Concert list thumbnail for each event (e.g. showcase202603-cover.jpg)
+  ├── <slug>-01.*, -02.* … — Images on each concert detail page, in page order
+  ├── lesson-01.jpg     — Lesson page image
+  ├── home-masthead.jpg — Old site's main visual (used as the home video fallback)
+  ├── home-background.jpg — Old site's background (not used)
+  └── favicon.png, apple-touch-icon.png
 reference/              — Reference files from original sites (not deployed)
 ```
 
@@ -54,6 +65,8 @@ reference/              — Reference files from original sites (not deployed)
 | `information.html` | News & announcements (filterable by year) |
 | `art.html` | Art index with category/year filters |
 | `concert.html` | Concert listings from SYIA's official site |
+| `<slug>.html` | Concert detail page for each event (same slugs as the old site, e.g. `fccj2025.html`) |
+| `lesson.html` | Lesson information and inquiry form |
 | `artist-statement.html` | Artist statement |
 | `biography.html` | Biography with photo |
 | `contact.html` | Contact form |
@@ -61,15 +74,13 @@ reference/              — Reference files from original sites (not deployed)
 
 ## 🎵 Concert Data Source
 
-Concert listings are sourced from https://syiaviolin.com/concert via the Wayback Machine (archived 2026-02-07). All 17 concerts from 2023–2026 are included with original Japanese titles. Images use Unsplash placeholders as the original CDN (cdn.myportfolio.com) requires authentication.
+Concert, lesson, profile and contact content was migrated from the old site https://syiaviolin.com (Adobe Portfolio) on 2026-10-10. All 17 concerts from 2023–2026 are included with their original Japanese text, and the images were downloaded from the old CDN (cdn.myportfolio.com) into `images/` at web size (up to 1920px wide). Dates shown in the lists are the event dates stated on the old pages.
 
 ## 🚧 Not Yet Implemented / Recommended Next Steps
 
-1. **Replace placeholder images** with SYIA's actual concert/performance photos
-2. **Replace YouTube video ID** (`dQw4w9WgXcQ`) on the home page with SYIA's video
-3. **Update social media links** (currently placeholders on most pages; concert.html has real links to @syiaviolin)
-4. **Add real concert detail pages** — each concert item currently links to `#`
-5. **SEO optimization** — add Open Graph tags, canonical URLs, structured data
-6. **Google Analytics** integration
-7. **Contact form backend** — currently client-side only (no server submission)
-8. **Performance optimization** — lazy loading for concert images, preload critical assets
+1. **Artist Statement** — `artist-statement.html` still contains the template text; the old site had no equivalent content
+2. **Art page** — currently 「準備中」; remove the `<div hidden>` wrapper and the Coming Soon block in `art.html` to publish the index
+3. **Contact form backend** — the Contact and Lesson forms have no server; on submit they open the visitor's mail app with a message addressed to syiaviolin@gmail.com (`js/main.js`). Replace with a form service if server-side submission is needed
+4. **SEO optimization** — Open Graph tags are in place (`og:image` assumes the site is served at https://syiaviolin.com); canonical URLs and structured data are not
+5. **Google Analytics** integration (the old site used a GA4 property)
+6. **Performance optimization** — `syia.png` is a 2.6 MB full-resolution photo; preload critical assets

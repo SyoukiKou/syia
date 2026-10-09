@@ -17,6 +17,7 @@ ul,ol{list-style:none}
 hr{border:0}
 @media only screen and (max-width:768px){.u-pc{display:none}}
 @media only screen and (min-width:769px){.u-sp{display:none}}
+.u-gap{margin-top:2em}
 
 /* ====== Shared Title Styles ====== */
 .archive-header__title,
@@ -186,9 +187,9 @@ hr{border:0}
 }
 @media only screen and (min-width:769px){.menu__nav__list{width:27.77778vw;position:absolute;left:6.94444vw;top:16.5%}}
 .menu__nav__list>li{font-size:7.46666vw;line-height:1}
-@media only screen and (min-width:769px){.menu__nav__list>li{font-size:2.77777vw}}
+@media only screen and (min-width:769px){.menu__nav__list>li{font-size:2.4vw}}
 .menu__nav__list>li:not(:last-child){margin-bottom:6vw}
-@media only screen and (min-width:769px){.menu__nav__list>li:not(:last-child){margin-bottom:1.4vw}}
+@media only screen and (min-width:769px){.menu__nav__list>li:not(:last-child){margin-bottom:1.14vw}}
 .menu__nav__list>li>a{text-decoration:none;display:inline-block;position:relative}
 @media only screen and (min-width:769px){
   .menu__nav__list>li>a:after{
@@ -562,6 +563,17 @@ span.pager__prev:hover,span.pager__next:hover{opacity:.2}
 .art-list__year{font-family:Prompt,sans-serif;font-weight:200;font-size:11px;opacity:.4;margin-top:8px}
 .art-list__category{font-family:Prompt,sans-serif;font-weight:200;font-size:11px;opacity:.4;margin-top:2px}
 
+/* ====== Coming Soon ====== */
+.coming-soon{padding:90px 8vw 140px;text-align:center}
+@media only screen and (min-width:769px){.coming-soon{padding:140px 6.94444vw 220px}}
+.coming-soon__title{
+  font-family:"Noto Serif JP",sans-serif,serif;font-weight:500;font-size:16px;
+  letter-spacing:.666em;text-indent:.666em
+}
+@media only screen and (min-width:769px){.coming-soon__title{font-weight:200;font-size:20px}}
+.coming-soon__text{font-family:Prompt,sans-serif;font-weight:300;font-size:12px;letter-spacing:.1em;opacity:.45;margin-top:14px}
+@media only screen and (min-width:769px){.coming-soon__text{font-weight:200}}
+
 /* ====== Exhibition List ====== */
 .exhibition-list{padding:40px 8vw 40px}
 @media only screen and (min-width:769px){.exhibition-list{padding:40px 6.94444vw 40px}}
@@ -573,7 +585,7 @@ span.pager__prev:hover,span.pager__next:hover{opacity:.2}
 }
 @media only screen and (min-width:769px){.exhibition-item{flex-direction:row;align-items:flex-start;gap:40px}}
 .exhibition-item:hover{opacity:.5}
-.exhibition-item__image{flex-shrink:0;width:100%;aspect-ratio:16/10;overflow:hidden;margin-bottom:20px}
+.exhibition-item__image{flex-shrink:0;width:100%;aspect-ratio:16/9;overflow:hidden;margin-bottom:20px}
 @media only screen and (min-width:769px){.exhibition-item__image{width:280px;margin-bottom:0}}
 .exhibition-item__image img{
   width:100%;height:100%;object-fit:cover;display:block;
@@ -586,7 +598,71 @@ span.pager__prev:hover,span.pager__next:hover{opacity:.2}
 .exhibition-item__title{font-family:"Noto Serif JP",serif;font-weight:400;font-size:14px;line-height:1.8}
 @media only screen and (min-width:769px){.exhibition-item__title{font-weight:200;font-size:16px}}
 .exhibition-item__en-title{font-family:Prompt,sans-serif;font-weight:200;font-size:11px;opacity:.6;margin-top:4px;line-height:1.6}
-.exhibition-item__venue{font-family:Prompt,sans-serif;font-weight:200;font-size:11px;opacity:.5;margin-top:6px}
+.exhibition-item__venue{font-family:Prompt,"Noto Serif JP",sans-serif;font-weight:200;font-size:11px;opacity:.5;margin-top:6px}
+
+/* ====== Article (Concert detail, Lesson) ====== */
+.archive-header__title>a{text-decoration:none}
+@media only screen and (min-width:769px){.archive-header__title>a:hover{opacity:.3}}
+.article{padding:40px 8vw 0}
+@media only screen and (min-width:769px){.article{padding:40px 6.94444vw 0}}
+.article__header{border-top:1px solid #1a1a1a;padding-top:35px;margin-bottom:35px}
+@media only screen and (min-width:769px){.article__header{margin-bottom:45px}}
+.article__date{font-family:Prompt,sans-serif;font-weight:300;font-size:11px;opacity:.45;margin-bottom:8px}
+@media only screen and (min-width:769px){.article__date{font-weight:200}}
+.article__title{font-family:"Noto Serif JP",serif;font-weight:500;font-size:19px;line-height:1.7;letter-spacing:.05em}
+@media only screen and (min-width:769px){.article__title{font-weight:200;font-size:28px;letter-spacing:.08em}}
+.article__text,.article__columns,.article__profile,.article__buttons{
+  font-family:"Noto Serif JP",serif;font-weight:400;font-size:13px;
+  line-height:2;letter-spacing:.05em
+}
+@media only screen and (min-width:769px){
+  .article__text,.article__columns,.article__profile,.article__buttons{font-weight:200;font-size:14px}
+}
+.article__text,.article__columns,.article__profile,.article__buttons,.article__figure,.article__embed,.article__gallery{margin-bottom:45px}
+@media only screen and (min-width:769px){
+  .article__text,.article__columns,.article__profile,.article__buttons,.article__figure,.article__embed,.article__gallery{margin-bottom:55px}
+}
+.article__text,.article__columns,.article__profile,.article__embed,.article__gallery,.article__figure--medium{max-width:750px}
+.article p{margin-bottom:.6em}
+.article__text>:first-child{margin-top:0}
+.article__text>:last-child{margin-bottom:0}
+.article__text a{text-underline-offset:.3em;transition:opacity .3s ease}
+.article__text a:hover{opacity:.5}
+.article__heading{font-weight:500;font-size:16px;line-height:1.8;letter-spacing:.1em;margin:2.6em 0 1em}
+@media only screen and (min-width:769px){.article__heading{font-weight:300;font-size:19px;letter-spacing:.2em}}
+.article__subheading{font-weight:500;font-size:14px;line-height:1.8;letter-spacing:.08em;margin:2em 0 .8em}
+@media only screen and (min-width:769px){.article__subheading{font-weight:400;font-size:16px}}
+.article__heading+.article__subheading,.article__columns .article__subheading{margin-top:0}
+.article__label{font-weight:500;font-size:13px;line-height:1.8;margin:1.6em 0 .3em}
+@media only screen and (min-width:769px){.article__label{font-weight:400;font-size:14px}}
+.article .article__lead{opacity:.7;letter-spacing:.1em;margin-bottom:2em}
+.article__note{font-size:11px;line-height:1.9;opacity:.6}
+@media only screen and (min-width:769px){.article__note{font-size:12px}}
+.article__divider{height:1px;background:#232323;border:0;margin-bottom:2em}
+.article__figure img,.article__profile__image img,.article__gallery img{display:block;height:auto}
+.article__figure--portrait{max-width:520px}
+.article__buttons{display:flex;flex-wrap:wrap;gap:25px 45px}
+.article__text+.article__buttons{margin-top:-15px}
+.article__button{font-family:"Noto Serif JP",serif;font-weight:400;font-size:14px;letter-spacing:.08em}
+@media only screen and (min-width:769px){.article__button{font-weight:300;font-size:15px}}
+.article__embed iframe{display:block;width:100%;height:300px;border:0}
+@media only screen and (min-width:769px){.article__embed iframe{height:380px}}
+.article__embed--video{aspect-ratio:16/9}
+.article__embed--video iframe{height:100%}
+.article__columns>div:not(:last-child){margin-bottom:30px}
+@media only screen and (min-width:769px){
+  .article__columns{display:grid;grid-template-columns:1fr 1fr;gap:0 50px}
+  .article__columns>div:not(:last-child){margin-bottom:0}
+}
+@media only screen and (min-width:769px){.article__profile{display:flex;gap:40px;align-items:flex-start}}
+.article__profile__image{width:55%;max-width:220px;margin-bottom:20px}
+@media only screen and (min-width:769px){.article__profile__image{width:200px;flex-shrink:0;margin-bottom:0}}
+.article__profile__text{flex:1;min-width:0}
+.article__profile__name{font-weight:500;font-size:14px;letter-spacing:.1em;margin-bottom:.8em}
+@media only screen and (min-width:769px){.article__profile__name{font-weight:400;font-size:16px}}
+.article__gallery{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.article__gallery img{width:100%}
+.article .contact-form{max-width:560px;margin-top:0}
 
 /* ====== Profile (Artist Statement) ====== */
 .profile-header{padding:140px 8vw 0}
@@ -620,12 +696,13 @@ span.pager__prev:hover,span.pager__next:hover{opacity:.2}
 .page-links{padding:0 8vw;margin:80px 0}
 @media only screen and (min-width:769px){.page-links{padding:0 6.94444vw;margin:120px 0}}
 .page-links__content{display:flex;justify-content:space-between;align-items:center;border-top:1px solid #232323;padding-top:40px}
-.page-links__prev,.page-links__next{
+.page-links__prev,.page-links__next,.page-links__index{
   font-family:Prompt,sans-serif;font-weight:200;font-size:14px;
   text-decoration:none;transition:opacity .3s ease;letter-spacing:.03em
 }
-@media only screen and (min-width:769px){.page-links__prev,.page-links__next{font-size:16px}}
-.page-links__prev:hover,.page-links__next:hover{opacity:.5}
+@media only screen and (min-width:769px){.page-links__prev,.page-links__next,.page-links__index{font-size:16px}}
+.page-links__prev:hover,.page-links__next:hover,.page-links__index:hover{opacity:.5}
+span.page-links__prev,span.page-links__next,span.page-links__prev:hover,span.page-links__next:hover{opacity:.2;cursor:default}
 .page-links__prev:before{content:"← ";opacity:.5}
 .page-links__next:after{content:" →";opacity:.5}
 
@@ -653,6 +730,11 @@ span.pager__prev:hover,span.pager__next:hover{opacity:.2}
   transition:all .3s cubic-bezier(.77,0,.175,1);letter-spacing:.05em
 }
 .contact-form__submit:hover{background:#f3f3f3;color:#000}
+.contact-form__note{
+  font-family:"Noto Serif JP",serif;font-weight:400;font-size:12px;
+  line-height:2;letter-spacing:.05em;margin-top:25px;opacity:.8
+}
+.contact-form__note a{text-underline-offset:.3em}
 
 /* ====== Biography ====== */
 .biography-header{padding:140px 8vw 0}
@@ -673,6 +755,8 @@ span.pager__prev:hover,span.pager__next:hover{opacity:.2}
   line-height:2;letter-spacing:.05em;margin-bottom:2em
 }
 @media only screen and (min-width:769px){.biography-content p{font-weight:200;font-size:14px}}
+.biography-content p a{text-underline-offset:.3em;transition:opacity .3s ease}
+.biography-content p a:hover{opacity:.5}
 .biography-section{margin-bottom:3em}
 .biography-section__heading{
   font-family:Prompt,sans-serif;font-weight:300;font-size:20px;
