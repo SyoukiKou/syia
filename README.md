@@ -51,14 +51,15 @@ js/
   ├── information.js    — News for the Information page (anything that is not a concert)
   ├── main.js           — Shared JavaScript (loading screen, menu, concert pages from the data, filters, contact form)
   ├── hero.js           — Home page opening animation (violin line drawing generated in code)
-  └── cursor.js         — Custom cursor on every page (dot, trailing ring, ribbon of light)
+  └── cursor.js         — Custom cursor on every page (calm glow and a shooting-star tail)
 images/                 — All images from the old site, in one flat folder
   ├── <id>-cover.*      — Concert list thumbnail for each event (e.g. showcase202603-cover.jpg)
   ├── <id>-01.*, -02.* … — Images in each concert's text, in order
   ├── lesson-01.jpg     — Lesson page image
   ├── home-masthead.jpg — Old site's main visual (used as the home video fallback)
   ├── home-background.jpg — Old site's background (not used)
-  └── favicon.png, apple-touch-icon.png
+  ├── favicon.svg       — Site icon: the home page violin glowing on a night-sky tile
+  └── favicon.png (32 px), apple-touch-icon.png (180 px) — PNG copies of favicon.svg for older browsers and iOS
 reference/              — Reference files from original sites (not deployed)
 ```
 
