@@ -91,10 +91,11 @@ The site is deployed on Vercel and served at https://syiaviolin.com (the domain 
 | `/concert`, `/lesson`, `/contact` | `concert.html`, `lesson.html`, `contact.html` |
 | `/<concert id>` (e.g. `/showcase202603`, the 17 concerts on the old site) | `concert.html#<concert id>` |
 
+Every page loads Google Analytics (GA4, measurement ID `G-JX7REYZTQF`, the same property the Adobe Portfolio site used), so visits keep being counted in the existing SYIA property.
+
 ## 🚧 Not Yet Implemented / Recommended Next Steps
 
 1. **Art page** — currently 「準備中」; remove the `<div hidden>` wrapper and the Coming Soon block in `art.html` to publish the index
 2. **Contact form backend** — the Contact and Lesson forms have no server; on submit they open the visitor's mail app with a message addressed to syiaviolin@gmail.com (`js/main.js`). Replace with a form service if server-side submission is needed
 3. **SEO optimization** — Open Graph tags are in place (`og:image` assumes the site is served at https://syiaviolin.com); canonical URLs and structured data are not
-4. **Google Analytics** integration (the old site used a GA4 property)
-5. **Performance optimization** — `syia.png` is a 2.6 MB full-resolution photo; preload critical assets
+4. **Performance optimization** — `syia.png` is a 2.6 MB full-resolution photo; preload critical assets
