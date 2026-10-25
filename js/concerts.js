@@ -14,8 +14,8 @@
  *
  *   {
  *     id: 'showcase202611',              // 公演ページの名前。半角英数字とハイフン（concert.html#showcase202611）
- *     date: '2026-11-14',                // 公演日（何日かあるときは初日）。並び順と年の絞り込みに使います
- *     dateText: 'Nov.14 – Nov.28,2026',  // 省略可。表示する日付を変えたいときだけ（省略すると Nov.14,2026）
+ *     date: '2026-11-14',                // 公演日（何日かあるときは初日）。2026.11/14 (Sat) と表示。並び順にも使います
+ *     dateEnd: '2026-11-28',             // 省略可。何日かにわたるときの最終日（2026.11/14 (Sat) – 11/28 (Sat) と表示）
  *     title: '○○ 出演のお知らせ',
  *     titleEn: 'Performing at ○○',       // メニューで en を選んだときのタイトル
  *     venue: '会場名',                    // 省略可。一覧に小さく出ます
@@ -45,6 +45,32 @@
  *   本文の中で ` （バッククォート）は使えません。
  */
 window.SYIA_CONCERTS = [
+  {
+    id: "wial2026",
+    date: "2026-10-24",
+    title: "WIAL グローバルカンファレンス 2026 JAPAN ガラディナー 出演のお知らせ",
+    titleEn: "Performed at the gala dinner of WIAL Global Conference 2026 Japan",
+    venue: "SHIBUYA QWS（渋谷スクランブルスクエア 15F）",
+    cover: "images/wial2026-cover.png",
+    body: `
+2026年10月24日（土）、WIAL グローバルカンファレンス 2026 JAPAN ガラディナー 出演のお知らせ
+
+## 《公演情報》
+
+### WIAL グローバルカンファレンス 2026 JAPAN ガラディナー
+
+2026年10月24日（土）18:00〜20:00
+
+＠SHIBUYA QWS（渋谷スクランブルスクエア 15F）
+
+Violin : SYIA
+
+[カンファレンス公式サイト](https://www.jial.or.jp/conference2026/index_ja.html)
+
+@map https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3241.752713122077!2d139.699687175513!3d35.658463772594565!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188bf0e52915ab%3A0x1ba65e8db4ca1d0e!2zU0hJQlVZQSBRV1Mg77yI5riL6LC344Kt44Ol44O844K677yJ!5e0!3m2!1sja!2sjp!4v1768907432899!5m2!1sja!2sjp
+`
+  },
+
   {
     id: "showcase202603",
     date: "2026-03-22",
@@ -216,7 +242,7 @@ Piano : Fumio
   {
     id: "msp2025winter",
     date: "2025-11-22",
-    dateText: "Nov.22 – Dec.25,2025",
+    dateEnd: "2025-12-25",
     title: "Marunouchi Street Park 2025 winter ストリート演奏のお知らせ",
     titleEn: "Street performances at Marunouchi Street Park 2025 winter",
     venue: "丸の内仲通り",
@@ -560,7 +586,7 @@ Marunouchi Street Park 公式ミュージシャン
   {
     id: "msp2025summer",
     date: "2025-09-06",
-    dateText: "Sep.06 – Sep.21,2025",
+    dateEnd: "2025-09-21",
     title: "Marunouchi Street Park 2025 summer ストリート演奏のお知らせ",
     titleEn: "Street performances at Marunouchi Street Park 2025 summer",
     venue: "丸の内仲通り",
@@ -747,7 +773,7 @@ Piano : 森下柚香
   {
     id: "msp2025spring",
     date: "2025-04-26",
-    dateText: "Apr.26 – May.11,2025",
+    dateEnd: "2025-05-11",
     title: "Marunouchi Street Park 2025 spring ストリート演奏のお知らせ",
     titleEn: "Street performances at Marunouchi Street Park 2025 spring",
     venue: "丸の内仲通り",
@@ -901,7 +927,7 @@ presented by Marunouchi Street Park 2024 winter
   {
     id: "msp2024winter",
     date: "2024-11-24",
-    dateText: "Nov.24 – Dec.25,2024",
+    dateEnd: "2024-12-25",
     title: "Marunouchi Street Park 2024 winter ストリート演奏のお知らせ",
     titleEn: "Street performances at Marunouchi Street Park 2024 winter",
     venue: "丸の内仲通り",

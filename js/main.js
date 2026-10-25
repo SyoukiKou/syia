@@ -84,21 +84,30 @@
   }
 
   // ========================================
-  // Concerts (the data lives in js/concerts.js)
-  // Builds the Concert page (the list, and one concert at concert.html#id), the Information list
-  // and the latest news in the menu, so a new concert is added in one place only.
+  // Concerts (js/concerts.js) and news (js/information.js)
+  // Builds the Concert page (the list, and one concert at concert.html#id), the Information page
+  // and the latest items in the menu, so each concert or piece of news is written in one place only.
   // ========================================
-  var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-  var concerts = (window.SYIA_CONCERTS || []).filter(function (c) { return c && c.id; })
-    .sort(function (a, b) { return String(b.date).localeCompare(String(a.date)); });
+  var WEEKDAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  var byDateDesc = function (a, b) { return String(b.date).localeCompare(String(a.date)); };
+  var concerts = (window.SYIA_CONCERTS || []).filter(function (c) { return c && c.id; }).sort(byDateDesc);
+  var news = (window.SYIA_INFORMATION || []).filter(function (n) { return n && n.date && n.title; }).sort(byDateDesc);
 
   function escapeHtml(s) {
     return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   }
+  // 2026-10-24 -> "2026.10/24 (Sat)"; with dateEnd, "2025.11/22 (Sat) – 12/25 (Thu)" (the year again only if it changes)
   function concertDate(c) {
     if (c.dateText) return c.dateText;
-    var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(c.date || '');
-    return m ? MONTHS[+m[2] - 1] + '.' + m[3] + ',' + m[1] : (c.date || '');
+    var day = function (iso, withYear) {
+      var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso || '');
+      if (!m) return iso || '';
+      var wd = WEEKDAYS[new Date(+m[1], +m[2] - 1, +m[3]).getDay()];
+      return (withYear ? m[1] + '.' : '') + m[2] + '/' + m[3] + ' (' + wd + ')';
+    };
+    var text = day(c.date, true);
+    if (c.dateEnd) text += ' – ' + day(c.dateEnd, String(c.dateEnd).slice(0, 4) !== String(c.date).slice(0, 4));
+    return text;
   }
   function concertUrl(c) { return 'concert.html#' + encodeURIComponent(c.id); }
   function linkAttrs(url) {
@@ -201,28 +210,35 @@
     });
   }
 
-  // latest news in the menu (every page)
+  // latest in the menu (every page): news and concerts together, newest first
+  var latest = news.map(function (n) { return { date: n.date, dateEnd: n.dateEnd, dateText: n.dateText, title: n.title, titleEn: n.titleEn, url: n.link || 'information.html' }; })
+    .concat(concerts.map(function (c) { return { date: c.date, dateEnd: c.dateEnd, dateText: c.dateText, title: c.title, titleEn: c.titleEn, url: concertUrl(c) }; }))
+    .sort(byDateDesc).slice(0, 3);
   document.querySelectorAll('.menu__information__list').forEach(function (ul) {
-    ul.innerHTML = concerts.slice(0, 3).map(function (c) {
-      return '<li><a href="' + concertUrl(c) + '"><p class="menu__information__list__date"><time datetime="' + escapeHtml(c.date) + '">' + escapeHtml(concertDate(c)) + '</time></p>' +
+    ul.innerHTML = latest.map(function (c) {
+      return '<li><a href="' + escapeHtml(c.url) + '"><p class="menu__information__list__date"><time datetime="' + escapeHtml(c.date) + '">' + escapeHtml(concertDate(c)) + '</time></p>' +
         '<p class="menu__information__list__title menu__information__list__title--ja">' + escapeHtml(c.title) + '</p>' +
         '<p class="menu__information__list__title menu__information__list__title--en">' + escapeHtml(c.titleEn || c.title) + '</p></a></li>';
     }).join('');
   });
 
-  // Information page: the list and its years
+  // Information page: news only (concerts have their own page), with its years
   var infoListEl = document.getElementById('informationList');
   var infoYearsEl = document.getElementById('archiveFilterList');
   if (infoListEl) {
-    infoListEl.innerHTML = concerts.map(function (c) {
-      return '<li data-year="' + escapeHtml(String(c.date).slice(0, 4)) + '"><a class="information-item" href="' + concertUrl(c) + '"><div class="information-item__content">' +
-        '<p class="information-item__date"><time datetime="' + escapeHtml(c.date) + '">' + escapeHtml(concertDate(c)) + '</time></p>' +
-        '<h3 class="information-item__title">' + escapeHtml(c.title) + '</h3>' +
-        '<p class="information-item__en-title">' + escapeHtml(c.titleEn || '') + '</p></div></a></li>';
-    }).join('');
+    // the title is the link (the text may hold links of its own, and links cannot nest)
+    infoListEl.innerHTML = news.length ? news.map(function (n) {
+      var title = n.link ? '<a ' + linkAttrs(escapeHtml(n.link)) + '>' + escapeHtml(n.title) + '</a>' : escapeHtml(n.title);
+      return '<li data-year="' + escapeHtml(String(n.date).slice(0, 4)) + '"><div class="information-item">' +
+        '<div class="information-item__content"><p class="information-item__date"><time datetime="' + escapeHtml(n.date) + '">' + escapeHtml(concertDate(n)) + '</time></p>' +
+        '<h3 class="information-item__title">' + title + '</h3>' +
+        (n.titleEn ? '<p class="information-item__en-title">' + escapeHtml(n.titleEn) + '</p>' : '') +
+        (n.text ? '<p class="information-item__text">' + inlineText(n.text) + '</p>' : '') + '</div></div></li>';
+    }).join('') : '<li class="information-empty">現在お知らせはありません。<br>演奏会の情報は <a href="concert.html">Concert</a> をご覧ください。</li>';
+    if (!news.length) document.body.classList.add('is-information-empty');
     if (infoYearsEl) {
       var years = [];
-      concerts.forEach(function (c) { var y = String(c.date).slice(0, 4); if (years.indexOf(y) < 0) years.push(y); });
+      news.forEach(function (n) { var y = String(n.date).slice(0, 4); if (years.indexOf(y) < 0) years.push(y); });
       infoYearsEl.innerHTML = '<li><a href="#" class="is-selected" data-year="ALL">ALL</a></li>' +
         years.map(function (y) { return '<li><a href="#" data-year="' + y + '">' + y + '</a></li>'; }).join('');
     }

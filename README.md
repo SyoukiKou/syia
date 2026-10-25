@@ -12,10 +12,10 @@ Artist portfolio website for **SYIA** (しあ), a Japan-based violinist. This is
 
 ### Pages
 1. **index.html** — Home page. Opening animation modelled on [Post-Classical Debussy](https://jumpeikaneko.github.io/Post-Classical-Debussy/): five staff lines are drawn across the screen, come apart into five-line fragments and settle into a 3D line drawing of a violin (front-view scroll with fluting and ears, pegbox and heart-shaped pegs, f-holes, ribs and a maple back). It sways slowly; strokes give way around the cursor, the cursor's side leans it, dragging turns it a full 360° (it drifts back to the front after a few seconds), click sends a ripple. Lines behind the head are hidden; surfaces facing away are drawn faintly. The text (SOUND × COMPUTER × BRAIN / SYIA / Violinist / Neuro Media Artist / profile line, then SNS links and copyright) rises out of a blur; the header fades in last
-2. **information.html** — Concert announcements (event date, Japanese/English title, link to the concert) with year filter and pagination (6 items per page), built from `js/concerts.js`
+2. **information.html** — News other than concerts (date, Japanese/English title, optional text and link) with year filter and pagination (6 items per page), built from `js/information.js`. Shows a short note pointing to Concert while there is no news
 3. **art.html** — Shows 「準備中」(Coming Soon). The art index built earlier (left sidebar filter, grid of artworks, pagination) is kept in the file inside a `<div hidden>` wrapper
 4. **concert.html** — One page for all concerts, built from `js/concerts.js`: the list (cover image, event date, title, venue, newest first) and, at `concert.html#<id>` (e.g. `concert.html#showcase202603`), one concert with its text, images, flyers, performer profiles, maps and links, plus Prev / Next
-5. **js/concerts.js** — All concert data in one file. Adding a new concert means adding one entry there (a template and the body format are described at the top of the file); the Concert page, the Information list and the latest news in every page's menu update from it
+5. **js/concerts.js** — All concert data in one file. Adding a new concert means adding one entry there (a template and the body format are described at the top of the file); the Concert page and the latest items in every page's menu update from it
 6. **lesson.html** — Lesson information migrated from [syiaviolin.com/lesson](https://syiaviolin.com/lesson), with an inquiry form
 7. **artist-statement.html** — Artist statement (NEURO ROMANTIC) in Japanese and English, from the SYIA world-view document (Oct 24, 2026)
 8. **biography.html** — Biography with artist photo displayed on the right side (sticky on desktop), Profile/Activities/Education sections (profile text from the old site's home page)
@@ -47,6 +47,7 @@ css/
   └── master.css        — All styles (reset, layout, animations, responsive)
 js/
   ├── concerts.js       — Concert data (edit this file to add or change concerts)
+  ├── information.js    — News for the Information page (anything that is not a concert)
   ├── main.js           — Shared JavaScript (loading screen, menu, concert pages from the data, filters, contact form)
   ├── hero.js           — Home page opening animation (violin line drawing generated in code)
   └── cursor.js         — Custom cursor on every page (dot, trailing ring, ribbon of light)
