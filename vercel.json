@@ -1,0 +1,13 @@
+{
+  "redirects": [
+    { "source": "/home", "destination": "/", "permanent": true },
+    { "source": "/concert", "destination": "/concert.html", "permanent": true },
+    { "source": "/lesson", "destination": "/lesson.html", "permanent": true },
+    { "source": "/contact", "destination": "/contact.html", "permanent": true },
+    {
+      "source": "/:id(showcase202603|violin-piano-showcase|showcase20251222|msp2025winter|showcase202510|showcase202509|fccj2025|msp2025summer|violin-duo-piano-showcase|showcase202505|lfj2025|msp2025spring|39-2025|iss2024|msp2024winter|duo2023|lfj2023)",
+      "destination": "/concert.html#:id",
+      "permanent": true
+    }
+  ]
+}

@@ -43,6 +43,7 @@ biography.html          — Biography with artist photo
 information.html        — News with year filter & pagination
 contact.html            — Contact form
 sitepolicy.html         — Site policy
+vercel.json             — Vercel settings: redirects from the old Adobe Portfolio URLs
 css/
   └── master.css        — All styles (reset, layout, animations, responsive)
 js/
@@ -79,6 +80,16 @@ reference/              — Reference files from original sites (not deployed)
 ## 🎵 Concert Data Source
 
 Concert, lesson, profile and contact content was migrated from the old site https://syiaviolin.com (Adobe Portfolio) on 2026-10-10. All 17 concerts from 2023–2026 are included with their original Japanese text, and the images were downloaded from the old CDN (cdn.myportfolio.com) into `images/` at web size (up to 1920px wide). Dates shown in the lists are the event dates stated on the old pages.
+
+## 🌐 Domain and Old URLs
+
+The site is deployed on Vercel and served at https://syiaviolin.com (the domain was registered at お名前.com and used to point to the Adobe Portfolio site). `vercel.json` sends the old Adobe Portfolio addresses to the new pages with permanent (308) redirects, so links shared on social media and search results keep working:
+
+| Old URL | New page |
+|---------|----------|
+| `/home` | `/` |
+| `/concert`, `/lesson`, `/contact` | `concert.html`, `lesson.html`, `contact.html` |
+| `/<concert id>` (e.g. `/showcase202603`, the 17 concerts on the old site) | `concert.html#<concert id>` |
 
 ## 🚧 Not Yet Implemented / Recommended Next Steps
 
