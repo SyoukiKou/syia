@@ -7,30 +7,14 @@
   <meta name="description" content="Information and News" />
   <link rel="icon" href="images/favicon.png" />
   <link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
-  <link rel="stylesheet" href="css/master.css" />
+  <link rel="stylesheet" href="css/master.css?v=20261025j" />
 </head>
 <body class="is-loaded" style="overflow-y:auto">
   <!-- Loading -->
-  <div class="loading" id="loading">
-    <div class="loading__background"></div>
-    <canvas class="loading__eeg" id="loadingEeg"></canvas>
-    <div class="loading__mask-text" id="loadingMaskText"><span>S</span><span>Y</span><span>I</span><span>A</span></div>
-  </div>
+  <div class="loading" id="loading"><canvas class="loading__staff" id="loadingStaff"></canvas></div>
 
   <!-- Header -->
   <header class="header">
-    <span class="header__nav-trigger">♪</span>
-    <nav class="header__nav">
-      <ul class="header__nav__list has-current">
-        <li><a href="information.html" class="is-current">Information</a></li>
-        <li><a href="art.html">Art</a></li>
-        <li><a href="concert.html">Concert</a></li>
-        <li><a href="lesson.html">Lesson</a></li>
-        <li><a href="artist-statement.html">Artist Statement</a></li>
-        <li><a href="biography.html">Biography</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </nav>
     <a class="header__title" href="index.html">SYIA</a>
     <button class="header__button" type="button">Menu</button>
   </header>
@@ -44,13 +28,13 @@
       </div>
       <nav class="menu__nav">
         <ul class="menu__nav__list">
-          <li><a href="information.html">Information</a></li>
-          <li><a href="art.html">Art</a></li>
-          <li><a href="concert.html">Concert</a></li>
-          <li><a href="lesson.html">Lesson</a></li>
-          <li><a href="artist-statement.html">Artist Statement</a></li>
-          <li><a href="biography.html">Biography</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="information.html">Information<small>お知らせ</small></a></li>
+          <li><a href="art.html">Art<small>作品</small></a></li>
+          <li><a href="concert.html">Concert<small>演奏会</small></a></li>
+          <li><a href="lesson.html">Lesson<small>レッスン</small></a></li>
+          <li><a href="artist-statement.html">Artist Statement<small>ステートメント</small></a></li>
+          <li><a href="biography.html">Biography<small>プロフィール</small></a></li>
+          <li><a href="contact.html">Contact<small>お問い合わせ</small></a></li>
         </ul>
       </nav>
       <div class="menu__information menu__information--ja">
@@ -64,17 +48,13 @@
           <span class="menu__information__lang__separator">/</span>
           <button class="menu__information__lang__button menu__information__lang__button--en">en</button>
         </div>
-        <ul class="menu__information__list">
-          <li><a href="showcase202603.html"><p class="menu__information__list__date"><time datetime="2026-03-22">Mar.22,2026</time></p><p class="menu__information__list__title menu__information__list__title--ja">Violin &amp; Piano Showcase 出演のお知らせ</p><p class="menu__information__list__title menu__information__list__title--en">Performing at Violin &amp; Piano Showcase</p></a></li>
-          <li><a href="violin-piano-showcase.html"><p class="menu__information__list__date"><time datetime="2026-01-29">Jan.29,2026</time></p><p class="menu__information__list__title menu__information__list__title--ja">Regulative Art Experience 体験会のお知らせ</p><p class="menu__information__list__title menu__information__list__title--en">Regulative Art Experience: hands-on session</p></a></li>
-          <li><a href="showcase20251222.html"><p class="menu__information__list__date"><time datetime="2025-12-22">Dec.22,2025</time></p><p class="menu__information__list__title menu__information__list__title--ja">BLUE FANTASY Special Showcase 出演のお知らせ</p><p class="menu__information__list__title menu__information__list__title--en">Performing at BLUE FANTASY Special Showcase</p></a></li>
-        </ul>
+        <ul class="menu__information__list"></ul>
       </div>
       <ul class="menu__sns sns-list">
         <li><a href="https://www.instagram.com/syiaviolin/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
         <li><a href="https://x.com/syiaviolin" target="_blank" rel="noopener noreferrer">X</a></li>
         <li><a href="https://www.facebook.com/syiaviolin/" target="_blank" rel="noopener noreferrer">Facebook</a></li>
-        <li><a href="mailto:syiaviolin@gmail.com">mail</a></li>
+        <li><a href="mailto:syiaviolin@gmail.com">Mail</a></li>
       </ul>
       <ul class="menu__links"><li><a href="sitepolicy.html">Site Policy</a></li></ul>
       <p class="menu__copyright"><small>&copy;2024 SYIA. All rights reserved.</small></p>
@@ -94,11 +74,6 @@
   <div class="archive-filter" id="archiveFilter">
     <p class="archive-filter__label">Year</p>
     <ul class="archive-filter__list" id="archiveFilterList">
-      <li><a href="#" class="is-selected" data-year="ALL">ALL</a></li>
-      <li><a href="#" data-year="2026">2026</a></li>
-      <li><a href="#" data-year="2025">2025</a></li>
-      <li><a href="#" data-year="2024">2024</a></li>
-      <li><a href="#" data-year="2023">2023</a></li>
     </ul>
     <div class="archive-filter__close">
       <button class="archive-filter__close__button" id="archiveFilterClose">Close</button>
@@ -109,159 +84,6 @@
 
   <!-- Information List -->
   <ul class="information-list" id="informationList">
-    <li data-year="2026">
-      <a class="information-item" href="showcase202603.html">
-        <div class="information-item__content">
-          <p class="information-item__date"><time datetime="2026-03-22">Mar.22,2026</time></p>
-          <h3 class="information-item__title">Violin &amp; Piano Showcase 出演のお知らせ</h3>
-          <p class="information-item__en-title">Performing at Violin &amp; Piano Showcase</p>
-        </div>
-      </a>
-    </li>
-    <li data-year="2026">
-      <a class="information-item" href="violin-piano-showcase.html">
-        <div class="information-item__content">
-          <p class="information-item__date"><time datetime="2026-01-29">Jan.29,2026</time></p>
-          <h3 class="information-item__title">Regulative Art Experience 体験会のお知らせ</h3>
-          <p class="information-item__en-title">Regulative Art Experience: hands-on session</p>
-        </div>
-      </a>
-    </li>
-    <li data-year="2025">
-      <a class="information-item" href="showcase20251222.html">
-        <div class="information-item__content">
-          <p class="information-item__date"><time datetime="2025-12-22">Dec.22,2025</time></p>
-          <h3 class="information-item__title">BLUE FANTASY Special Showcase 出演のお知らせ</h3>
-          <p class="information-item__en-title">Performing at BLUE FANTASY Special Showcase</p>
-        </div>
-      </a>
-    </li>
-    <li data-year="2025">
-      <a class="information-item" href="msp2025winter.html">
-        <div class="information-item__content">
-          <p class="information-item__date"><time datetime="2025-11-22">Nov.22 – Dec.25,2025</time></p>
-          <h3 class="information-item__title">Marunouchi Street Park 2025 winter ストリート演奏のお知らせ</h3>
-          <p class="information-item__en-title">Street performances at Marunouchi Street Park 2025 winter</p>
-        </div>
-      </a>
-    </li>
-    <li data-year="2025">
-      <a class="information-item" href="showcase202510.html">
-        <div class="information-item__content">
-          <p class="information-item__date"><time datetime="2025-10-30">Oct.30,2025</time></p>
-          <h3 class="information-item__title">&quot;ブエノスアイレスの四季&quot; Showcase 出演のお知らせ</h3>
-          <p class="information-item__en-title">Performing at &quot;The Four Seasons of Buenos Aires&quot; Showcase</p>
-        </div>
-      </a>
-    </li>
-    <li data-year="2025">
-      <a class="information-item" href="showcase202509.html">
-        <div class="information-item__content">
-          <p class="information-item__date"><time datetime="2025-09-14">Sep.14,2025</time></p>
-          <h3 class="information-item__title">&quot;偉大な芸術家の思い出&quot; Showcase 出演のお知らせ</h3>
-          <p class="information-item__en-title">Performing at &quot;In Memory of a Great Artist&quot; Showcase</p>
-        </div>
-      </a>
-    </li>
-    <li data-year="2025">
-      <a class="information-item" href="fccj2025.html">
-        <div class="information-item__content">
-          <p class="information-item__date"><time datetime="2025-09-13">Sep.13,2025</time></p>
-          <h3 class="information-item__title">It's Saturday Night Live ! 出演のお知らせ</h3>
-          <p class="information-item__en-title">Performing at It's Saturday Night Live !</p>
-        </div>
-      </a>
-    </li>
-    <li data-year="2025">
-      <a class="information-item" href="msp2025summer.html">
-        <div class="information-item__content">
-          <p class="information-item__date"><time datetime="2025-09-06">Sep.06 – Sep.21,2025</time></p>
-          <h3 class="information-item__title">Marunouchi Street Park 2025 summer ストリート演奏のお知らせ</h3>
-          <p class="information-item__en-title">Street performances at Marunouchi Street Park 2025 summer</p>
-        </div>
-      </a>
-    </li>
-    <li data-year="2025">
-      <a class="information-item" href="violin-duo-piano-showcase.html">
-        <div class="information-item__content">
-          <p class="information-item__date"><time datetime="2025-08-03">Aug.03,2025</time></p>
-          <h3 class="information-item__title">Violin Duo &amp; Piano Showcase 出演のお知らせ</h3>
-          <p class="information-item__en-title">Performing at Violin Duo &amp; Piano Showcase</p>
-        </div>
-      </a>
-    </li>
-    <li data-year="2025">
-      <a class="information-item" href="showcase202505.html">
-        <div class="information-item__content">
-          <p class="information-item__date"><time datetime="2025-05-11">May.11,2025</time></p>
-          <h3 class="information-item__title">Violin Duo &amp; Piano Showcase 出演のお知らせ</h3>
-          <p class="information-item__en-title">Performing at Violin Duo &amp; Piano Showcase</p>
-        </div>
-      </a>
-    </li>
-    <li data-year="2025">
-      <a class="information-item" href="lfj2025.html">
-        <div class="information-item__content">
-          <p class="information-item__date"><time datetime="2025-05-05">May.05,2025</time></p>
-          <h3 class="information-item__title">ラ・フォル・ジュルネ TOKYO 2025 出演のお知らせ</h3>
-          <p class="information-item__en-title">Performing at La Folle Journée TOKYO 2025</p>
-        </div>
-      </a>
-    </li>
-    <li data-year="2025">
-      <a class="information-item" href="msp2025spring.html">
-        <div class="information-item__content">
-          <p class="information-item__date"><time datetime="2025-04-26">Apr.26 – May.11,2025</time></p>
-          <h3 class="information-item__title">Marunouchi Street Park 2025 spring ストリート演奏のお知らせ</h3>
-          <p class="information-item__en-title">Street performances at Marunouchi Street Park 2025 spring</p>
-        </div>
-      </a>
-    </li>
-    <li data-year="2025">
-      <a class="information-item" href="39-2025.html">
-        <div class="information-item__content">
-          <p class="information-item__date"><time datetime="2025-03-09">Mar.09,2025</time></p>
-          <h3 class="information-item__title">《卒業前最終公演》早稲田大学卒業記念リサイタル開催のお知らせ</h3>
-          <p class="information-item__en-title">Waseda University graduation recital</p>
-        </div>
-      </a>
-    </li>
-    <li data-year="2024">
-      <a class="information-item" href="iss2024.html">
-        <div class="information-item__content">
-          <p class="information-item__date"><time datetime="2024-12-24">Dec.24,2024</time></p>
-          <h3 class="information-item__title">Bright Street Ice Skating Show 生演奏出演のお知らせ</h3>
-          <p class="information-item__en-title">Live performance at Bright Street Ice Skating Show</p>
-        </div>
-      </a>
-    </li>
-    <li data-year="2024">
-      <a class="information-item" href="msp2024winter.html">
-        <div class="information-item__content">
-          <p class="information-item__date"><time datetime="2024-11-24">Nov.24 – Dec.25,2024</time></p>
-          <h3 class="information-item__title">Marunouchi Street Park 2024 winter ストリート演奏のお知らせ</h3>
-          <p class="information-item__en-title">Street performances at Marunouchi Street Park 2024 winter</p>
-        </div>
-      </a>
-    </li>
-    <li data-year="2023">
-      <a class="information-item" href="duo2023.html">
-        <div class="information-item__content">
-          <p class="information-item__date"><time datetime="2023-09-24">Sep.24,2023</time></p>
-          <h3 class="information-item__title">Duo Concert開催のお知らせ</h3>
-          <p class="information-item__en-title">Duo Concert</p>
-        </div>
-      </a>
-    </li>
-    <li data-year="2023">
-      <a class="information-item" href="lfj2023.html">
-        <div class="information-item__content">
-          <p class="information-item__date"><time datetime="2023">2023</time></p>
-          <h3 class="information-item__title">ラ・フォル・ジュルネ TOKYO 2023 出演のお知らせ</h3>
-          <p class="information-item__en-title">Performing at La Folle Journée TOKYO 2023</p>
-        </div>
-      </a>
-    </li>
   </ul>
 
   <p class="pager-count" id="pagerCount">Page 1/3</p>
@@ -289,7 +111,7 @@
             <li><a href="https://www.instagram.com/syiaviolin/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
             <li><a href="https://x.com/syiaviolin" target="_blank" rel="noopener noreferrer">X</a></li>
             <li><a href="https://www.facebook.com/syiaviolin/" target="_blank" rel="noopener noreferrer">Facebook</a></li>
-            <li><a href="mailto:syiaviolin@gmail.com">mail</a></li>
+            <li><a href="mailto:syiaviolin@gmail.com">Mail</a></li>
           </ul>
         </div>
       
@@ -302,6 +124,8 @@
   </footer>
 
   <div class="canvas" id="canvas"></div>
-  <script src="js/main.js"></script>
+  <script src="js/concerts.js?v=20261025a"></script>
+  <script src="js/main.js?v=20261025d"></script>
+  <script src="js/cursor.js?v=20261025c"></script>
 </body>
 </html>

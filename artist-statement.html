@@ -4,33 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Artist Statement | SYIA Official Portfolio</title>
-  <meta name="description" content="Artist Statement" />
+  <meta name="description" content="SYIA - Artist Statement / NEURO ROMANTIC：音が消えたあと、あなたの中で鳴りつづけるもの。それを、僕は作品と呼ぶ。" />
   <link rel="icon" href="images/favicon.png" />
   <link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
-  <link rel="stylesheet" href="css/master.css" />
+  <link rel="stylesheet" href="css/master.css?v=20261025j" />
 </head>
 <body class="is-loaded" style="overflow-y:auto">
   <!-- Loading -->
-  <div class="loading" id="loading">
-    <div class="loading__background"></div>
-    <canvas class="loading__eeg" id="loadingEeg"></canvas>
-    <div class="loading__mask-text" id="loadingMaskText"><span>S</span><span>Y</span><span>I</span><span>A</span></div>
-  </div>
+  <div class="loading" id="loading"><canvas class="loading__staff" id="loadingStaff"></canvas></div>
 
   <!-- Header -->
   <header class="header">
-    <span class="header__nav-trigger">♪</span>
-    <nav class="header__nav">
-      <ul class="header__nav__list has-current">
-        <li><a href="information.html">Information</a></li>
-        <li><a href="art.html">Art</a></li>
-        <li><a href="concert.html">Concert</a></li>
-        <li><a href="lesson.html">Lesson</a></li>
-        <li><a href="artist-statement.html" class="is-current">Artist Statement</a></li>
-        <li><a href="biography.html">Biography</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </nav>
     <a class="header__title" href="index.html">SYIA</a>
     <button class="header__button" type="button">Menu</button>
   </header>
@@ -44,13 +28,13 @@
       </div>
       <nav class="menu__nav">
         <ul class="menu__nav__list">
-          <li><a href="information.html">Information</a></li>
-          <li><a href="art.html">Art</a></li>
-          <li><a href="concert.html">Concert</a></li>
-          <li><a href="lesson.html">Lesson</a></li>
-          <li><a href="artist-statement.html">Artist Statement</a></li>
-          <li><a href="biography.html">Biography</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="information.html">Information<small>お知らせ</small></a></li>
+          <li><a href="art.html">Art<small>作品</small></a></li>
+          <li><a href="concert.html">Concert<small>演奏会</small></a></li>
+          <li><a href="lesson.html">Lesson<small>レッスン</small></a></li>
+          <li><a href="artist-statement.html">Artist Statement<small>ステートメント</small></a></li>
+          <li><a href="biography.html">Biography<small>プロフィール</small></a></li>
+          <li><a href="contact.html">Contact<small>お問い合わせ</small></a></li>
         </ul>
       </nav>
       <div class="menu__information menu__information--ja">
@@ -64,17 +48,13 @@
           <span class="menu__information__lang__separator">/</span>
           <button class="menu__information__lang__button menu__information__lang__button--en">en</button>
         </div>
-        <ul class="menu__information__list">
-          <li><a href="showcase202603.html"><p class="menu__information__list__date"><time datetime="2026-03-22">Mar.22,2026</time></p><p class="menu__information__list__title menu__information__list__title--ja">Violin &amp; Piano Showcase 出演のお知らせ</p><p class="menu__information__list__title menu__information__list__title--en">Performing at Violin &amp; Piano Showcase</p></a></li>
-          <li><a href="violin-piano-showcase.html"><p class="menu__information__list__date"><time datetime="2026-01-29">Jan.29,2026</time></p><p class="menu__information__list__title menu__information__list__title--ja">Regulative Art Experience 体験会のお知らせ</p><p class="menu__information__list__title menu__information__list__title--en">Regulative Art Experience: hands-on session</p></a></li>
-          <li><a href="showcase20251222.html"><p class="menu__information__list__date"><time datetime="2025-12-22">Dec.22,2025</time></p><p class="menu__information__list__title menu__information__list__title--ja">BLUE FANTASY Special Showcase 出演のお知らせ</p><p class="menu__information__list__title menu__information__list__title--en">Performing at BLUE FANTASY Special Showcase</p></a></li>
-        </ul>
+        <ul class="menu__information__list"></ul>
       </div>
       <ul class="menu__sns sns-list">
         <li><a href="https://www.instagram.com/syiaviolin/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
         <li><a href="https://x.com/syiaviolin" target="_blank" rel="noopener noreferrer">X</a></li>
         <li><a href="https://www.facebook.com/syiaviolin/" target="_blank" rel="noopener noreferrer">Facebook</a></li>
-        <li><a href="mailto:syiaviolin@gmail.com">mail</a></li>
+        <li><a href="mailto:syiaviolin@gmail.com">Mail</a></li>
       </ul>
       <ul class="menu__links"><li><a href="sitepolicy.html">Site Policy</a></li></ul>
       <p class="menu__copyright"><small>&copy;2024 SYIA. All rights reserved.</small></p>
@@ -89,49 +69,43 @@
   <!-- Profile Front Content -->
   <div class="profile-front">
     <figure class="profile-front__image">
-      <img class="profile-front__image__image" src="syia.png" alt="Artist main image">
+      <img class="profile-front__image__image" src="syia.png" alt="SYIA">
     </figure>
 
     <div class="profile-front__header">
       <h2 class="profile-front__header__title">
-        物化，計算機自然<br>
-        風景，共感覚<br>
-        映像と物質，<br class="u-sp">質量への憧憬
+        音が消えたあと、<br>
+        あなたの中で鳴りつづけるもの。<br>
+        それを、僕は作品と呼ぶ。
       </h2>
-      <p class="profile-front__header__text">Transformation of Material Things in Digital Nature Scenery with Synesthesia Image and Matter, Sehnsucht nach Masse</p>
+      <p class="profile-front__header__text">NEURO ROMANTIC — 神経のロマン主義</p>
     </div>
 
     <div class="profile-front__ja-text reveal">
-      <p>物化する計算機自然と対峙し，<br class="u-pc">質量と映像の間にある憧憬や情念を反芻する．</p>
-      <p>研究や芸術活動の枠を自由に越境し，<br class="u-pc">探求と表現を継続している．<br class="u-pc">メディア装置の発明やメディアのコンテクストを含む<br class="u-pc">メタ的な芸術活動としてのメディアアートを行いながら，<br class="u-pc">質量のある物質的な世界と質量のないデータの世界の<br class="u-pc">融和する計算機自然という世界観への思考を続けている．</p>
-      <p>作品の根本に，老子・荘子から連続する<br class="u-pc">東洋的な物化（万物が変化し定型を持たず循環する）の思想を通底し，<br class="u-pc">19世紀以降の映像装置とメディア装置，<br class="u-pc">計算機と東洋的な物化との関係性，<br class="u-pc">自然現象とデータの相似性を考えながら，<br class="u-pc">空間に没入するようなインスタレーションの構築を得意とする．</p>
-      <p>作品の主題と副題には以下のものが内包される：<br class="u-pc">映像と物質の境界と融和，計算機と自然の類似性，<br class="u-pc">質量性のあるものと非質量性のあるものの調停．<br class="u-pc">ポスト工業社会，計算機自然社会における侘びと寂び，<br class="u-pc">デジタルから見た質量への憧憬という概念提示．</p>
+      <p>アルゴリズムが「最適解」を差し出す時代に、人はいつ、なぜ心を震わせるのか。<br>僕はヴァイオリンを弾きながら、その問いを脳科学と数理モデルで追いかけている。</p>
+      <p>音は空気の波として身体に入り、心拍を揺らし、呼吸を変え、やがて神経の中に「余韻」として残る。僕にとって作品とは、楽譜でも録音でもなく、その余韻のことだ。</p>
+      <p>だから舞台の上では、聴く人の身体もまた楽譜になる。バッハやヴィヴァルディは、その場にいる人々の呼吸に合わせて組み替えられ、古典は化石ではなく、いま生きている生態系として鳴りはじめる。</p>
+      <p>科学で感動を解剖したいのではない。科学で、感動を守りたい。<br>計算の時代に、震える身体を取り戻すために。<br>これを、僕は NEURO ROMANTIC と呼んでいる。</p>
     </div>
 
-    <div class="profile-front__en-group reveal">
+    <div class="profile-front__en-group reveal" lang="en">
       <div class="ordered-group">
         <div class="ordered-group__section">
-          <p>Freely crossing the boundaries of research and artistic activity, continuing to explore and express philosophy. While engaging in media art as a meta-artistic activity that includes the invention of media devices and media contexts, continuing to think about the worldview of the Digital Nature, in which the material world with mass and the digital world of massless data melt together.</p>
+          <p>In an age when algorithms hand us the optimal answer, when — and why — does a person still tremble? I chase that question with a violin, and with neuroscience and mathematical models.</p>
         </div>
         <div class="ordered-group__section">
-          <p>Based on the idea of oriental materialization (all things change and circulate without any formality), which is derived from Laozi and Zhuangzi, the works are rooted in the idea of the relationship between imaging devices and media devices since the 19th century, digital transformation and oriental materialization, and the similarity of natural phenomena and data.</p>
+          <p>Sound enters the body as a wave. It sways the heartbeat, reshapes the breath, and stays in the nervous system as an afterglow — what Japanese calls <em>yoin</em>. To me, that afterglow is the work: not the score, not the recording.</p>
         </div>
         <div class="ordered-group__section">
-          <p>The subjects and sub-titles of the work encompass the following: the boundaries and harmonization of image and matter, the analogy between computation and nature, and the mediation of the massive and the immaterial. The post-industrial society, wabi and sabi in the Digital Nature society, and the concept of the Sehnsucht nach Masse (Longing for mass) from a Digital perspective.</p>
+          <p>So on stage, the listener's body becomes part of the score. Bach and Vivaldi are recomposed to the breathing of the room, and the classics sound not as fossils but as a living ecosystem.</p>
+        </div>
+        <div class="ordered-group__section">
+          <p>I don't want to dissect emotion with science. I want to protect it. To give back a trembling body to an age of computation. I call this Neuro Romantic.</p>
         </div>
       </div>
     </div>
   </div>
 
-  <hr class="divider">
-
-  <!-- Page Links -->
-  <div class="page-links">
-    <div class="page-links__content">
-      <a class="page-links__prev" href="art.html">Art</a>
-      <a class="page-links__next" href="biography.html">Biography</a>
-    </div>
-  </div>
 
   <!-- Footer -->
   <footer class="footer">
@@ -152,7 +126,7 @@
             <li><a href="https://www.instagram.com/syiaviolin/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
             <li><a href="https://x.com/syiaviolin" target="_blank" rel="noopener noreferrer">X</a></li>
             <li><a href="https://www.facebook.com/syiaviolin/" target="_blank" rel="noopener noreferrer">Facebook</a></li>
-            <li><a href="mailto:syiaviolin@gmail.com">mail</a></li>
+            <li><a href="mailto:syiaviolin@gmail.com">Mail</a></li>
           </ul>
         </div>
       
@@ -165,6 +139,8 @@
   </footer>
 
   <div class="canvas" id="canvas"></div>
-  <script src="js/main.js"></script>
+  <script src="js/concerts.js?v=20261025a"></script>
+  <script src="js/main.js?v=20261025d"></script>
+  <script src="js/cursor.js?v=20261025c"></script>
 </body>
 </html>

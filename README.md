@@ -6,37 +6,37 @@ Artist portfolio website for **SYIA** (しあ), a Japan-based violinist. This is
 
 ### Global Customizations
 - **SYIA branding**: All occurrences of "Your Name" replaced with "SYIA" across every page
-- **Loading screen**: Full-screen black overlay with EEG-style brainwave canvas animation and centered "SYIA" mask text reveal animation (letters slide up one by one)
-- **Eighth-note navigation**: Left-top desktop navigation trigger changed from a dot to a ♪ (eighth note) musical icon
+- **Loading screen** (sub pages): the home page's opening in short — on a deep navy overlay, five staff lines are drawn across the screen and come apart into five-line fragments while the page appears (about 1.5 s, `js/main.js`)
+- **Cursor** (mouse/pen only, all pages): a calm glow on the pointer (like the specks of light around the violin, a little larger over links) and a shooting star trailing the pointer (bright head, long pale-blue tail, stardust), with a twinkle on click (`js/cursor.js`). Touch screens and reduced-motion settings keep the normal cursor
 - **Renamed Exhibition → Concert**: `exhibition.html` renamed to `concert.html` with all navigation links updated sitewide
 
 ### Pages
-1. **index.html** — Home page with loading animation, YouTube background video, particle effects, autograph canvas, explore button, and top-footer
-2. **information.html** — The 17 announcements from the old site (event date, Japanese/English title, link to the detail page) with year filter (All/2026-2023) and pagination (6 items per page)
+1. **index.html** — Home page. Opening animation modelled on [Post-Classical Debussy](https://jumpeikaneko.github.io/Post-Classical-Debussy/): five staff lines are drawn across the screen, come apart into five-line fragments and settle into a 3D line drawing of a violin (front-view scroll with fluting and ears, pegbox and heart-shaped pegs, f-holes, ribs and a maple back). It sways slowly; strokes give way around the cursor, the cursor's side leans it, dragging turns it a full 360° (it drifts back to the front after a few seconds), click sends a ripple. Lines behind the head are hidden; surfaces facing away are drawn faintly. The text (SOUND × COMPUTER × BRAIN / SYIA / Violinist / Neuro Media Artist / profile line, then SNS links and copyright) rises out of a blur; the header fades in last
+2. **information.html** — Concert announcements (event date, Japanese/English title, link to the concert) with year filter and pagination (6 items per page), built from `js/concerts.js`
 3. **art.html** — Shows 「準備中」(Coming Soon). The art index built earlier (left sidebar filter, grid of artworks, pagination) is kept in the file inside a `<div hidden>` wrapper
-4. **concert.html** — Concert page with all 17 events from [syiaviolin.com/concert](https://syiaviolin.com/concert) (2026–2023; cover image, event date, title and venue), each linking to its detail page
-5. **Concert detail pages** — One page per event, named after the old site's URL slug (e.g. `showcase202603.html`, `msp2025winter.html`, `lfj2023.html`): text, images, flyers, performer profiles, maps and links migrated from the old site
+4. **concert.html** — One page for all concerts, built from `js/concerts.js`: the list (cover image, event date, title, venue, newest first) and, at `concert.html#<id>` (e.g. `concert.html#showcase202603`), one concert with its text, images, flyers, performer profiles, maps and links, plus Prev / Next
+5. **js/concerts.js** — All concert data in one file. Adding a new concert means adding one entry there (a template and the body format are described at the top of the file); the Concert page, the Information list and the latest news in every page's menu update from it
 6. **lesson.html** — Lesson information migrated from [syiaviolin.com/lesson](https://syiaviolin.com/lesson), with an inquiry form
-7. **artist-statement.html** — Artist statement with main image, Japanese/English text sections, and description blocks
+7. **artist-statement.html** — Artist statement (NEURO ROMANTIC) in Japanese and English, from the SYIA world-view document (Oct 24, 2026)
 8. **biography.html** — Biography with artist photo displayed on the right side (sticky on desktop), Profile/Activities/Education sections (profile text from the old site's home page)
 9. **contact.html** — Contact form with Name, Email, Subject, Message fields
 10. **sitepolicy.html** — Site policy with copyright, disclaimer, and link policy sections
 
 ### Design & Interaction
 - Responsive layout with mobile/desktop breakpoints (768px/769px)
-- Full-screen hamburger menu with background slideshow and language toggle (JP/EN)
+- Night-sky look on every page, matching the home page: deep navy gradient with a soft blue light, quietly twinkling stars behind the content and in the menu (`js/main.js`), thin translucent white rules
+- Full-screen hamburger menu in the same look: italic menu items with Japanese labels, the photo slideshow tinted into the navy, latest news and language toggle (JP/EN)
 - Page title fade-in/slide-up animation on all sub-pages
 - Scroll reveal animations using IntersectionObserver
 - Custom scrollbar styling
-- Google Fonts: Noto Serif JP, Prompt
+- Google Fonts: Cormorant Garamond (Latin: titles, dates, navigation; page titles in italic) and Shippori Mincho (Japanese text)
 
 ## 📁 File Structure
 
 ```
 index.html              — Home page
 art.html                — Art index
-concert.html            — Concert listing (from syiaviolin.com)
-<slug>.html             — Concert detail pages, one per event (17 files, e.g. showcase202603.html)
+concert.html            — Concert list and each concert (concert.html#<id>), from js/concerts.js
 lesson.html             — Lesson information and inquiry form
 artist-statement.html   — Artist statement
 biography.html          — Biography with artist photo
@@ -46,10 +46,13 @@ sitepolicy.html         — Site policy
 css/
   └── master.css        — All styles (reset, layout, animations, responsive)
 js/
-  └── main.js           — All JavaScript (loading, menu, filters, particles, EEG animation, contact form)
+  ├── concerts.js       — Concert data (edit this file to add or change concerts)
+  ├── main.js           — Shared JavaScript (loading screen, menu, concert pages from the data, filters, contact form)
+  ├── hero.js           — Home page opening animation (violin line drawing generated in code)
+  └── cursor.js         — Custom cursor on every page (dot, trailing ring, ribbon of light)
 images/                 — All images from the old site, in one flat folder
-  ├── <slug>-cover.*    — Concert list thumbnail for each event (e.g. showcase202603-cover.jpg)
-  ├── <slug>-01.*, -02.* … — Images on each concert detail page, in page order
+  ├── <id>-cover.*      — Concert list thumbnail for each event (e.g. showcase202603-cover.jpg)
+  ├── <id>-01.*, -02.* … — Images in each concert's text, in order
   ├── lesson-01.jpg     — Lesson page image
   ├── home-masthead.jpg — Old site's main visual (used as the home video fallback)
   ├── home-background.jpg — Old site's background (not used)
@@ -61,11 +64,11 @@ reference/              — Reference files from original sites (not deployed)
 
 | Path | Description |
 |------|-------------|
-| `index.html` | Home page with loading animation |
+| `index.html` | Home page with staff-to-violin opening animation |
 | `information.html` | News & announcements (filterable by year) |
 | `art.html` | Art index with category/year filters |
-| `concert.html` | Concert listings from SYIA's official site |
-| `<slug>.html` | Concert detail page for each event (same slugs as the old site, e.g. `fccj2025.html`) |
+| `concert.html` | Concert list |
+| `concert.html#<id>` | One concert (e.g. `concert.html#fccj2025`) |
 | `lesson.html` | Lesson information and inquiry form |
 | `artist-statement.html` | Artist statement |
 | `biography.html` | Biography with photo |
@@ -78,9 +81,8 @@ Concert, lesson, profile and contact content was migrated from the old site http
 
 ## 🚧 Not Yet Implemented / Recommended Next Steps
 
-1. **Artist Statement** — `artist-statement.html` still contains the template text; the old site had no equivalent content
-2. **Art page** — currently 「準備中」; remove the `<div hidden>` wrapper and the Coming Soon block in `art.html` to publish the index
-3. **Contact form backend** — the Contact and Lesson forms have no server; on submit they open the visitor's mail app with a message addressed to syiaviolin@gmail.com (`js/main.js`). Replace with a form service if server-side submission is needed
-4. **SEO optimization** — Open Graph tags are in place (`og:image` assumes the site is served at https://syiaviolin.com); canonical URLs and structured data are not
-5. **Google Analytics** integration (the old site used a GA4 property)
-6. **Performance optimization** — `syia.png` is a 2.6 MB full-resolution photo; preload critical assets
+1. **Art page** — currently 「準備中」; remove the `<div hidden>` wrapper and the Coming Soon block in `art.html` to publish the index
+2. **Contact form backend** — the Contact and Lesson forms have no server; on submit they open the visitor's mail app with a message addressed to syiaviolin@gmail.com (`js/main.js`). Replace with a form service if server-side submission is needed
+3. **SEO optimization** — Open Graph tags are in place (`og:image` assumes the site is served at https://syiaviolin.com); canonical URLs and structured data are not
+4. **Google Analytics** integration (the old site used a GA4 property)
+5. **Performance optimization** — `syia.png` is a 2.6 MB full-resolution photo; preload critical assets
