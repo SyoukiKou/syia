@@ -85,7 +85,7 @@
 
   // ========================================
   // Concerts (js/concerts.js) and news (js/information.js)
-  // Builds the Concert page (the list, and one concert at concert.html#id), the Information page
+  // Builds the Concert page (the list, and one concert at concert#id), the Information page
   // and the latest items in the menu, so each concert or piece of news is written in one place only.
   // ========================================
   var WEEKDAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -109,7 +109,7 @@
     if (c.dateEnd) text += ' – ' + day(c.dateEnd, String(c.dateEnd).slice(0, 4) !== String(c.date).slice(0, 4));
     return text;
   }
-  function concertUrl(c) { return 'concert.html#' + encodeURIComponent(c.id); }
+  function concertUrl(c) { return 'concert#' + encodeURIComponent(c.id); }
   function linkAttrs(url) {
     return 'href="' + url + '"' + (/^https?:/.test(url) ? ' target="_blank" rel="noopener noreferrer"' : '');
   }
@@ -211,7 +211,7 @@
   }
 
   // latest in the menu (every page): news and concerts together, newest first
-  var latest = news.map(function (n) { return { date: n.date, dateEnd: n.dateEnd, dateText: n.dateText, title: n.title, titleEn: n.titleEn, url: n.link || 'information.html' }; })
+  var latest = news.map(function (n) { return { date: n.date, dateEnd: n.dateEnd, dateText: n.dateText, title: n.title, titleEn: n.titleEn, url: n.link || 'information' }; })
     .concat(concerts.map(function (c) { return { date: c.date, dateEnd: c.dateEnd, dateText: c.dateText, title: c.title, titleEn: c.titleEn, url: concertUrl(c) }; }))
     .sort(byDateDesc).slice(0, 3);
   document.querySelectorAll('.menu__information__list').forEach(function (ul) {
@@ -234,7 +234,7 @@
         '<h3 class="information-item__title">' + title + '</h3>' +
         (n.titleEn ? '<p class="information-item__en-title">' + escapeHtml(n.titleEn) + '</p>' : '') +
         (n.text ? '<p class="information-item__text">' + inlineText(n.text) + '</p>' : '') + '</div></div></li>';
-    }).join('') : '<li class="information-empty">現在お知らせはありません。<br>演奏会の情報は <a href="concert.html">Concert</a> をご覧ください。</li>';
+    }).join('') : '<li class="information-empty">現在お知らせはありません。<br>演奏会の情報は <a href="concert">Concert</a> をご覧ください。</li>';
     if (!news.length) document.body.classList.add('is-information-empty');
     if (infoYearsEl) {
       var years = [];

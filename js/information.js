@@ -14,7 +14,7 @@
  *     title: '公式サイトをリニューアルしました',
  *     titleEn: 'The official website has been renewed',   // メニューで en を選んだときのタイトル（省略可）
  *     text: '本文（省略可）。改行はそのまま反映されます。文中に[リンク](https://...)も書けます。',
- *     link: 'concert.html#showcase202611'      // 省略可。タイトルを押したときの行き先（外部サイトの URL も可）
+ *     link: 'concert#showcase202611'      // 省略可。タイトルを押したときの行き先（外部サイトの URL も可）
  *   },
  */
 window.SYIA_INFORMATION = [

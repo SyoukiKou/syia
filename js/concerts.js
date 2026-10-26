@@ -2,7 +2,7 @@
  * Concerts - SYIA Portfolio
  *
  * コンサート情報はこのファイル1つにまとめています。ここを書き換えるだけで
- *   ・Concert ページの一覧と、各公演の詳細（concert.html#id で開きます）
+ *   ・Concert ページの一覧と、各公演の詳細（concert#id で開きます）
  *   ・Information ページの一覧（年で絞り込み）
  *   ・全ページのメニューに出る新着3件
  * がすべて更新されます。HTML を編集する必要はありません。
@@ -13,7 +13,7 @@
  *      （一覧はいつも日付の新しい順に並ぶので、どこに書いても大丈夫です）
  *
  *   {
- *     id: 'showcase202611',              // 公演ページの名前。半角英数字とハイフン（concert.html#showcase202611）
+ *     id: 'showcase202611',              // 公演ページの名前。半角英数字とハイフン（concert#showcase202611）
  *     date: '2026-11-14',                // 公演日（何日かあるときは初日）。2026.11/14 (Sat) と表示。並び順にも使います
  *     dateEnd: '2026-11-28',             // 省略可。何日かにわたるときの最終日（2026.11/14 (Sat) – 11/28 (Sat) と表示）
  *     title: '○○ 出演のお知らせ',
@@ -322,7 +322,7 @@ Block5：新国際ビル・国際ビル前
 
 お問い合わせはこちら
 
-[Contact](contact.html)
+[Contact](contact)
 `
   },
 
@@ -920,7 +920,7 @@ presented by Marunouchi Street Park 2024 winter
 
 その他お問い合わせは下記へ
 
-[Contact](contact.html)
+[Contact](contact)
 `
   },
 
@@ -1019,7 +1019,7 @@ Block5：新国際ビル・国際ビル前
 
 その他お問い合わせは下記へ
 
-[Contact](contact.html)
+[Contact](contact)
 `
   },
 
@@ -1060,7 +1060,7 @@ Block5：新国際ビル・国際ビル前
 
 その他お問い合わせは下記へ
 
-[Contact](contact.html)
+[Contact](contact)
 `
   }
 ];

@@ -11,10 +11,10 @@ Artist portfolio website for **SYIA** (しあ), a Japan-based violinist. This is
 - **Renamed Exhibition → Concert**: `exhibition.html` renamed to `concert.html` with all navigation links updated sitewide
 
 ### Pages
-1. **index.html** — Home page. Opening animation modelled on [Post-Classical Debussy](https://jumpeikaneko.github.io/Post-Classical-Debussy/): five staff lines are drawn across the screen, come apart into five-line fragments and settle into a 3D line drawing of a violin (front-view scroll with fluting and ears, pegbox and heart-shaped pegs, f-holes, ribs and a maple back). It sways slowly; strokes give way around the cursor, the cursor's side leans it, dragging turns it a full 360° (it drifts back to the front after a few seconds), click sends a ripple. Touching it makes sound (see below). Lines behind the head are hidden; surfaces facing away are drawn faintly. The text (SOUND × COMPUTER × BRAIN / SYIA / Violinist / Neuro Media Artist / profile line, then SNS links and copyright) rises out of a blur; the header fades in last
+1. **home.html** — Home page. Opening animation modelled on [Post-Classical Debussy](https://jumpeikaneko.github.io/Post-Classical-Debussy/): five staff lines are drawn across the screen, come apart into five-line fragments and settle into a 3D line drawing of a violin (front-view scroll with fluting and ears, pegbox and heart-shaped pegs, f-holes, ribs and a maple back). It sways slowly; strokes give way around the cursor, the cursor's side leans it, dragging turns it a full 360° (it drifts back to the front after a few seconds), click sends a ripple. Touching it makes sound (see below). Lines behind the head are hidden; surfaces facing away are drawn faintly. The text (SOUND × COMPUTER × BRAIN / SYIA / Violinist / Neuro Media Artist / profile line, then SNS links and copyright) rises out of a blur; the header fades in last
 2. **information.html** — News other than concerts (date, Japanese/English title, optional text and link) with year filter and pagination (6 items per page), built from `js/information.js`. Shows a short note pointing to Concert while there is no news
 3. **art.html** — Shows 「準備中」(Coming Soon). The art index built earlier (left sidebar filter, grid of artworks, pagination) is kept in the file inside a `<div hidden>` wrapper
-4. **concert.html** — One page for all concerts, built from `js/concerts.js`: the list (cover image, event date, title, venue, newest first) and, at `concert.html#<id>` (e.g. `concert.html#showcase202603`), one concert with its text, images, flyers, performer profiles, maps and links, plus Prev / Next
+4. **concert.html** — One page for all concerts, built from `js/concerts.js`: the list (cover image, event date, title, venue, newest first) and, at `/concert#<id>` (e.g. `/concert#showcase202603`), one concert with its text, images, flyers, performer profiles, maps and links, plus Prev / Next
 5. **js/concerts.js** — All concert data in one file. Adding a new concert means adding one entry there (a template and the body format are described at the top of the file); the Concert page and the latest items in every page's menu update from it
 6. **lesson.html** — Lesson information migrated from [syiaviolin.com/lesson](https://syiaviolin.com/lesson), with an inquiry form
 7. **artist-statement.html** — Artist statement (NEURO ROMANTIC) in Japanese and English, from the SYIA world-view document (Oct 24, 2026)
@@ -50,7 +50,7 @@ Every note is in C major pentatonic, which holds all four open strings (G D A E)
 ## 📁 File Structure
 
 ```
-index.html              — Home page
+home.html               — Home page
 art.html                — Art index
 concert.html            — Concert list and each concert (concert.html#<id>), from js/concerts.js
 lesson.html             — Lesson information and inquiry form
@@ -59,7 +59,7 @@ biography.html          — Biography with artist photo
 information.html        — News with year filter & pagination
 contact.html            — Contact form
 sitepolicy.html         — Site policy
-vercel.json             — Vercel settings: redirects from the old Adobe Portfolio URLs
+vercel.json             — Vercel settings: URLs without .html, / → /home, redirects from the old Adobe Portfolio URLs
 css/
   └── master.css        — All styles (reset, layout, animations, responsive)
 js/
@@ -82,18 +82,20 @@ reference/              — Reference files from original sites (not deployed)
 
 ## 🔗 Functional URIs
 
+URLs have no `.html` (`cleanUrls` in `vercel.json`; `/concert.html` redirects to `/concert`). `/` redirects to `/home`.
+
 | Path | Description |
 |------|-------------|
-| `index.html` | Home page with staff-to-violin opening animation |
-| `information.html` | News & announcements (filterable by year) |
-| `art.html` | Art index with category/year filters |
-| `concert.html` | Concert list |
-| `concert.html#<id>` | One concert (e.g. `concert.html#fccj2025`) |
-| `lesson.html` | Lesson information and inquiry form |
-| `artist-statement.html` | Artist statement |
-| `biography.html` | Biography with photo |
-| `contact.html` | Contact form |
-| `sitepolicy.html` | Site policy |
+| `/home` | Home page with staff-to-violin opening animation (`home.html`) |
+| `/information` | News & announcements (filterable by year) |
+| `/art` | Art index with category/year filters |
+| `/concert` | Concert list |
+| `/concert#<id>` | One concert (e.g. `/concert#fccj2025`) |
+| `/lesson` | Lesson information and inquiry form |
+| `/artist-statement` | Artist statement |
+| `/biography` | Biography with photo |
+| `/contact` | Contact form |
+| `/sitepolicy` | Site policy |
 
 ## 🎵 Concert Data Source
 
@@ -105,9 +107,8 @@ The site is deployed on Vercel and served at https://syiaviolin.com (the domain 
 
 | Old URL | New page |
 |---------|----------|
-| `/home` | `/` |
-| `/concert`, `/lesson`, `/contact` | `concert.html`, `lesson.html`, `contact.html` |
-| `/<concert id>` (e.g. `/showcase202603`, the 17 concerts on the old site) | `concert.html#<concert id>` |
+| `/home`, `/concert`, `/lesson`, `/contact` | the same paths (no redirect needed) |
+| `/<concert id>` (e.g. `/showcase202603`, the 17 concerts on the old site) | `/concert#<concert id>` |
 
 Every page loads Google Analytics (GA4, measurement ID `G-JX7REYZTQF`, the same property the Adobe Portfolio site used), so visits keep being counted in the existing SYIA property.
 
