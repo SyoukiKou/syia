@@ -11,7 +11,7 @@ Artist portfolio website for **SYIA** (しあ), a Japan-based violinist. This is
 - **Renamed Exhibition → Concert**: `exhibition.html` renamed to `concert.html` with all navigation links updated sitewide
 
 ### Pages
-1. **index.html** — Home page. Opening animation modelled on [Post-Classical Debussy](https://jumpeikaneko.github.io/Post-Classical-Debussy/): five staff lines are drawn across the screen, come apart into five-line fragments and settle into a 3D line drawing of a violin (front-view scroll with fluting and ears, pegbox and heart-shaped pegs, f-holes, ribs and a maple back). It sways slowly; strokes give way around the cursor, the cursor's side leans it, dragging turns it a full 360° (it drifts back to the front after a few seconds), click sends a ripple. Lines behind the head are hidden; surfaces facing away are drawn faintly. The text (SOUND × COMPUTER × BRAIN / SYIA / Violinist / Neuro Media Artist / profile line, then SNS links and copyright) rises out of a blur; the header fades in last
+1. **index.html** — Home page. Opening animation modelled on [Post-Classical Debussy](https://jumpeikaneko.github.io/Post-Classical-Debussy/): five staff lines are drawn across the screen, come apart into five-line fragments and settle into a 3D line drawing of a violin (front-view scroll with fluting and ears, pegbox and heart-shaped pegs, f-holes, ribs and a maple back). It sways slowly; strokes give way around the cursor, the cursor's side leans it, dragging turns it a full 360° (it drifts back to the front after a few seconds), click sends a ripple. Touching it makes sound (see below). Lines behind the head are hidden; surfaces facing away are drawn faintly. The text (SOUND × COMPUTER × BRAIN / SYIA / Violinist / Neuro Media Artist / profile line, then SNS links and copyright) rises out of a blur; the header fades in last
 2. **information.html** — News other than concerts (date, Japanese/English title, optional text and link) with year filter and pagination (6 items per page), built from `js/information.js`. Shows a short note pointing to Concert while there is no news
 3. **art.html** — Shows 「準備中」(Coming Soon). The art index built earlier (left sidebar filter, grid of artworks, pagination) is kept in the file inside a `<div hidden>` wrapper
 4. **concert.html** — One page for all concerts, built from `js/concerts.js`: the list (cover image, event date, title, venue, newest first) and, at `concert.html#<id>` (e.g. `concert.html#showcase202603`), one concert with its text, images, flyers, performer profiles, maps and links, plus Prev / Next
@@ -30,6 +30,22 @@ Artist portfolio website for **SYIA** (しあ), a Japan-based violinist. This is
 - Scroll reveal animations using IntersectionObserver
 - Custom scrollbar styling
 - Google Fonts: Cormorant Garamond (Latin: titles, dates, navigation; page titles in italic) and Shippori Mincho (Japanese text)
+
+## 🎻 Violin sound (home page)
+
+Touching the violin plays it. Sounds are made in the browser (`js/violin-sound.js`); `js/hero.js` decides what was touched, where and how fast. With a mouse it sounds as the pointer moves over it and on click; on a phone, on a sideways swipe or a tap (scrolling past it stays silent).
+
+| Where | How | Sound |
+|---|---|---|
+| Strings | slow, light touch | a glassy harmonic from the nearest node (octave at the middle, and so on) |
+| Strings | quicker swipe | pizzicato, louder and brighter the faster; over the fingerboard the note rises towards the bridge, past it the open string rings (thinner near the bridge). The string shivers on screen from where it was stopped |
+| Body | stroking | a soft rustle and the strings humming back, higher on the upper bout and to the right, panned left/right |
+| f-holes | moving into one | a breath of air (the body's air resonance) |
+| Body | click / tap | a knock on the wood, and the open strings ring on quietly (duller on the back when turned round) |
+| Scroll, pegbox | moving / click | small bells, higher towards the top / three rising bells |
+| Pegs | moving across | that string sounds and slides into tune |
+
+Every note is in C major pentatonic, which holds all four open strings (G D A E), so anything played together agrees. Browsers only allow sound after the visitor's first click, tap or key press on the page, so the violin is silent until then. It also sounds with reduced-motion settings (without the string animation).
 
 ## 📁 File Structure
 
@@ -50,7 +66,8 @@ js/
   ├── concerts.js       — Concert data (edit this file to add or change concerts)
   ├── information.js    — News for the Information page (anything that is not a concert)
   ├── main.js           — Shared JavaScript (loading screen, menu, concert pages from the data, filters, contact form)
-  ├── hero.js           — Home page opening animation (violin line drawing generated in code)
+  ├── hero.js           — Home page opening animation (violin line drawing generated in code) and what touching it does
+  ├── violin-sound.js   — The violin's sounds, synthesised in the browser (Web Audio API, no audio files)
   └── cursor.js         — Custom cursor on every page (calm glow and a shooting-star tail)
 images/                 — All images from the old site, in one flat folder
   ├── <id>-cover.*      — Concert list thumbnail for each event (e.g. showcase202603-cover.jpg)

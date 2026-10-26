@@ -4,6 +4,8 @@
  * and settle into a line drawing of a violin that slowly turns in 3D.
  * Pointer: strokes give way around the cursor, its horizontal position leans the violin,
  * dragging turns it all the way round, click sends a ripple.
+ * Touching it makes sound (js/violin-sound.js): strings, body and head each answer in their own way,
+ * changing with where they are touched and how fast.
  */
 (function () {
   'use strict';
@@ -28,7 +30,8 @@
   // Strokes come in bundles of up to five parallel lines; each bundle flies as one staff fragment.
   // ========================================
   var strokes = [];   // [x1, y1, x2, y2, z, r, g, b, group, rank, dz, nx, ny, nz, mode]
-  var dots = [];      // [x, y, z, brightness 0-255]
+  var dots = [];      // [x, y, z, brightness 0-255, string 1-4 or 0, how far along it]
+  var stringPart = {};   // stroke index -> [string, along at its start, along at its end] (nut 0 ... bridge 1)
   var groupCount = 0;
 
   // Which way a stroke's surface faces. mode 0: drawn brighter the more it faces the viewer;
@@ -40,7 +43,10 @@
     strokes.push([x1, y1, x2, y2, z, c[0], c[1], c[2], g, rank, dz || 0, nrm[0], nrm[1], nrm[2], faceMode]);
   }
 
-  var BODY_TOP = 237, BODY_BOTTOM = 593, BRIDGE_Y = 432;
+  var BODY_TOP = 237, BODY_BOTTOM = 593, BRIDGE_Y = 432, NUT_Y = 107, FINGERBOARD_END = 377;
+  var nutX = [-8.2, -2.7, 2.7, 8.2], brX = [-17, -5.7, 5.7, 17];   // the strings (G D A E) at the nut and at the bridge
+  // pegs [side, y] from the top: A on the right, G on the left, E on the right, D on the left
+  var PEGS = [[1, 55], [-1, 65], [1, 78], [-1, 91]], PEG_STRING = [2, 0, 3, 1];
 
   function catmull(pts, sub) {
     var out = [], i, s;
@@ -392,17 +398,18 @@
     }
 
     // strings: four lines, nut -> bridge -> tailpiece, each slice flies as one fragment
-    var nutX = [-8.2, -2.7, 2.7, 8.2], brX = [-17, -5.7, 5.7, 17], tpX = [-13, -4.3, 4.3, 13];
-    function strings(y0, y1, xa, xb, za, zb, n) {
+    var tpX = [-13, -4.3, 4.3, 13];
+    function strings(y0, y1, xa, xb, za, zb, n, sounding) {
       for (var s = 0; s < n; s++) {
         var t0 = s / n, t1 = (s + 1) / n, g = groupCount++, ranks = pickRanks(4);
         for (var j = 0; j < 4; j++) {
           emit(xa[j] + (xb[j] - xa[j]) * t0, y0 + (y1 - y0) * t0, xa[j] + (xb[j] - xa[j]) * t1, y0 + (y1 - y0) * t1,
             za + (zb - za) * (t0 + t1) / 2, jitter(shade(.95), 10), g, ranks[j]);
+          if (sounding) stringPart[strokes.length - 1] = [j, t0, t1];
         }
       }
     }
-    strings(107, BRIDGE_Y, nutX, brX, 28, 36, 10);
+    strings(NUT_Y, BRIDGE_Y, nutX, brX, 28, 36, 10, true);
     strings(BRIDGE_Y, 474, brX, tpX, 36, 22, 2);
 
     // bridge: a thin maple plate standing on the top (edge-on from the front), with its heart and kidney cut-outs
@@ -452,8 +459,6 @@
     trace3([[-13, 107, 26.5], [13, 107, 26.5]], { seg: 13, n: 2, gap: 1.2, off: [0, 1, 0], normal: nrm([0, 0, 1]), color: bright(.92) });
 
     // pegs: shaft through the box, collar rings, a heart-shaped thumb piece with a small pip at its end
-    // (from the top: A on the right, G on the left, E on the right, D on the left)
-    var PEGS = [[1, 55], [-1, 65], [1, 78], [-1, 91]];
     var thumb = catmull([[25.5, -2.6], [26.6, -6.4], [29, -8.7], [32, -8.5], [34, -6.2], [36, -8], [38.6, -8.3], [40.8, -6],
       [41.6, -1.8], [41, 2.6], [39, 6.6], [35, 8.7], [30, 8.6], [27, 6.6], [25.5, 2.6]], 4);
     PEGS.forEach(function (pg) {
@@ -522,12 +527,12 @@
     setFace(0, 0, 1, 0);
 
     // ---- dots: light on the strings and the rim, glints on the body, a faint halo around ----
-    function dot(x, y, z, b) { dots.push([x, y, z, clamp(b, 0, 255)]); }
+    function dot(x, y, z, b, str, along) { dots.push([x, y, z, clamp(b, 0, 255), str || 0, along || 0]); }
     for (k = 0; k < 4; k++) {
       for (var sy = 112; sy < BRIDGE_Y; sy += 7) {
         if (rand() < .55) {
-          var st = (sy - 107) / (BRIDGE_Y - 107);
-          dot(nutX[k] + (brX[k] - nutX[k]) * st + (rand() - .5) * 1.5, sy + rand() * 6, 32 + st * 4, 150 + rand() * 90);
+          var st = (sy - NUT_Y) / (BRIDGE_Y - NUT_Y);
+          dot(nutX[k] + (brX[k] - nutX[k]) * st + (rand() - .5) * 1.5, sy + rand() * 6, 32 + st * 4, 150 + rand() * 90, k + 1, st);
         }
       }
     }
@@ -571,6 +576,7 @@
   var gFx = F(nG), gFy = F(nG), gFz = F(nG), gN = F(nG), gCx = F(nG), gCy = F(nG);
   var dDelay = F(nD), dBendX = F(nD), dBendY = F(nD), dStartX = F(nD), dRow = new Int8Array(nD);
   var dOx = F(nD), dOy = F(nD), dVx = F(nD), dVy = F(nD), dPhase = F(nD), dTwinkle = F(nD);
+  var sStr = new Int8Array(nS), sA1 = F(nS), sA2 = F(nS), dStr = new Int8Array(nD), dAlong = F(nD);
 
   (function () {
     var i, k, order = [];
@@ -586,6 +592,7 @@
       sGroup[k] = g; sRank[k] = s[9];
       NX[k] = s[11]; NY[k] = s[12]; NZ[k] = s[13]; MODE[k] = s[14];
       if (s[14] === 1) headIdx.push(k);
+      if (stringPart[k]) { sStr[k] = stringPart[k][0] + 1; sA1[k] = stringPart[k][1]; sA2[k] = stringPart[k][2]; }
       gFx[g] += sMx[k]; gFy[g] += sMy[k]; gFz[g] += sMz[k]; gN[g]++;
     }
     for (i = 0; i < nG; i++) { gFx[i] /= gN[i] || 1; gFy[i] /= gN[i] || 1; gFz[i] /= gN[i] || 1; }
@@ -593,6 +600,7 @@
       dDelay[k] = rand(); dBendX[k] = rand() * 2 - 1; dBendY[k] = rand() * 2 - 1;
       dStartX[k] = rand(); dRow[k] = Math.floor(rand() * 5);
       dPhase[k] = rand() * Math.PI * 2; dTwinkle[k] = .6 + rand() * 2;
+      dStr[k] = dots[k][4]; dAlong[k] = dots[k][5];
     }
   })();
 
@@ -702,6 +710,206 @@
   }
 
   // ========================================
+  // Sound: what the pointer touches, where and how fast (js/violin-sound.js makes the sounds)
+  //   strings  slow, light touch -> a glassy harmonic from the nearest node; quicker -> pizzicato, louder and
+  //            brighter the faster. Over the fingerboard the note rises towards the bridge; past it the open
+  //            string rings, thinner near the bridge. Each string vibrates on screen from where it was stopped.
+  //   body     stroking it -> a soft rustle and the strings humming back, higher on the upper bout and to the
+  //            right; an f-hole breathes; a click or tap knocks on the wood (duller on the back).
+  //   head     the scroll and pegbox ring small bells, higher towards the top; a peg slides its string into tune.
+  // ========================================
+  var sound = window.SYIA_VIOLIN_SOUND;
+  var OPEN = [55, 62, 69, 76];                   // open strings G3 D4 A4 E5 as MIDI notes
+  var STR_DECAY = [1.7, 1.5, 1.3, 1.1];          // seconds a pizzicato rings on each string
+  // C major pentatonic holds all four open strings, so whatever is touched, the notes agree
+  function inScale(m) { return [0, 2, 4, 7, 9].indexOf(((m % 12) + 12) % 12) >= 0; }
+  function nearestInScale(m) { m = Math.round(m); return inScale(m) ? m : inScale(m + 1) ? m + 1 : m - 1; }
+  function scaleFrom(lo, hi) { var out = []; for (var m = lo; m <= hi; m++) if (inScale(m)) out.push(m); return out; }
+  var HUM_NOTES = scaleFrom(55, 81), BELL_NOTES = scaleFrom(72, 93);
+  // harmonic nodes [where along the string, which harmonic]
+  var NODES = [[.5, 2], [1 / 3, 3], [2 / 3, 3], [.25, 4], [.75, 4], [.2, 5], [.4, 5], [.6, 5], [.8, 5], [1 / 6, 6], [5 / 6, 6]];
+  function hz(m) { return 440 * Math.pow(2, (m - 69) / 12); }
+  // pointer speed in mm/s of the violin -> 0 (a slow, light touch) ... 1 (a quick swipe)
+  function speedOf(v) { return clamp(Math.log(1 + v / 90) / Math.log(1 + 2600 / 90), 0, 1); }
+  var HARMONIC_SPEED = 140;
+
+  var viewC = 1, viewS = 0;   // the violin's turn this frame (cos, sin)
+  function modelY(y) { return (y - OY) / SC; }
+  // screen x of string j at height my (mm)
+  function stringX(j, my) {
+    var a = (my - NUT_Y) / (BRIDGE_Y - NUT_Y);
+    return OX + ((nutX[j] + (brX[j] - nutX[j]) * a) * viewC + (28 + 8 * a) * viewS) * SC;
+  }
+  // the body under a screen point: where on the side facing the viewer (mm), or null
+  function bodyAt(x, y) {
+    var my = modelY(y);
+    if (my < BODY_TOP + 1 || my > BODY_BOTTOM - 1) return null;
+    var w = bodyHalf(my), X = (x - OX) / SC, lo = 1e9, hi = -1e9;
+    [w, -w].forEach(function (bx) {
+      [3, -31].forEach(function (bz) { var v = bx * viewC + bz * viewS; lo = Math.min(lo, v); hi = Math.max(hi, v); });
+    });
+    if (!w || X < lo || X > hi) return null;
+    var side = Math.abs(viewC) < .3, back = viewC < 0;
+    return { x: side ? 0 : clamp((X - (back ? -36 : 8) * viewS) / viewC, -w, w), y: my, w: w, back: back && !side, side: side };
+  }
+  // the head under a screen point: {peg: index into PEGS, or -1 for the scroll and pegbox, y}, or null
+  function headAt(x, y) {
+    var my = modelY(y), X = (x - OX) / SC, aC = Math.abs(viewC), aS = Math.abs(viewS);
+    if (my < -4 || my > NUT_Y) return null;
+    for (var i = 0; i < PEGS.length; i++) {
+      var p = PEGS[i], pegX = p[0] * 34 * viewC + (zMid(p[1]) + 2) * viewS;
+      if (Math.abs(X - pegX) < 9 * aC + 3 && Math.abs(my - p[1]) < 8) return { peg: i, y: my };
+    }
+    return Math.abs(X - 6 * viewS) < 15 * aC + 20 * aS + 2 ? { peg: -1, y: my } : null;
+  }
+  function stringsFacing() { return viewC > .25; }
+
+  // the strings shiver on screen: from the stopping point to the bridge, or with nodes for a harmonic
+  var vibAmp = F(4), vibT0 = F(4), vibStop = F(4), vibN = new Int8Array(4), vibHz = F(4), vibLast = -99;
+  function vibrate(j, amp, stop, n, lag) {
+    vibAmp[j] = amp * (mobile ? .8 : 1); vibT0[j] = lastT + (lag || 0); vibStop[j] = stop; vibN[j] = n;
+    vibHz[j] = n ? 100 : 70 + 12 * j; vibLast = lastT;
+  }
+  function vibAt(j, a, t) {
+    var age = t - vibT0[j], shape;
+    if (age < 0 || age > 2.4 || !vibAmp[j]) return 0;
+    if (vibN[j]) shape = Math.sin(Math.PI * vibN[j] * a);
+    else if (a <= vibStop[j]) return 0;
+    else shape = Math.sin(Math.PI * (a - vibStop[j]) / (1 - vibStop[j]));
+    return vibAmp[j] * Math.exp(-age * 2.4) * Math.min(1, age * 30) * shape * Math.sin(age * vibHz[j]);
+  }
+  // a little light where something sounded
+  var sparks = [];
+  function spark(x, y, r, a, lag) { if (sparks.length < 40) sparks.push({ x: x, y: y, t: lastT + (lag || 0), r: r, a: a }); }
+
+  function touchString(j, my, v, x, y, lag) {
+    if (lastT - plucked[j] < .045) return;
+    plucked[j] = lastT;
+    var a = clamp((my - NUT_Y) / (BRIDGE_Y - NUT_Y), 0, 1), vel = speedOf(v), pan = (j - 1.5) * .22, f;
+    if (v < HARMONIC_SPEED) {
+      var node = NODES[0];
+      NODES.forEach(function (nd) { if (Math.abs(nd[0] - a) < Math.abs(node[0] - a)) node = nd; });
+      f = hz(OPEN[j]) * node[1];
+      sound.harmonic({ freq: f, vel: .3 + vel, pan: pan, delay: lag, gain: Math.min(1, Math.sqrt(1400 / f)) });
+      vibrate(j, 1.4 + 2 * vel, 0, Math.min(node[1], 4), lag);
+      spark(x, y, 16, .5, lag);
+      return;
+    }
+    if (my < FINGERBOARD_END) {
+      // stopped where it is touched: an octave at the middle, and so on (kept within two octaves, on the scale)
+      var m = nearestInScale(OPEN[j] + Math.min(24, -12 * Math.log(1 - a) / Math.LN2));
+      var stop = 1 - hz(OPEN[j]) / hz(m);
+      sound.pluck({ freq: hz(m), vel: vel, pos: .12 + .1 * (1 - vel), decay: STR_DECAY[j] * (1 - .45 * stop), pan: pan, delay: lag });
+      vibrate(j, 2.5 + 5.5 * vel, stop, 0, lag);
+    } else {
+      sound.pluck({ freq: hz(OPEN[j]), vel: vel, pos: clamp((BRIDGE_Y - my) / (BRIDGE_Y - NUT_Y), .03, .3),
+        decay: STR_DECAY[j] * 1.25, pan: pan, delay: lag });
+      vibrate(j, 2.5 + 5.5 * vel, 0, 0, lag);
+    }
+    spark(x, y, 14 + 14 * vel, .45 + .4 * vel, lag);
+  }
+
+  function humAt(b, v, x, y) {
+    var vel = speedOf(v), u = b.x / (b.w || 1), h = 1 - (b.y - BODY_TOP) / (BODY_BOTTOM - BODY_TOP), pan = u * viewC * .5;
+    var idx = clamp(Math.round(h * 8 + (u * (viewC < 0 ? -1 : 1) + 1) * 1.5 - (b.back ? 2 : 0)), 0, HUM_NOTES.length - 1);
+    sound.hum({ freq: hz(HUM_NOTES[idx]), vel: vel, pan: pan, gain: b.back ? .8 : 1 });
+    sound.rustle({ vel: vel, pan: pan });
+    spark(x, y, 10 + 8 * vel, .2 + .25 * vel);
+  }
+
+  function knockAt(b, x, y) {
+    var h = 1 - (b.y - BODY_TOP) / (BODY_BOTTOM - BODY_TOP);
+    sound.knock({ scale: (b.back ? .85 : 1) * (.88 + .3 * h), vel: .8, pan: b.x / (b.w || 1) * viewC * .5, back: b.back });
+    if (b.back || b.side) return;
+    // and the open strings ring on quietly
+    for (var j = 0; j < 4; j++) {
+      sound.pluck({ freq: hz(OPEN[j]), vel: 0, pos: .25, decay: STR_DECAY[j] * 1.3, gain: .14, pan: (j - 1.5) * .22, delay: .015 + j * .012 });
+      vibrate(j, 1, 0, 0, .015 + j * .012);
+    }
+  }
+
+  function bellAt(my, v, x, y, lag) {
+    var h = 1 - clamp(my / NUT_Y, 0, 1), vel = speedOf(v);
+    var m = BELL_NOTES[clamp(Math.round(h * (BELL_NOTES.length - 1)), 0, BELL_NOTES.length - 1)];
+    sound.bell({ freq: hz(m), vel: vel, pan: clamp((x - OX) / (SC * 60), -1, 1) * .4, delay: lag });
+    spark(x, y, 12 + 10 * vel, .4 + .3 * vel, lag);
+  }
+
+  // turning a peg: its string sounds and slides into tune (up when the pointer moves up)
+  function pegAt(i, v, dy, x, y) {
+    var j = PEG_STRING[i], vel = speedOf(v);
+    sound.pluck({ freq: hz(OPEN[j]), vel: .3 + .5 * vel, pos: .2, decay: STR_DECAY[j], pan: PEGS[i][0] * viewC * .3,
+      glide: 1 + (dy < 0 ? -1 : 1) * (.025 + .06 * vel) });
+    vibrate(j, 2 + 3 * vel, 0, 0, 0);
+    spark(x, y, 16, .6);
+  }
+
+  var tx0 = 0, ty0 = 0, tt0 = -1, tSpeed = 0, travel = 0, lastGrain = -9, inFHole = false, onPeg = -1, plucked = [-9, -9, -9, -9];
+  var lastD = [NaN, NaN, NaN, NaN];   // which side of each string the pointer was on (px, signed)
+  function playable() { return !!sound && (reduceMotion || lastT > 4.2); }
+  function stringSide(j, x, my) { return stringsFacing() && my > NUT_Y + 2 && my < BRIDGE_Y - 1 ? x - stringX(j, my) : NaN; }
+  function resetSides(x, y) { for (var j = 0; j < 4; j++) lastD[j] = stringSide(j, x, modelY(y)); }
+
+  // the pointer moved from where it was to (x, y) (canvas px) at `ms`
+  function touchMove(x, y, ms) {
+    var dt = (ms - tt0) / 1000, x0 = tx0, y0 = ty0, fresh = tt0 < 0 || dt > .25, j;
+    if (!fresh && dt <= 0) return;
+    var dist = fresh ? 0 : Math.hypot(x - x0, y - y0) / SC;
+    if (!fresh) tSpeed = tSpeed * .4 + dist / dt * .6;
+    tx0 = x; ty0 = y; tt0 = ms;
+    var v = tSpeed, live = playable() && !fresh;
+
+    // every string crossed since the last move, in order. The side of each string is remembered from move to move,
+    // so a string that turns along with a drag is not crossed twice.
+    for (j = 0; j < 4; j++) {
+      var d0 = lastD[j], d1 = stringSide(j, x, modelY(y));
+      lastD[j] = d1;
+      if (!live || !(d0 * d1 < 0)) continue;
+      var u = d0 / (d0 - d1), cy = y0 + (y - y0) * u;
+      touchString(j, modelY(cy), v, x0 + (x - x0) * u, cy, u * dt);
+    }
+    if (!live || dist < .05) return;
+
+    var b = bodyAt(x, y);
+    if (b) {
+      var fh = !b.back && !b.side && fHoleDist(b.x, b.y) < 4;
+      if (fh && !inFHole) { sound.breath({ vel: speedOf(v), pan: b.x / b.w * viewC * .5 }); spark(x, y, 18, .35); }
+      inFHole = fh;
+      if (!fh && !(stringsFacing() && Math.abs(b.x) < 24 && b.y < BRIDGE_Y + 8)) {
+        travel += dist;
+        if (travel > 26 && lastT - lastGrain > .09) { travel = 0; lastGrain = lastT; humAt(b, v, x, y); }
+      }
+      onPeg = -1;
+      return;
+    }
+    inFHole = false;
+    var hd = headAt(x, y);
+    if (hd && hd.peg >= 0) {
+      if (hd.peg !== onPeg) pegAt(hd.peg, v, y - y0, x, y);
+    } else if (hd) {
+      travel += dist;
+      if (travel > 18 && lastT - lastGrain > .11) { travel = 0; lastGrain = lastT; bellAt(hd.y, v, x, y); }
+    }
+    onPeg = hd ? hd.peg : -1;
+  }
+
+  // a click, or a tap on a touch screen (a fingertip gets more room to find a string)
+  function touchDown(x, y, finger) {
+    if (!playable()) return;
+    var my = modelY(y), j;
+    if (stringsFacing() && my > NUT_Y + 2 && my < BRIDGE_Y - 1) {
+      var best = -1, bd = Math.max(4.5 * SC, finger ? 14 : 7);
+      for (j = 0; j < 4; j++) { var d = Math.abs(x - stringX(j, my)); if (d < bd) { bd = d; best = j; } }
+      if (best >= 0) { touchString(best, my, 700, x, y, 0); return; }
+    }
+    var b = bodyAt(x, y);
+    if (b) { knockAt(b, x, y); return; }
+    var hd = headAt(x, y);
+    if (hd && hd.peg >= 0) pegAt(hd.peg, 500, -1, x, y);
+    else if (hd) for (j = 0; j < 3; j++) bellAt(hd.y - j * 14, 500, x, y - j * 6, j * .09);
+  }
+
+  // ========================================
   // Frame
   // ========================================
   // `turn` is free (any number of full turns by dragging), `lean` follows the cursor's side, `sway` is the idle motion
@@ -728,6 +936,8 @@
       }
     }
     var th = sway + lean + turn, cT = Math.cos(th), sT = Math.sin(th);
+    viewC = cT; viewS = sT;
+    var vibOn = t - vibLast < 2.6, vibSide = .35 + .65 * Math.abs(cT);
     if (Math.abs(th - occTh) > .012) {
       occTh = th;
       for (var hk = 0; hk < headIdx.length; hk++) HID[headIdx[hk]] = headHidden(headIdx[hk], sT, cT);
@@ -782,6 +992,7 @@
         sOx[k] += sVx[k] * dt; sOy[k] += sVy[k] * dt;
       }
       X1[k] = x1 + sOx[k]; Y1[k] = y1 + sOy[k]; X2[k] = x2 + sOx[k]; Y2[k] = y2 + sOy[k];
+      if (vibOn && sStr[k]) { X1[k] += vibAt(sStr[k] - 1, sA1[k], t) * vibSide; X2[k] += vibAt(sStr[k] - 1, sA2[k], t) * vibSide; }
       // brightness by how much the surface faces the viewer; hidden head strokes fade out as they land
       var bin, land = e <= 0 ? 0 : ease((e - .45) / .55);
       if (MODE[k] === 1) bin = HID[k] ? -1 : 3;
@@ -837,6 +1048,7 @@
             dVy[k] = (dVy[k] - .04 * dOy[k] * dt) * Math.pow(.92, dt);
             dOx[k] += dVx[k] * dt; dOy[k] += dVy[k] * dt;
             ppx += Math.sin(t * 5.9 + dPhase[k] * 9) * .8; ppy += Math.cos(t * 5.3 + dPhase[k] * 7) * .8;
+            if (vibOn && dStr[k]) ppx += vibAt(dStr[k] - 1, dAlong[k], t) * vibSide;
           }
           var depth = clamp(.5 + dzr / 220, 0, 1);
           var a = da * dotsIn * (.7 + .3 * depth) * (e >= 1 ? (.55 + .45 * Math.sin(t * dTwinkle[k] + dPhase[k])) : .5);
@@ -844,6 +1056,20 @@
           ctx.globalAlpha = a > 1 ? 1 : a;
           ctx.drawImage(sprite, ppx + dOx[k] - sz / 2, ppy + dOy[k] - sz / 2, sz, sz);
         }
+      }
+      ctx.globalCompositeOperation = 'source-over'; ctx.globalAlpha = 1;
+    }
+
+    // light where the violin sounded
+    if (sparks.length) {
+      ctx.globalCompositeOperation = 'lighter';
+      for (i = sparks.length - 1; i >= 0; i--) {
+        var spk = sparks[i], sa = (t - spk.t) / .9;
+        if (sa > 1) { sparks.splice(i, 1); continue; }
+        if (sa < 0) continue;
+        var ssz = spk.r * (.6 + sa * 1.2);
+        ctx.globalAlpha = spk.a * (1 - sa) * (1 - sa);
+        ctx.drawImage(sprite, spk.x - ssz / 2, spk.y - ssz / 2, ssz, ssz);
       }
       ctx.globalCompositeOperation = 'source-over'; ctx.globalAlpha = 1;
     }
@@ -873,6 +1099,30 @@
   function wake() { if (!raf && onScreen && !document.hidden) raf = requestAnimationFrame(loop); }
 
   layout();
+
+  // sound: a mouse sounds as it moves over the violin and on click; a finger on a swipe and on a tap
+  // (on pointerup, so that scrolling the page past the violin stays silent)
+  var tapX = 0, tapY = 0, tapAt = -1;
+  function canvasPoint(e) { var r = canvas.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; }
+  hero.addEventListener('pointermove', function (e) {
+    var p = canvasPoint(e);
+    touchMove(p[0], p[1], e.timeStamp || performance.now());
+  }, { passive: true });
+  hero.addEventListener('pointerleave', function () { tt0 = -1; inFHole = false; onPeg = -1; });
+  hero.addEventListener('pointerdown', function (e) {
+    if (e.target.closest && e.target.closest('a, button')) return;
+    var p = canvasPoint(e);
+    tx0 = p[0]; ty0 = p[1]; tt0 = e.timeStamp || performance.now(); resetSides(p[0], p[1]);
+    if (e.pointerType === 'touch') { tapX = p[0]; tapY = p[1]; tapAt = tt0; } else touchDown(p[0], p[1], false);
+  }, { passive: true });
+  hero.addEventListener('pointerup', function (e) {
+    if (e.pointerType !== 'touch' || tapAt < 0) return;
+    var p = canvasPoint(e);
+    if ((e.timeStamp || performance.now()) - tapAt < 500 && Math.hypot(p[0] - tapX, p[1] - tapY) < 12) touchDown(tapX, tapY, true);
+    tapAt = -1;
+  }, { passive: true });
+  hero.addEventListener('pointercancel', function () { tapAt = -1; tt0 = -1; });
+
   if (reduceMotion) {
     frame(99); setReady();
     window.addEventListener('resize', function () { layout(); frame(99); });
