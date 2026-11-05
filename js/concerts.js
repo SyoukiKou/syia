@@ -46,6 +46,81 @@
  */
 window.SYIA_CONCERTS = [
   {
+    id: "debussy2026",
+    date: "2026-11-14",
+    dateEnd: "2026-11-28",
+    title: "Post-Classical Debussy 出演のお知らせ",
+    titleEn: "Performing in Post-Classical Debussy (violin × electronics × visual)",
+    venue: "美学校（11/14）・100BANCH（11/28）",
+    cover: "images/debussy2026-cover.jpg",
+    body: `
+![Post-Classical Debussy](images/debussy2026-01.jpg)
+
+五線をほどくと、絵が鳴りはじめる。
+
+印象派の絵画とドビュッシーを、
+ヴァイオリン・電子音・映像で立ち上げ直すライブ「Post-Classical Debussy」に、ヴァイオリンで出演いたします。
+
+11月14日（土）は美学校、11月28日（土）は100BANCHにて開催します。
+どちらも入場無料・予約不要です。
+
+## 《公演情報》
+
+@columns
+### 11.14 Sat　美学校
+
+Live／ドビュッシー4曲の再構成ライブ
+
+2026年11月14日（土）18:00〜19:00
+入場無料・予約不要
+
+＠美学校
+東京都千代田区神田神保町2-20 第二富士ビル3F
+
+[11/14 参加フォーム](https://forms.gle/6oM4AJB4sHV5AhGM7)
+@next
+### 11.28 Sat　100BANCH
+
+Listen to the Painting
+ライブ＋絵画を聴く音声ガイド体験
+
+2026年11月28日（土）18:00〜19:00
+入場無料・予約不要
+
+＠100BANCH
+東京都渋谷区渋谷3-27-1
+
+[11/28 参加フォーム](https://docs.google.com/forms/d/e/1FAIpQLSf0sD5RV8oLNxYMkAP7YX2W0XOWYwlHeA9png0hFpC0zaabbQ/viewform)
+@end
+
+### 【プログラム】
+
+C. ドビュッシー
+Clair de lune　月の光
+Arabesque No.1　アラベスク第1番
+Bruyères　ヒースの茂る荒れ地
+La fille aux cheveux de lin　亜麻色の髪の乙女
+
+### 【出演・制作】
+
+Marcy MIWA（映像）
+SYIA（ヴァイオリン）
+吉村勇作（脳波同期映像）
+金子 淳平（編曲・企画）
+
+## 《会場》
+
+#### 11/14（土）美学校
+
+@map https://www.google.com/maps?q=%E7%BE%8E%E5%AD%A6%E6%A0%A1%20%E6%9D%B1%E4%BA%AC%E9%83%BD%E5%8D%83%E4%BB%A3%E7%94%B0%E5%8C%BA%E7%A5%9E%E7%94%B0%E7%A5%9E%E4%BF%9D%E7%94%BA2-20&output=embed
+
+#### 11/28（土）100BANCH
+
+@map https://www.google.com/maps?q=100BANCH%20%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%B8%8B%E8%B0%B7%E5%8C%BA%E6%B8%8B%E8%B0%B73-27-1&output=embed
+`
+  },
+
+  {
     id: "wial2026",
     date: "2026-10-24",
     title: "WIAL グローバルカンファレンス 2026 JAPAN ガラディナー 出演のお知らせ",
