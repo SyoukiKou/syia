@@ -283,7 +283,7 @@
         (next ? '<a class="page-links__next" href="#' + escapeHtml(next.id) + '" title="' + escapeHtml(next.title) + '">Next</a>' : '<span class="page-links__next">Next</span>');
       concertList.hidden = true;
       concertDetail.hidden = concertPager.hidden = false;
-      document.title = c.title + ' | SYIA Official Portfolio';
+      document.title = c.title + ' | SYIA（しあ）ヴァイオリニスト';
       lastShown = c.id;
       sizeFigures(concertDetail);
       toTop();

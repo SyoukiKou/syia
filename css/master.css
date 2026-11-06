@@ -676,7 +676,7 @@ span.pager__prev:hover,span.pager__next:hover{opacity:.2}
 @media only screen and (min-width:769px){.profile-front{padding:0 6.94444vw}}
 .profile-front__image{margin:60px 0 50px}
 @media only screen and (min-width:769px){.profile-front__image{margin:80px 0 70px;max-width:600px}}
-.profile-front__image__image{width:100%;display:block}
+.profile-front__image__image{width:100%;height:auto;display:block}
 .profile-front__header{margin-bottom:50px}
 @media only screen and (min-width:769px){.profile-front__header{margin-bottom:70px}}
 .profile-front__header__title{
@@ -755,7 +755,7 @@ span.page-links__prev,span.page-links__next,span.page-links__prev:hover,span.pag
 .biography-content__main{flex:1;min-width:0;max-width:700px}
 .biography-content__photo{flex-shrink:0;margin-top:40px}
 @media only screen and (min-width:769px){.biography-content__photo{margin-top:0;width:280px;position:sticky;top:200px}}
-.biography-content__photo__img{width:100%;display:block;filter:grayscale(.2);transition:filter .5s ease}
+.biography-content__photo__img{width:100%;height:auto;display:block;filter:grayscale(.2);transition:filter .5s ease}
 .biography-content__photo__img:hover{filter:grayscale(0)}
 .biography-content p{
   font-family:var(--jp);font-weight:400;font-size:13px;

@@ -75,10 +75,22 @@ images/                 — All images from the old site, in one flat folder
   ├── lesson-01.jpg     — Lesson page image
   ├── home-masthead.jpg — Old site's main visual (used as the home video fallback)
   ├── home-background.jpg — Old site's background (not used)
+  ├── syia-portrait.jpg — Artist photo used on the pages and in the menu (1600 px wide copy of syia.png, 250 KB)
+  ├── ogp.jpg           — Share image for social media and search (1200×630, cropped from syia.png)
   ├── favicon.svg       — Site icon: the home page violin glowing on a night-sky tile
   └── favicon.png (32 px), apple-touch-icon.png (180 px) — PNG copies of favicon.svg for older browsers and iOS
+syia.png                — Original full-resolution artist photo (2.6 MB; not used by the pages)
+robots.txt              — Lets search engines crawl everything and points them to the sitemap
+sitemap.xml             — The list of pages for search engines (add a line when a new page is added)
 reference/              — Reference files from original sites (not deployed)
 ```
+
+## 🔍 SEO
+
+- Every page has its own `<title>` and `description` in Japanese (written for searches like 「しあ ヴァイオリン」), a canonical URL (`https://syiaviolin.com/<page>`), Open Graph and X (Twitter) card tags. The share image is `images/ogp.jpg`, except Lesson, which uses `images/lesson-01.jpg`
+- Page titles end with ` | SYIA（しあ）ヴァイオリニスト`; a concert opened at `concert#<id>` gets `<concert title> | SYIA（しあ）ヴァイオリニスト` (`js/main.js`)
+- The home page carries structured data (JSON-LD): `WebSite` (site name SYIA / しあ) and `Person` (SYIA, Violinist / Neuro Media Artist, with the Instagram, X and Facebook accounts), so search engines can tie the site and the accounts to one person
+- `robots.txt` and `sitemap.xml` are at the site root. Submit `https://syiaviolin.com/sitemap.xml` in Google Search Console
 
 ## 🔗 Functional URIs
 
@@ -116,5 +128,5 @@ Every page loads Google Analytics (GA4, measurement ID `G-JX7REYZTQF`, the same 
 
 1. **Art page** — currently 「準備中」; remove the `<div hidden>` wrapper and the Coming Soon block in `art.html` to publish the index
 2. **Contact form backend** — the Contact and Lesson forms have no server; on submit they open the visitor's mail app with a message addressed to syiaviolin@gmail.com (`js/main.js`). Replace with a form service if server-side submission is needed
-3. **SEO optimization** — Open Graph tags are in place (`og:image` assumes the site is served at https://syiaviolin.com); canonical URLs and structured data are not
-4. **Performance optimization** — `syia.png` is a 2.6 MB full-resolution photo; preload critical assets
+3. **Concert pages for search engines** — each concert lives at `concert#<id>`; search engines ignore everything after `#`, so all 17 concerts count as the single page `/concert` and their text is not indexed. Giving each concert its own address (e.g. `/concert/<id>`, generated from `js/concerts.js`) would let them be found one by one and carry event details (`MusicEvent` structured data)
+4. **Performance optimization** — some concert images are large PNGs (`showcase20251222-02.png` 2.4 MB, `fccj2025-02.png` 1.7 MB); preload critical assets

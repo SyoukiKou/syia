@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Pages for search engines. Add a line here when a new page (.html) is added to the site. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://syiaviolin.com/home</loc></url>
+  <url><loc>https://syiaviolin.com/concert</loc></url>
+  <url><loc>https://syiaviolin.com/lesson</loc></url>
+  <url><loc>https://syiaviolin.com/biography</loc></url>
+  <url><loc>https://syiaviolin.com/artist-statement</loc></url>
+  <url><loc>https://syiaviolin.com/information</loc></url>
+  <url><loc>https://syiaviolin.com/art</loc></url>
+  <url><loc>https://syiaviolin.com/contact</loc></url>
+  <url><loc>https://syiaviolin.com/sitepolicy</loc></url>
+</urlset>
