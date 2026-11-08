@@ -40,14 +40,14 @@ Touching the violin plays it. Sounds are made in the browser (`js/violin-sound.j
 | Where | How | Sound |
 |---|---|---|
 | Strings | slow, light touch | a glassy harmonic from the nearest node (octave at the middle, and so on) |
-| Strings | quicker swipe | pizzicato, louder and brighter the faster; over the fingerboard the note rises towards the bridge, past it the open string rings (thinner near the bridge). The string shivers on screen from where it was stopped |
+| Strings | quicker swipe | pizzicato, louder and brighter the faster: a round "plock" plucked by a fingertip, with the short ringing of the wooden body. Over the fingerboard the note rises towards the bridge (stopped notes die sooner, damped by the finger), past it the open string rings (thinner near the bridge). The string shivers on screen from where it was stopped |
 | Body | stroking | a soft rustle and the strings humming back, higher on the upper bout and to the right, panned left/right |
 | f-holes | moving into one | a breath of air (the body's air resonance) |
 | Body | click / tap | a knock on the wood, and the open strings ring on quietly (duller on the back when turned round) |
 | Scroll, pegbox | moving / click | small bells, higher towards the top / three rising bells |
-| Pegs | moving across | that string sounds and slides into tune |
+| Pegs | moving across | that string and the next one sound together, the open fifth a violinist tunes by |
 
-Every note is in C major pentatonic, which holds all four open strings (G D A E), so anything played together agrees. Browsers only allow sound after the visitor's first click, tap or key press on the page, so the violin is silent until then. It also sounds with reduced-motion settings (without the string animation).
+The harmony is G major, which holds all four open strings (G D A E), moving slowly through Gmaj7 → Em7 → Cmaj7 → D7, six seconds each. Stopped notes, the hum of the body and the bells take a note of the chord of the moment, so anything played together agrees and a sweep across the strings sounds that chord; harmonics are the natural ones of the open strings that are in the key. (Until 2026-11-08 every note was in C major pentatonic, which made the violin sound like a zither.) Browsers only allow sound after the visitor's first click, tap or key press on the page, so the violin is silent until then. It also sounds with reduced-motion settings (without the string animation).
 
 ## 🎼 Adding or changing a concert
 

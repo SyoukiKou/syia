@@ -716,16 +716,31 @@
   //            string rings, thinner near the bridge. Each string vibrates on screen from where it was stopped.
   //   body     stroking it -> a soft rustle and the strings humming back, higher on the upper bout and to the
   //            right; an f-hole breathes; a click or tap knocks on the wood (duller on the back).
-  //   head     the scroll and pegbox ring small bells, higher towards the top; a peg slides its string into tune.
+  //   head     the scroll and pegbox ring small bells, higher towards the top; a peg sounds its string together
+  //            with the next one, the open fifth a violinist tunes by.
+  // Harmony: G major (it holds the four open strings), moving slowly through Gmaj7 - Em7 - Cmaj7 - D7, a few
+  // seconds each. Stopped notes, the hum of the body and the bells take a note of the chord of the moment, so
+  // whatever is touched agrees, and a sweep across the strings sounds that chord.
   // ========================================
   var sound = window.SYIA_VIOLIN_SOUND;
   var OPEN = [55, 62, 69, 76];                   // open strings G3 D4 A4 E5 as MIDI notes
-  var STR_DECAY = [1.7, 1.5, 1.3, 1.1];          // seconds a pizzicato rings on each string
-  // C major pentatonic holds all four open strings, so whatever is touched, the notes agree
-  function inScale(m) { return [0, 2, 4, 7, 9].indexOf(((m % 12) + 12) % 12) >= 0; }
-  function nearestInScale(m) { m = Math.round(m); return inScale(m) ? m : inScale(m + 1) ? m + 1 : m - 1; }
-  function scaleFrom(lo, hi) { var out = []; for (var m = lo; m <= hi; m++) if (inScale(m)) out.push(m); return out; }
-  var HUM_NOTES = scaleFrom(55, 81), BELL_NOTES = scaleFrom(72, 93);
+  var STR_DECAY = [1.5, 1.3, 1.1, .9];           // seconds an open string rings when plucked
+  var KEY = [0, 2, 4, 6, 7, 9, 11];              // G major, as pitch classes (C = 0)
+  var CHORDS = [[7, 11, 2, 6], [4, 7, 11, 2], [0, 4, 7, 11], [2, 6, 9, 0]];   // Gmaj7, Em7, Cmaj7, D7
+  var CHORD_SECONDS = 6;
+  function pitchClass(m) { return ((Math.round(m) % 12) + 12) % 12; }
+  function chordNow() { return CHORDS[Math.floor(performance.now() / 1000 / CHORD_SECONDS) % CHORDS.length]; }
+  function inChord(m) { return chordNow().indexOf(pitchClass(m)) >= 0; }
+  // the chord note nearest to m, not below `lo` (a string cannot sound under its open note)
+  function nearestInChord(m, lo) {
+    m = Math.round(m);
+    for (var d = 0; d < 12; d++) {
+      if (inChord(m + d)) return m + d;
+      if (m - d >= lo && inChord(m - d)) return m - d;
+    }
+    return m;
+  }
+  function chordFrom(lo, hi) { var out = []; for (var m = lo; m <= hi; m++) if (inChord(m)) out.push(m); return out; }
   // harmonic nodes [where along the string, which harmonic]
   var NODES = [[.5, 2], [1 / 3, 3], [2 / 3, 3], [.25, 4], [.75, 4], [.2, 5], [.4, 5], [.6, 5], [.8, 5], [1 / 6, 6], [5 / 6, 6]];
   function hz(m) { return 440 * Math.pow(2, (m - 69) / 12); }
@@ -787,8 +802,12 @@
     plucked[j] = lastT;
     var a = clamp((my - NUT_Y) / (BRIDGE_Y - NUT_Y), 0, 1), vel = speedOf(v), pan = (j - 1.5) * .22, f;
     if (v < HARMONIC_SPEED) {
-      var node = NODES[0];
-      NODES.forEach(function (nd) { if (Math.abs(nd[0] - a) < Math.abs(node[0] - a)) node = nd; });
+      // the nearest node whose harmonic is in the key (the 5th harmonic of A and E, C# and G#, is not)
+      var node = null;
+      NODES.forEach(function (nd) {
+        if (KEY.indexOf(pitchClass(OPEN[j] + 12 * Math.log(nd[1]) / Math.LN2)) < 0) return;
+        if (!node || Math.abs(nd[0] - a) < Math.abs(node[0] - a)) node = nd;
+      });
       f = hz(OPEN[j]) * node[1];
       sound.harmonic({ freq: f, vel: .3 + vel, pan: pan, delay: lag, gain: Math.min(1, Math.sqrt(1400 / f)) });
       vibrate(j, 1.4 + 2 * vel, 0, Math.min(node[1], 4), lag);
@@ -796,14 +815,15 @@
       return;
     }
     if (my < FINGERBOARD_END) {
-      // stopped where it is touched: an octave at the middle, and so on (kept within two octaves, on the scale)
-      var m = nearestInScale(OPEN[j] + Math.min(24, -12 * Math.log(1 - a) / Math.LN2));
+      // stopped where it is touched: an octave at the middle, and so on (kept within two octaves, on the chord).
+      // The fingertip stopping the string damps it, so a stopped note dies sooner than an open one.
+      var m = nearestInChord(OPEN[j] + Math.min(24, -12 * Math.log(1 - a) / Math.LN2), OPEN[j]);
       var stop = 1 - hz(OPEN[j]) / hz(m);
-      sound.pluck({ freq: hz(m), vel: vel, pos: .12 + .1 * (1 - vel), decay: STR_DECAY[j] * (1 - .45 * stop), pan: pan, delay: lag });
+      sound.pluck({ freq: hz(m), vel: vel, pos: .14 + .08 * (1 - vel), decay: STR_DECAY[j] * (.32 + .3 * (1 - stop)), pan: pan, delay: lag });
       vibrate(j, 2.5 + 5.5 * vel, stop, 0, lag);
     } else {
-      sound.pluck({ freq: hz(OPEN[j]), vel: vel, pos: clamp((BRIDGE_Y - my) / (BRIDGE_Y - NUT_Y), .03, .3),
-        decay: STR_DECAY[j] * 1.25, pan: pan, delay: lag });
+      sound.pluck({ freq: hz(OPEN[j]), vel: vel, pos: clamp((BRIDGE_Y - my) / (BRIDGE_Y - NUT_Y), .06, .3),
+        decay: STR_DECAY[j], pan: pan, delay: lag });
       vibrate(j, 2.5 + 5.5 * vel, 0, 0, lag);
     }
     spark(x, y, 14 + 14 * vel, .45 + .4 * vel, lag);
@@ -811,8 +831,9 @@
 
   function humAt(b, v, x, y) {
     var vel = speedOf(v), u = b.x / (b.w || 1), h = 1 - (b.y - BODY_TOP) / (BODY_BOTTOM - BODY_TOP), pan = u * viewC * .5;
-    var idx = clamp(Math.round(h * 8 + (u * (viewC < 0 ? -1 : 1) + 1) * 1.5 - (b.back ? 2 : 0)), 0, HUM_NOTES.length - 1);
-    sound.hum({ freq: hz(HUM_NOTES[idx]), vel: vel, pan: pan, gain: b.back ? .8 : 1 });
+    var notes = chordFrom(55, 84);
+    var idx = clamp(Math.round(h * 8 + (u * (viewC < 0 ? -1 : 1) + 1) * 1.5 - (b.back ? 2 : 0)), 0, notes.length - 1);
+    sound.hum({ freq: hz(notes[idx]), vel: vel, pan: pan, gain: b.back ? .8 : 1 });
     sound.rustle({ vel: vel, pan: pan });
     spark(x, y, 10 + 8 * vel, .2 + .25 * vel);
   }
@@ -823,24 +844,25 @@
     if (b.back || b.side) return;
     // and the open strings ring on quietly
     for (var j = 0; j < 4; j++) {
-      sound.pluck({ freq: hz(OPEN[j]), vel: 0, pos: .25, decay: STR_DECAY[j] * 1.3, gain: .14, pan: (j - 1.5) * .22, delay: .015 + j * .012 });
+      sound.pluck({ freq: hz(OPEN[j]), vel: 0, pos: .25, decay: STR_DECAY[j] * 1.2, gain: .14, pan: (j - 1.5) * .22, delay: .015 + j * .012 });
       vibrate(j, 1, 0, 0, .015 + j * .012);
     }
   }
 
   function bellAt(my, v, x, y, lag) {
     var h = 1 - clamp(my / NUT_Y, 0, 1), vel = speedOf(v);
-    var m = BELL_NOTES[clamp(Math.round(h * (BELL_NOTES.length - 1)), 0, BELL_NOTES.length - 1)];
+    var notes = chordFrom(72, 93), m = notes[clamp(Math.round(h * (notes.length - 1)), 0, notes.length - 1)];
     sound.bell({ freq: hz(m), vel: vel, pan: clamp((x - OX) / (SC * 60), -1, 1) * .4, delay: lag });
     spark(x, y, 12 + 10 * vel, .4 + .3 * vel, lag);
   }
 
-  // turning a peg: its string sounds and slides into tune (up when the pointer moves up)
+  // touching a peg: its string and the next one together, the open fifth a violinist tunes by
   function pegAt(i, v, dy, x, y) {
-    var j = PEG_STRING[i], vel = speedOf(v);
-    sound.pluck({ freq: hz(OPEN[j]), vel: .3 + .5 * vel, pos: .2, decay: STR_DECAY[j], pan: PEGS[i][0] * viewC * .3,
-      glide: 1 + (dy < 0 ? -1 : 1) * (.025 + .06 * vel) });
+    var j = PEG_STRING[i], k = j < 3 ? j + 1 : j - 1, vel = speedOf(v), pan = PEGS[i][0] * viewC * .3;
+    sound.pluck({ freq: hz(OPEN[j]), vel: .3 + .5 * vel, pos: .2, decay: STR_DECAY[j], pan: pan });
+    sound.pluck({ freq: hz(OPEN[k]), vel: .2 + .4 * vel, pos: .2, decay: STR_DECAY[k], pan: pan * .5, gain: .7, delay: .018 });
     vibrate(j, 2 + 3 * vel, 0, 0, 0);
+    vibrate(k, 1.5 + 2 * vel, 0, 0, .018);
     spark(x, y, 16, .6);
   }
 

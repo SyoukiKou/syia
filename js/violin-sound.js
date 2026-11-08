@@ -1,8 +1,9 @@
 /**
  * Violin sound - SYIA Portfolio
  * What the home page violin sounds like when it is touched. Everything is synthesised in the browser with the
- * Web Audio API (no audio files): plucked strings (Karplus-Strong) and their harmonics, the hum, rustle and knock
- * of the wooden body, the breath of the f-holes, and small bells on the scroll.
+ * Web Audio API (no audio files): pizzicato strings (Karplus-Strong, plucked by a fingertip, with the "plock" of
+ * the wooden body) and their harmonics, the hum, rustle and knock of the body, the breath of the f-holes, and
+ * small bells on the scroll.
  * js/hero.js works out what was touched, where and how fast, and calls window.SYIA_VIOLIN_SOUND.
  * Browsers only allow sound after the visitor's first click, tap or key press on the page; until then it stays silent.
  */
@@ -67,7 +68,7 @@
     var master = gain(.85);
     master.connect(comp); comp.connect(ac.destination);
     var verb = ac.createConvolver();
-    verb.buffer = hall(3.4);
+    verb.buffer = hall(2.5);
     verb.connect(gain(.55, master));
     function send(node, amount) { node.connect(gain(amount, verb)); }
 
@@ -75,10 +76,15 @@
     // (the air inside near 280 Hz, the plates near 480 Hz, the "bridge hill" near 2.7 kHz)
     var hp = biquad('highpass', 160, .7), a0 = biquad('peaking', 280, 4, 5), b1 = biquad('peaking', 480, 3, 3);
     var hill = biquad('peaking', 2700, 1.1, 4), top = biquad('lowpass', 7500, .6);
-    hp.connect(a0); a0.connect(b1); b1.connect(hill); hill.connect(top); top.connect(master); send(top, .35);
+    // (only a little of the hall: a pizzicato close by, not a harp across a church)
+    hp.connect(a0); a0.connect(b1); b1.connect(hill); hill.connect(top); top.connect(master); send(top, .18);
     bus.wood = hp;
     // air: harmonics, bells and breath, with more of the hall
     bus.air = gain(1, master); send(bus.air, .75);
+    // Both stay stereo whatever comes in. Otherwise, when the last voice panned left or right ends while a
+    // centred (mono) one still sounds, the input turns mono, the browser resets the filters, and the body's
+    // ringing is cut off with a click.
+    [hp, bus.air].forEach(function (n) { n.channelCount = 2; n.channelCountMode = 'explicit'; });
 
     noiseBuf = ac.createBuffer(1, ac.sampleRate * 2, ac.sampleRate);
     var nd = noiseBuf.getChannelData(0);
@@ -109,10 +115,15 @@
   function noise() { var s = ac.createBufferSource(); s.buffer = noiseBuf; s.loop = true; return s; }
 
   // ----- plucked string (Karplus-Strong) -----
-  // A burst of noise one period long goes round a delay line; each pass smooths it a little, so the highs die
-  // first, as on a real string. vel: how hard (a brighter burst); pos: where along the string it is plucked,
-  // as a fraction from the bridge (small = thin and bright); decay: seconds to fade by 60 dB.
-  function ksSamples(sr, freq, vel, pos, decay) {
+  // One period of the string's shape goes round a delay line; each pass smooths it a little, so the highs die
+  // first, as on a real string. The shape is the string pulled aside by a fingertip and let go: a triangle
+  // peaking where it is plucked, rounded off by the soft finger - not the flat, bright noise of a plectrum,
+  // which is what makes a plucked string sound like a zither or a harp. vel: how hard (a sharper, brighter
+  // pull); pos: where along the string, as a fraction from the bridge (small = thin and bright); decay: seconds
+  // to fade by 60 dB; body: add the short ringing of the violin's body that a pizzicato sets off.
+  // the body's lowest modes [Hz, level, seconds]: the air inside and the first plate modes
+  var PLOCK = [[275, 1, .11], [460, .75, .08], [540, .55, .06], [700, .3, .04], [1050, .18, .025]];
+  function ksSamples(sr, freq, vel, pos, decay, body) {
     // the smoothing is a weighted average (1 - S, S); high notes pass through it so often that S = .5 would
     // kill them too soon, so there it is lightened until the note lasts `decay`
     var w = 2 * Math.PI * freq / sr, target = Math.pow(.001, 1 / (freq * decay)), S = .5, rho = target / Math.cos(w / 2);
@@ -122,10 +133,14 @@
     }
     var D = Math.atan2(S * Math.sin(w), 1 - S + S * Math.cos(w)) / w;   // delay of the average at this pitch
     var P = sr / freq, N = Math.floor(P - D - .1), frac = P - D - N, C = (1 - frac) / (1 + frac);
-    var len = Math.ceil(sr * (decay + .1)), out = new Float32Array(len), line = new Float32Array(N), ex = new Float32Array(N);
-    var lp = 0, k = .1 + .8 * vel, M = Math.max(1, Math.round(pos * N)), mean = 0, peak = 0, i;
-    for (i = 0; i < N; i++) { lp += k * (Math.random() * 2 - 1 - lp); line[i] = lp; }
-    for (i = 0; i < N; i++) { ex[i] = line[i] - line[(i - M + N) % N]; mean += ex[i] / N; }
+    var len = Math.ceil(sr * (decay + .1)), out = new Float32Array(len), ex = new Float32Array(N);
+    var M = Math.max(1, Math.min(N - 1, Math.round(pos * N))), mean = 0, peak = 0, i, pass;
+    // the triangle, with a breath of noise so no two plucks are quite the same
+    for (i = 0; i < N; i++) ex[i] = (i < M ? i / M : (N - i) / (N - M)) + (Math.random() - .5) * .04;
+    // the fingertip: a width of a few percent of the string, narrower when it is pulled harder
+    var tau = Math.max(.6, N * (.05 - .035 * vel)), a = 1 - Math.exp(-1 / tau), lp = ex[N - 1];
+    for (pass = 0; pass < 2; pass++) for (i = 0; i < N; i++) { lp += a * (ex[i] - lp); ex[i] = lp; }
+    for (i = 0; i < N; i++) mean += ex[i] / N;
     for (i = 0; i < N; i++) { ex[i] -= mean; peak = Math.max(peak, Math.abs(ex[i])); }
     // loop: the average (the string's losses) and an allpass for the fraction of a sample, so it is in tune
     var norm = 1 / (peak || 1), idx = 0, prev = 0, x1 = 0, y1 = 0;
@@ -136,15 +151,23 @@
       ex[idx] = rho * y;
       if (++idx === N) idx = 0;
     }
+    if (body) {
+      // the "plock": the body rings for a moment as the string is let go, more when it is plucked harder
+      var lvl = .22 + .3 * vel, bl = Math.min(len, Math.floor(sr * .35));
+      PLOCK.forEach(function (m) {
+        var f = m[0] * (1 + (Math.random() - .5) * .03), w2 = 2 * Math.PI * f / sr, g = lvl * m[1], dk = Math.exp(-1 / (sr * m[2] / 3));
+        for (var n = 0, e = 1; n < bl; n++, e *= dk) out[n] += g * e * Math.sin(w2 * n);
+      });
+    }
     var fade = Math.min(len, Math.floor(sr * .06));
     for (i = 0; i < fade; i++) out[len - 1 - i] *= i / fade;
     return out;
   }
-  function ks(freq, vel, pos, decay) {
+  function ks(freq, vel, pos, decay, body) {
     vel = Math.round(clamp(vel, 0, 1) * 4) / 4; pos = Math.round(clamp(pos, .02, .5) * 50) / 50; decay = Math.round(decay * 10) / 10;
-    var key = freq.toFixed(1) + '/' + vel + '/' + pos + '/' + decay;
+    var key = freq.toFixed(1) + '/' + vel + '/' + pos + '/' + decay + (body ? '/b' : '');
     if (!cache[key]) {
-      var data = ksSamples(ac.sampleRate, freq, vel, pos, decay), b = ac.createBuffer(1, data.length, ac.sampleRate);
+      var data = ksSamples(ac.sampleRate, freq, vel, pos, decay, body), b = ac.createBuffer(1, data.length, ac.sampleRate);
       b.getChannelData(0).set(data);
       cache[key] = b; cacheKeys.push(key);
       if (cacheKeys.length > 24) delete cache[cacheKeys.shift()];
@@ -152,13 +175,17 @@
     return cache[key];
   }
 
-  // o: freq, vel 0-1, pos, decay (s), pan -1..1, delay (s), gain,
-  //    glide: the pitch it starts at as a ratio, sliding back to 1 (a peg being turned)
+  // pizzicato. o: freq, vel 0-1, pos, decay (s), pan -1..1, delay (s), gain
+  // A violin's pizzicato is a short, round "plock": most of it goes in the first tenth of a second, then a
+  // quieter ring - so the level drops quickly after the attack and the string rings on underneath.
   function pluck(o) {
     if (!can()) return;
-    var t = at(o.delay), src = ac.createBufferSource(), vel = clamp(o.vel, 0, 1), out = gain((.2 + .6 * vel) * (o.gain || 1));
-    src.buffer = ks(o.freq, vel, o.pos || .2, o.decay || 1.2);
-    if (o.glide) { src.playbackRate.setValueAtTime(o.glide, t); src.playbackRate.setTargetAtTime(1, t + .03, .15); }
+    // (the fingertip's triangle carries about twice the energy of the old noise burst at the same peak: the
+    // levels here keep the pizzicato as loud as it was)
+    var t = at(o.delay), src = ac.createBufferSource(), vel = clamp(o.vel, 0, 1), peak = (.11 + .31 * vel) * (o.gain || 1), out = gain(0);
+    src.buffer = ks(o.freq, vel, o.pos || .2, o.decay || 1, true);
+    out.gain.setValueAtTime(peak, t);
+    out.gain.setTargetAtTime(peak * .42, t + .015, .06);
     src.connect(out);
     play([src], out, [], bus.wood, o.pan, t, t + src.buffer.duration + .05);
   }
@@ -182,7 +209,7 @@
     src.buffer = ks(o.freq, vel * .5, .3, 2.2);
     src.connect(out);
     out.gain.setValueAtTime(0, t);
-    out.gain.linearRampToValueAtTime((.08 + .3 * vel) * (o.gain || 1), t + rise);
+    out.gain.linearRampToValueAtTime((.045 + .16 * vel) * (o.gain || 1), t + rise);
     out.gain.setTargetAtTime(0, t + rise, .6);
     play([src], out, [], bus.wood, o.pan, t, t + 2.3);
   }
