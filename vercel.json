@@ -1,11 +1,14 @@
 {
   "cleanUrls": true,
+  "trailingSlash": false,
+  "buildCommand": "node scripts/build.mjs",
   "redirects": [
-    { "source": "/", "destination": "/home", "permanent": false },
-    { "source": "/index", "destination": "/home", "permanent": true },
+    { "source": "/home", "destination": "/", "permanent": true },
+    { "source": "/home.html", "destination": "/", "permanent": true },
+    { "source": "/index", "destination": "/", "permanent": true },
     {
       "source": "/:id(showcase202603|violin-piano-showcase|showcase20251222|msp2025winter|showcase202510|showcase202509|fccj2025|msp2025summer|violin-duo-piano-showcase|showcase202505|lfj2025|msp2025spring|39-2025|iss2024|msp2024winter|duo2023|lfj2023)",
-      "destination": "/concert#:id",
+      "destination": "/concert/:id",
       "permanent": true
     }
   ]

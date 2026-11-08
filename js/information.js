@@ -4,6 +4,7 @@
  * お知らせ（Information ページ）はこのファイルにまとめています。
  * 演奏会の告知は js/concerts.js に書くので、ここには入れません（Concert ページに並びます）。
  * メニューの新着3件には、お知らせと演奏会の両方から新しい順に出ます。
+ * 書き換えたら node scripts/build.mjs を実行すると information.html に反映されます（Vercel ではデプロイ時に自動で実行）。
  *
  * ■ お知らせを追加するには
  *   下の「window.SYIA_INFORMATION = [」のすぐ後ろに、このひな形をコピーして書き換える
@@ -14,7 +15,7 @@
  *     title: '公式サイトをリニューアルしました',
  *     titleEn: 'The official website has been renewed',   // メニューで en を選んだときのタイトル（省略可）
  *     text: '本文（省略可）。改行はそのまま反映されます。文中に[リンク](https://...)も書けます。',
- *     link: 'concert#showcase202611'      // 省略可。タイトルを押したときの行き先（外部サイトの URL も可）
+ *     link: 'concert/showcase202611'      // 省略可。タイトルを押したときの行き先（外部サイトの URL も可）
  *   },
  */
 window.SYIA_INFORMATION = [
@@ -31,7 +32,7 @@ window.SYIA_INFORMATION = [
       '11/28（土）18:00〜19:00　100BANCH（東京都渋谷区渋谷3-27-1）\n' +
       'Listen to the Painting／ライブ＋絵画を聴く音声ガイド体験　[参加フォーム](https://docs.google.com/forms/d/e/1FAIpQLSf0sD5RV8oLNxYMkAP7YX2W0XOWYwlHeA9png0hFpC0zaabbQ/viewform)\n' +
       '\n' +
-      'いずれも入場無料・予約不要です。チラシ・プログラムは[公演ページ](concert#debussy2026)をご覧ください。',
-    link: 'concert#debussy2026'
+      'いずれも入場無料・予約不要です。チラシ・プログラムは[公演ページ](concert/debussy2026)をご覧ください。',
+    link: 'concert/debussy2026'
   },
 ];

@@ -2,10 +2,15 @@
  * Concerts - SYIA Portfolio
  *
  * コンサート情報はこのファイル1つにまとめています。ここを書き換えるだけで
- *   ・Concert ページの一覧と、各公演の詳細（concert#id で開きます）
- *   ・Information ページの一覧（年で絞り込み）
+ *   ・Concert ページの一覧と、公演ごとのページ（/concert/<id>。concert/<id>.html が作られます）
+ *   ・トップページの最新公演2件
  *   ・全ページのメニューに出る新着3件
+ *   ・sitemap.xml（検索エンジン向けのページ一覧）
  * がすべて更新されます。HTML を編集する必要はありません。
+ *
+ * ■ 書き換えたあと
+ *   node scripts/build.mjs を実行すると、手元のページ（concert.html や concert/<id>.html など）に反映されます。
+ *   Vercel ではデプロイのたびに自動で実行されるので、実行し忘れても公開されるサイトは最新になります。
  *
  * ■ 新しい公演を追加するには
  *   1. 画像を images/ に入れる（例: images/showcase202611-cover.jpg、images/showcase202611-01.jpg）
@@ -13,13 +18,14 @@
  *      （一覧はいつも日付の新しい順に並ぶので、どこに書いても大丈夫です）
  *
  *   {
- *     id: 'showcase202611',              // 公演ページの名前。半角英数字とハイフン（concert#showcase202611）
+ *     id: 'showcase202611',              // 公演ページの名前。半角英数字とハイフン（/concert/showcase202611 になります）
  *     date: '2026-11-14',                // 公演日（何日かあるときは初日）。2026.11/14 (Sat) と表示。並び順にも使います
  *     dateEnd: '2026-11-28',             // 省略可。何日かにわたるときの最終日（2026.11/14 (Sat) – 11/28 (Sat) と表示）
  *     title: '○○ 出演のお知らせ',
  *     titleEn: 'Performing at ○○',       // メニューで en を選んだときのタイトル
  *     venue: '会場名',                    // 省略可。一覧に小さく出ます
- *     cover: 'images/showcase202611-cover.jpg',   // 一覧のサムネイル（横長がきれいです）
+ *     cover: 'images/showcase202611-cover.jpg',   // 一覧のサムネイル（横長がきれいです）。SNS で共有されたときの画像にもなります
+ *     description: '検索結果に出る説明文',   // 省略可。省略すると日付・会場と本文の書き出しから作ります
  *     body: `
  *   ここに本文（書き方は下）
  *   `
@@ -126,7 +132,7 @@ SYIA（ヴァイオリン）
     title: "WIAL グローバルカンファレンス 2026 JAPAN ガラディナー 出演のお知らせ",
     titleEn: "Performed at the gala dinner of WIAL Global Conference 2026 Japan",
     venue: "SHIBUYA QWS（渋谷スクランブルスクエア 15F）",
-    cover: "images/wial2026-cover.png",
+    cover: "images/wial2026-cover.jpg",
     body: `
 2026年10月24日（土）、WIAL グローバルカンファレンス 2026 JAPAN ガラディナー 出演のお知らせ
 
@@ -201,9 +207,9 @@ J.S.バッハ・グノー / アヴェ・マリア
     title: "Regulative Art Experience 体験会のお知らせ",
     titleEn: "Regulative Art Experience: hands-on session",
     venue: "SHIBUYA QWS CROSS PARK",
-    cover: "images/violin-piano-showcase-cover.png",
+    cover: "images/violin-piano-showcase-cover.jpg",
     body: `
-![Regulative Art Experience](images/violin-piano-showcase-01.png)
+![Regulative Art Experience](images/violin-piano-showcase-01.jpg)
 
 弦楽四重奏の生演奏と共に、今ここで生じていることを知覚し、
 
@@ -310,7 +316,7 @@ Piano : Fumio
 
 @map https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3241.8543293841767!2d139.76030277556856!3d35.65596047259547!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188b844cf9914f%3A0x496e9f1c0007b0ee!2z44CSMTA1LTAwMjIg5p2x5Lqs6YO95riv5Yy65rW35bK477yR5LiB55uu77yR77yQ4oiS77yT77yQ!5e0!3m2!1sja!2sjp!4v1743940719977!5m2!1sja!2sjp
 
-![BLUE FANTASY Special Showcase フライヤー](images/showcase20251222-02.png)
+![BLUE FANTASY Special Showcase フライヤー](images/showcase20251222-02.jpg)
 `
   },
 
@@ -584,7 +590,7 @@ Cello : CARO
 第三部
 マックス・リヒター：四季
 
-![It's Saturday Night Live ! フライヤー](images/fccj2025-02.png)
+![It's Saturday Night Live ! フライヤー](images/fccj2025-02.jpg)
 
 [本公演の詳細(英語のみ)](https://www.fccj.or.jp/event/its-saturday-nite-live-43)
 
@@ -726,7 +732,7 @@ Block3：丸の内パークビル・明治安田生命ビル前
     title: "Violin Duo & Piano Showcase 出演のお知らせ",
     titleEn: "Performing at Violin Duo & Piano Showcase",
     venue: "メズム東京 16階ロビー",
-    cover: "images/violin-duo-piano-showcase-cover.png",
+    cover: "images/violin-duo-piano-showcase-cover.jpg",
     body: `
 ![Violin Duo & Piano Showcase](images/violin-duo-piano-showcase-01.jpg)
 

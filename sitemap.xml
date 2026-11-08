@@ -1,13 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Pages for search engines. Add a line here when a new page (.html) is added to the site. -->
+<!-- Made by scripts/build.mjs: the site's pages and every concert. Do not edit it by hand. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://syiaviolin.com/home</loc></url>
+  <url><loc>https://syiaviolin.com/</loc></url>
   <url><loc>https://syiaviolin.com/concert</loc></url>
-  <url><loc>https://syiaviolin.com/lesson</loc></url>
-  <url><loc>https://syiaviolin.com/biography</loc></url>
   <url><loc>https://syiaviolin.com/artist-statement</loc></url>
-  <url><loc>https://syiaviolin.com/information</loc></url>
-  <url><loc>https://syiaviolin.com/art</loc></url>
+  <url><loc>https://syiaviolin.com/biography</loc></url>
   <url><loc>https://syiaviolin.com/contact</loc></url>
+  <url><loc>https://syiaviolin.com/information</loc></url>
+  <url><loc>https://syiaviolin.com/lesson</loc></url>
   <url><loc>https://syiaviolin.com/sitepolicy</loc></url>
+  <url><loc>https://syiaviolin.com/concert/debussy2026</loc></url>
+  <url><loc>https://syiaviolin.com/concert/wial2026</loc></url>
+  <url><loc>https://syiaviolin.com/concert/showcase202603</loc></url>
+  <url><loc>https://syiaviolin.com/concert/violin-piano-showcase</loc></url>
+  <url><loc>https://syiaviolin.com/concert/showcase20251222</loc></url>
+  <url><loc>https://syiaviolin.com/concert/msp2025winter</loc></url>
+  <url><loc>https://syiaviolin.com/concert/showcase202510</loc></url>
+  <url><loc>https://syiaviolin.com/concert/showcase202509</loc></url>
+  <url><loc>https://syiaviolin.com/concert/fccj2025</loc></url>
+  <url><loc>https://syiaviolin.com/concert/msp2025summer</loc></url>
+  <url><loc>https://syiaviolin.com/concert/violin-duo-piano-showcase</loc></url>
+  <url><loc>https://syiaviolin.com/concert/showcase202505</loc></url>
+  <url><loc>https://syiaviolin.com/concert/lfj2025</loc></url>
+  <url><loc>https://syiaviolin.com/concert/msp2025spring</loc></url>
+  <url><loc>https://syiaviolin.com/concert/39-2025</loc></url>
+  <url><loc>https://syiaviolin.com/concert/iss2024</loc></url>
+  <url><loc>https://syiaviolin.com/concert/msp2024winter</loc></url>
+  <url><loc>https://syiaviolin.com/concert/duo2023</loc></url>
+  <url><loc>https://syiaviolin.com/concert/lfj2023</loc></url>
 </urlset>

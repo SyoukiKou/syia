@@ -85,8 +85,9 @@
 
   // ========================================
   // Concerts (js/concerts.js) and news (js/information.js)
-  // Builds the Concert page (the list, and one concert at concert#id), the Information page
-  // and the latest items in the menu, so each concert or piece of news is written in one place only.
+  // The Concert list, each concert's own page (concert/<id>), the Information list and the home page's
+  // latest concerts are written as HTML by scripts/build.mjs. Here: the latest items in the menu,
+  // old concert#id addresses, and the frame of pictures whose size the build could not read.
   // ========================================
   var WEEKDAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   var byDateDesc = function (a, b) { return String(b.date).localeCompare(String(a.date)); };
@@ -109,95 +110,12 @@
     if (c.dateEnd) text += ' – ' + day(c.dateEnd, String(c.dateEnd).slice(0, 4) !== String(c.date).slice(0, 4));
     return text;
   }
-  function concertUrl(c) { return 'concert#' + encodeURIComponent(c.id); }
-  function linkAttrs(url) {
-    return 'href="' + url + '"' + (/^https?:/.test(url) ? ' target="_blank" rel="noopener noreferrer"' : '');
-  }
-  // text inside a paragraph: [text](url) links, <small> <b> <strong> <em>, line breaks
-  function inlineText(s) {
-    return escapeHtml(s)
-      .replace(/&lt;(\/?)(small|b|strong|em)&gt;/g, '<$1$2>')
-      .replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, function (all, text, url) { return '<a ' + linkAttrs(url) + '>' + text + '</a>'; })
-      .replace(/\n/g, '<br>');
-  }
-
-  // The body of a concert, written in the simple format described at the top of js/concerts.js
-  function renderBody(src) {
-    var lines = String(src || '').replace(/\r/g, '').split('\n'), at = 0;
-    var IMAGE = /!\[([^\]]*)\]\(([^)\s]+)\)/g;
-    var isImages = function (l) { return /^(!\[[^\]]*\]\([^)\s]+\)\s*)+$/.test(l); };
-    var isButton = function (l) { return /^\[[^\]]+\]\([^)\s]+\)$/.test(l); };
-    var isDirective = function (l) { return /^@(map|youtube|columns|next|end|profile)\b/.test(l) || /^#{2,4}\s/.test(l) || l === '---'; };
-    var http = function (u) { return /^https:\/\//.test(u) ? escapeHtml(u) : ''; };
-
-    // inner: inside @columns / @profile (no text wrapper); stops at a line matching `until`
-    function parse(inner, until) {
-      var html = '', text = '', blanks = 0, m;
-      var flush = function () { if (text) { html += inner ? text : '<div class="article__text reveal">' + text + '</div>'; text = ''; } };
-      while (at < lines.length) {
-        var line = lines[at].trim();
-        if (until && until.test(line)) { flush(); return { html: html, stop: line }; }
-        if (!line) { blanks++; at++; continue; }
-        var gap = blanks >= 2 ? ' u-gap' : '';
-        blanks = 0;
-        if ((m = /^@map\s+(\S+)/.exec(line))) {
-          flush(); at++;
-          html += '<div class="article__embed reveal"><iframe src="' + http(m[1]) + '" title="Google マップ" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>';
-        } else if ((m = /^@youtube\s+(\S+)/.exec(line))) {
-          flush(); at++;
-          html += '<div class="article__embed article__embed--video reveal"><iframe src="' + http(m[1]) + '" title="YouTube video player" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>';
-        } else if (line === '@columns') {
-          flush(); at++;
-          var cols = [], r;
-          do { r = parse(true, /^@(next|end)$/); cols.push('<div>' + r.html + '</div>'); at++; } while (r.stop === '@next');
-          html += '<div class="article__columns reveal">' + cols.join('') + '</div>';
-        } else if ((m = /^@profile\s+(\S+)/.exec(line))) {
-          flush(); at++;
-          var p = parse(true, /^@end$/), name = '';
-          at++;
-          var txt = p.html.replace(/^<h3 class="article__subheading">([\s\S]*?)<\/h3>/, function (all, n) { name = n; return ''; });
-          html += '<div class="article__profile reveal"><figure class="article__profile__image"><img src="' + escapeHtml(m[1]) + '" alt="' +
-            name.replace(/<[^>]+>/g, '').replace(/\s*[(（][^)）]*[)）]\s*$/, '') + '" loading="lazy"></figure>' +
-            '<div class="article__profile__text">' + (name ? '<h3 class="article__profile__name">' + name + '</h3>' : '') + txt + '</div></div>';
-        } else if (line === '---') {
-          at++; text += '<hr class="article__divider">';
-        } else if ((m = /^(#{2,4})\s+(.*)$/.exec(line))) {
-          at++;
-          var level = m[1].length, cls = level === 2 ? 'article__heading' : level === 3 ? 'article__subheading' : 'article__label';
-          text += '<h' + level + ' class="' + cls + '">' + inlineText(m[2]) + '</h' + level + '>';
-        } else {
-          var block = [];
-          while (at < lines.length && lines[at].trim() && !isDirective(lines[at].trim()) && !(until && until.test(lines[at].trim()))) {
-            block.push(lines[at].trim()); at++;
-          }
-          if (block.every(isImages)) {
-            flush();
-            block.forEach(function (l) {
-              var imgs = [];
-              l.replace(IMAGE, function (all, alt, src) { imgs.push('<img src="' + escapeHtml(src) + '" alt="' + escapeHtml(alt) + '" loading="lazy">'); return ''; });
-              html += imgs.length > 1
-                ? '<div class="article__gallery reveal">' + imgs.map(function (i) { return '<figure>' + i + '</figure>'; }).join('') + '</div>'
-                : '<figure class="article__figure reveal">' + imgs[0] + '</figure>';
-            });
-          } else if (block.every(isButton)) {
-            flush();
-            html += '<div class="article__buttons reveal">' + block.map(function (l) {
-              var b = /^\[([^\]]+)\]\(([^)\s]+)\)$/.exec(l);
-              return '<a class="link-underline article__button" ' + linkAttrs(escapeHtml(b[2])) + '>' + escapeHtml(b[1]) + '</a>';
-            }).join('') + '</div>';
-          } else {
-            var note = block.every(function (l) { return l.charAt(0) === '※'; });
-            text += '<p' + (note || gap ? ' class="' + ((note ? 'article__note' : '') + gap).trim() + '"' : '') + '>' + inlineText(block.join('\n')) + '</p>';
-          }
-        }
-      }
-      flush();
-      return { html: html, stop: null };
-    }
-    return parse(false, null).html;
-  }
+  function concertUrl(c) { return 'concert/' + encodeURIComponent(c.id); }
+  // links written the old way (concert#id) go to the concert's own page
+  function siteUrl(url) { return String(url).replace(/^\/?concert#([A-Za-z0-9-]+)$/, 'concert/$1'); }
 
   // tall pictures (flyers) and middling ones are shown narrower than wide banners
+  // (the build already does this for every picture whose size it can read)
   function sizeFigures(root) {
     root.querySelectorAll('.article__figure img').forEach(function (img) {
       var fit = function () {
@@ -211,7 +129,7 @@
   }
 
   // latest in the menu (every page): news and concerts together, newest first
-  var latest = news.map(function (n) { return { date: n.date, dateEnd: n.dateEnd, dateText: n.dateText, title: n.title, titleEn: n.titleEn, url: n.link || 'information' }; })
+  var latest = news.map(function (n) { return { date: n.date, dateEnd: n.dateEnd, dateText: n.dateText, title: n.title, titleEn: n.titleEn, url: n.link ? siteUrl(n.link) : 'information' }; })
     .concat(concerts.map(function (c) { return { date: c.date, dateEnd: c.dateEnd, dateText: c.dateText, title: c.title, titleEn: c.titleEn, url: concertUrl(c) }; }))
     .sort(byDateDesc).slice(0, 3);
   document.querySelectorAll('.menu__information__list').forEach(function (ul) {
@@ -222,76 +140,15 @@
     }).join('');
   });
 
-  // Information page: news only (concerts have their own page), with its years
-  var infoListEl = document.getElementById('informationList');
-  var infoYearsEl = document.getElementById('archiveFilterList');
-  if (infoListEl) {
-    // the title is the link (the text may hold links of its own, and links cannot nest)
-    infoListEl.innerHTML = news.length ? news.map(function (n) {
-      var title = n.link ? '<a ' + linkAttrs(escapeHtml(n.link)) + '>' + escapeHtml(n.title) + '</a>' : escapeHtml(n.title);
-      return '<li data-year="' + escapeHtml(String(n.date).slice(0, 4)) + '"><div class="information-item">' +
-        '<div class="information-item__content"><p class="information-item__date"><time datetime="' + escapeHtml(n.date) + '">' + escapeHtml(concertDate(n)) + '</time></p>' +
-        '<h3 class="information-item__title">' + title + '</h3>' +
-        (n.titleEn ? '<p class="information-item__en-title">' + escapeHtml(n.titleEn) + '</p>' : '') +
-        (n.text ? '<p class="information-item__text">' + inlineText(n.text) + '</p>' : '') + '</div></div></li>';
-    }).join('') : '<li class="information-empty">現在お知らせはありません。<br>演奏会の情報は <a href="concert">Concert</a> をご覧ください。</li>';
-    if (!news.length) document.body.classList.add('is-information-empty');
-    if (infoYearsEl) {
-      var years = [];
-      news.forEach(function (n) { var y = String(n.date).slice(0, 4); if (years.indexOf(y) < 0) years.push(y); });
-      infoYearsEl.innerHTML = '<li><a href="#" class="is-selected" data-year="ALL">ALL</a></li>' +
-        years.map(function (y) { return '<li><a href="#" data-year="' + y + '">' + y + '</a></li>'; }).join('');
-    }
+  // Concert list: an old address ending in #id (concert#fccj2025, shared before each concert had its own page)
+  // opens that concert's page
+  if (document.getElementById('concertList') && location.hash.length > 1) {
+    var oldId = '';
+    try { oldId = decodeURIComponent(location.hash.slice(1)); } catch (e) { /* not an id */ }
+    if (concerts.some(function (c) { return c.id === oldId; })) location.replace(concertUrl({ id: oldId }));
   }
-
-  // Concert page: the list, or one concert when the address ends in #id
-  var concertList = document.getElementById('concertList');
   var concertDetail = document.getElementById('concertDetail');
-  var concertPager = document.getElementById('concertPager');
-  if (concertList && concertDetail && concertPager) {
-    concertList.innerHTML = concerts.map(function (c) {
-      return '<li class="reveal" id="list-' + escapeHtml(c.id) + '"><a class="exhibition-item" href="#' + escapeHtml(c.id) + '">' +
-        '<div class="exhibition-item__image"><img src="' + escapeHtml(c.cover) + '" alt="" loading="lazy"></div>' +
-        '<div class="exhibition-item__content"><p class="exhibition-item__date"><time datetime="' + escapeHtml(c.date) + '">' + escapeHtml(concertDate(c)) + '</time></p>' +
-        '<h3 class="exhibition-item__title">' + escapeHtml(c.title) + '</h3>' +
-        (c.venue ? '<p class="exhibition-item__venue">' + escapeHtml(c.venue) + '</p>' : '') + '</div></a></li>';
-    }).join('');
-
-    var listTitle = document.title, lastShown = null;
-    var toTop = function () { document.body.scrollTop = 0; document.documentElement.scrollTop = 0; };
-    var showConcert = function () {
-      var id = decodeURIComponent(location.hash.slice(1)), idx = -1;
-      concerts.forEach(function (c, i) { if (c.id === id) idx = i; });
-      var openMenu = document.querySelector('.menu.is-open .menu__button');
-      if (openMenu) openMenu.click();   // a news link in the menu, on this page
-      if (idx < 0) {
-        concertDetail.hidden = concertPager.hidden = true;
-        concertList.hidden = false;
-        document.title = listTitle;
-        var card = lastShown && document.getElementById('list-' + lastShown);
-        if (card) card.scrollIntoView({ block: 'center' }); else toTop();
-        lastShown = null;
-        revealIn(concertList);
-        return;
-      }
-      var c = concerts[idx], prev = concerts[idx - 1], next = concerts[idx + 1];
-      concertDetail.innerHTML = '<header class="article__header"><p class="article__date"><time datetime="' + escapeHtml(c.date) + '">' + escapeHtml(concertDate(c)) + '</time></p>' +
-        '<h2 class="article__title">' + escapeHtml(c.title) + '</h2></header>' + renderBody(c.body);
-      concertPager.querySelector('.page-links__content').innerHTML =
-        (prev ? '<a class="page-links__prev" href="#' + escapeHtml(prev.id) + '" title="' + escapeHtml(prev.title) + '">Prev</a>' : '<span class="page-links__prev">Prev</span>') +
-        '<a class="page-links__index" href="#">Concert</a>' +
-        (next ? '<a class="page-links__next" href="#' + escapeHtml(next.id) + '" title="' + escapeHtml(next.title) + '">Next</a>' : '<span class="page-links__next">Next</span>');
-      concertList.hidden = true;
-      concertDetail.hidden = concertPager.hidden = false;
-      document.title = c.title + ' | SYIA（しあ）ヴァイオリニスト';
-      lastShown = c.id;
-      sizeFigures(concertDetail);
-      toTop();
-      revealIn(concertDetail);
-    };
-    window.addEventListener('hashchange', showConcert);
-    showConcert();
-  }
+  if (concertDetail) sizeFigures(concertDetail);
 
   // ========================================
   // Page Title Reveal Animation
@@ -504,7 +361,6 @@
   // ========================================
   // Scroll Reveal
   // ========================================
-  // Also called for content built after load (a concert opened on the Concert page)
   var revealObserver;
   function revealIn(root) {
     var reveals = root.querySelectorAll('.reveal:not(.is-visible)');

@@ -28,7 +28,7 @@
   <link rel="icon" href="images/favicon.svg?v=20261026" type="image/svg+xml" />
   <link rel="icon" href="images/favicon.png?v=20261026" sizes="32x32" type="image/png" />
   <link rel="apple-touch-icon" href="images/apple-touch-icon.png?v=20261026" />
-  <link rel="stylesheet" href="css/master.css?v=20261106a" />
+  <link rel="stylesheet" href="css/master.css?v=20261108a" />
 </head>
 <body class="is-loaded" style="overflow-y:auto">
   <!-- Loading -->
@@ -36,7 +36,7 @@
 
   <!-- Header -->
   <header class="header">
-    <a class="header__title" href="home">SYIA</a>
+    <a class="header__title" href="/">SYIA</a>
     <button class="header__button" type="button">Menu</button>
   </header>
 
@@ -44,7 +44,7 @@
   <div class="menu">
     <div class="menu__container">
       <div class="menu__header">
-        <a class="menu__title" href="home">SYIA</a>
+        <a class="menu__title" href="/">SYIA</a>
         <button class="menu__button" type="button">Close</button>
       </div>
       <nav class="menu__nav">
@@ -87,14 +87,30 @@
     <h1 class="archive-header__title"><span class="page-title-anim">Concert</span></h1>
   </div>
 
-  <!-- Concert List -->
-  <!-- Built from js/concerts.js: the list of concerts, or one concert when the address ends in #id -->
-  <ul class="exhibition-list concert-list" id="concertList"></ul>
-  <article class="article" id="concertDetail" hidden></article>
-  <div class="page-links" id="concertPager" hidden>
-    <div class="page-links__content"></div>
-  </div>
-  <noscript><p class="exhibition-list">コンサート情報の表示には JavaScript を有効にしてください。</p></noscript>
+  <!-- Concert List: written by scripts/build.mjs from js/concerts.js (each concert also gets its own page, concert/<id>.html, made from this file) -->
+  <!-- build:concert -->
+  <ul class="exhibition-list concert-list" id="concertList">
+    <li class="reveal"><a class="exhibition-item" href="concert/debussy2026"><div class="exhibition-item__image"><img src="images/debussy2026-cover.jpg" alt="" width="1076" height="605"></div><div class="exhibition-item__content"><p class="exhibition-item__date"><time datetime="2026-11-14">2026.11/14 (Sat) – 11/28 (Sat)</time></p><h2 class="exhibition-item__title">Post-Classical Debussy 出演のお知らせ</h2><p class="exhibition-item__venue">美学校（11/14）・100BANCH（11/28）</p></div></a></li>
+    <li class="reveal"><a class="exhibition-item" href="concert/wial2026"><div class="exhibition-item__image"><img src="images/wial2026-cover.jpg" alt="" width="1200" height="630"></div><div class="exhibition-item__content"><p class="exhibition-item__date"><time datetime="2026-10-24">2026.10/24 (Sat)</time></p><h2 class="exhibition-item__title">WIAL グローバルカンファレンス 2026 JAPAN ガラディナー 出演のお知らせ</h2><p class="exhibition-item__venue">SHIBUYA QWS（渋谷スクランブルスクエア 15F）</p></div></a></li>
+    <li class="reveal"><a class="exhibition-item" href="concert/showcase202603"><div class="exhibition-item__image"><img src="images/showcase202603-cover.jpg" alt="" width="1280" height="722" loading="lazy"></div><div class="exhibition-item__content"><p class="exhibition-item__date"><time datetime="2026-03-22">2026.03/22 (Sun)</time></p><h2 class="exhibition-item__title">Violin &amp; Piano Showcase 出演のお知らせ</h2><p class="exhibition-item__venue">メズム東京 16階ロビー</p></div></a></li>
+    <li class="reveal"><a class="exhibition-item" href="concert/violin-piano-showcase"><div class="exhibition-item__image"><img src="images/violin-piano-showcase-cover.jpg" alt="" width="798" height="450" loading="lazy"></div><div class="exhibition-item__content"><p class="exhibition-item__date"><time datetime="2026-01-29">2026.01/29 (Thu)</time></p><h2 class="exhibition-item__title">Regulative Art Experience 体験会のお知らせ</h2><p class="exhibition-item__venue">SHIBUYA QWS CROSS PARK</p></div></a></li>
+    <li class="reveal"><a class="exhibition-item" href="concert/showcase20251222"><div class="exhibition-item__image"><img src="images/showcase20251222-cover.jpg" alt="" width="799" height="450" loading="lazy"></div><div class="exhibition-item__content"><p class="exhibition-item__date"><time datetime="2025-12-22">2025.12/22 (Mon)</time></p><h2 class="exhibition-item__title">BLUE FANTASY Special Showcase 出演のお知らせ</h2><p class="exhibition-item__venue">メズム東京 16階ロビー</p></div></a></li>
+    <li class="reveal"><a class="exhibition-item" href="concert/msp2025winter"><div class="exhibition-item__image"><img src="images/msp2025winter-cover.jpg" alt="" width="1280" height="722" loading="lazy"></div><div class="exhibition-item__content"><p class="exhibition-item__date"><time datetime="2025-11-22">2025.11/22 (Sat) – 12/25 (Thu)</time></p><h2 class="exhibition-item__title">Marunouchi Street Park 2025 winter ストリート演奏のお知らせ</h2><p class="exhibition-item__venue">丸の内仲通り</p></div></a></li>
+    <li class="reveal"><a class="exhibition-item" href="concert/showcase202510"><div class="exhibition-item__image"><img src="images/showcase202510-cover.jpg" alt="" width="840" height="473" loading="lazy"></div><div class="exhibition-item__content"><p class="exhibition-item__date"><time datetime="2025-10-30">2025.10/30 (Thu)</time></p><h2 class="exhibition-item__title">&quot;ブエノスアイレスの四季&quot; Showcase 出演のお知らせ</h2><p class="exhibition-item__venue">メズム東京 16階ロビー</p></div></a></li>
+    <li class="reveal"><a class="exhibition-item" href="concert/showcase202509"><div class="exhibition-item__image"><img src="images/showcase202509-cover.jpg" alt="" width="1280" height="722" loading="lazy"></div><div class="exhibition-item__content"><p class="exhibition-item__date"><time datetime="2025-09-14">2025.09/14 (Sun)</time></p><h2 class="exhibition-item__title">&quot;偉大な芸術家の思い出&quot; Showcase 出演のお知らせ</h2><p class="exhibition-item__venue">メズム東京 16階ロビー</p></div></a></li>
+    <li class="reveal"><a class="exhibition-item" href="concert/fccj2025"><div class="exhibition-item__image"><img src="images/fccj2025-cover.jpg" alt="" width="480" height="270" loading="lazy"></div><div class="exhibition-item__content"><p class="exhibition-item__date"><time datetime="2025-09-13">2025.09/13 (Sat)</time></p><h2 class="exhibition-item__title">It's Saturday Night Live ! 出演のお知らせ</h2><p class="exhibition-item__venue">外国人記者クラブ THE MAIN BAR</p></div></a></li>
+    <li class="reveal"><a class="exhibition-item" href="concert/msp2025summer"><div class="exhibition-item__image"><img src="images/msp2025summer-cover.jpg" alt="" width="1280" height="721" loading="lazy"></div><div class="exhibition-item__content"><p class="exhibition-item__date"><time datetime="2025-09-06">2025.09/06 (Sat) – 09/21 (Sun)</time></p><h2 class="exhibition-item__title">Marunouchi Street Park 2025 summer ストリート演奏のお知らせ</h2><p class="exhibition-item__venue">丸の内仲通り</p></div></a></li>
+    <li class="reveal"><a class="exhibition-item" href="concert/violin-duo-piano-showcase"><div class="exhibition-item__image"><img src="images/violin-duo-piano-showcase-cover.jpg" alt="" width="840" height="473" loading="lazy"></div><div class="exhibition-item__content"><p class="exhibition-item__date"><time datetime="2025-08-03">2025.08/03 (Sun)</time></p><h2 class="exhibition-item__title">Violin Duo &amp; Piano Showcase 出演のお知らせ</h2><p class="exhibition-item__venue">メズム東京 16階ロビー</p></div></a></li>
+    <li class="reveal"><a class="exhibition-item" href="concert/showcase202505"><div class="exhibition-item__image"><img src="images/showcase202505-cover.jpg" alt="" width="1064" height="599" loading="lazy"></div><div class="exhibition-item__content"><p class="exhibition-item__date"><time datetime="2025-05-11">2025.05/11 (Sun)</time></p><h2 class="exhibition-item__title">Violin Duo &amp; Piano Showcase 出演のお知らせ</h2><p class="exhibition-item__venue">メズム東京</p></div></a></li>
+    <li class="reveal"><a class="exhibition-item" href="concert/lfj2025"><div class="exhibition-item__image"><img src="images/lfj2025-cover.jpg" alt="" width="1280" height="722" loading="lazy"></div><div class="exhibition-item__content"><p class="exhibition-item__date"><time datetime="2025-05-05">2025.05/05 (Mon)</time></p><h2 class="exhibition-item__title">ラ・フォル・ジュルネ TOKYO 2025 出演のお知らせ</h2><p class="exhibition-item__venue">新丸ビル1階 北西外構部</p></div></a></li>
+    <li class="reveal"><a class="exhibition-item" href="concert/msp2025spring"><div class="exhibition-item__image"><img src="images/msp2025spring-cover.jpg" alt="" width="1280" height="721" loading="lazy"></div><div class="exhibition-item__content"><p class="exhibition-item__date"><time datetime="2025-04-26">2025.04/26 (Sat) – 05/11 (Sun)</time></p><h2 class="exhibition-item__title">Marunouchi Street Park 2025 spring ストリート演奏のお知らせ</h2><p class="exhibition-item__venue">丸の内仲通り</p></div></a></li>
+    <li class="reveal"><a class="exhibition-item" href="concert/39-2025"><div class="exhibition-item__image"><img src="images/39-2025-cover.jpg" alt="" width="894" height="504" loading="lazy"></div><div class="exhibition-item__content"><p class="exhibition-item__date"><time datetime="2025-03-09">2025.03/09 (Sun)</time></p><h2 class="exhibition-item__title">《卒業前最終公演》早稲田大学卒業記念リサイタル開催のお知らせ</h2><p class="exhibition-item__venue">早稲田大学村上春樹ライブラリー 地下1階カフェ 橙子猫-Orange Cat-</p></div></a></li>
+    <li class="reveal"><a class="exhibition-item" href="concert/iss2024"><div class="exhibition-item__image"><img src="images/iss2024-cover.jpg" alt="" width="1280" height="720" loading="lazy"></div><div class="exhibition-item__content"><p class="exhibition-item__date"><time datetime="2024-12-24">2024.12/24 (Tue)</time></p><h2 class="exhibition-item__title">Bright Street Ice Skating Show 生演奏出演のお知らせ</h2><p class="exhibition-item__venue">東京駅前 行幸通り</p></div></a></li>
+    <li class="reveal"><a class="exhibition-item" href="concert/msp2024winter"><div class="exhibition-item__image"><img src="images/msp2024winter-cover.jpg" alt="" width="1280" height="722" loading="lazy"></div><div class="exhibition-item__content"><p class="exhibition-item__date"><time datetime="2024-11-24">2024.11/24 (Sun) – 12/25 (Wed)</time></p><h2 class="exhibition-item__title">Marunouchi Street Park 2024 winter ストリート演奏のお知らせ</h2><p class="exhibition-item__venue">丸の内仲通り</p></div></a></li>
+    <li class="reveal"><a class="exhibition-item" href="concert/duo2023"><div class="exhibition-item__image"><img src="images/duo2023-cover.jpg" alt="" width="1077" height="607" loading="lazy"></div><div class="exhibition-item__content"><p class="exhibition-item__date"><time datetime="2023-09-24">2023.09/24 (Sun)</time></p><h2 class="exhibition-item__title">Duo Concert開催のお知らせ</h2><p class="exhibition-item__venue">サロン・ヴェーラ</p></div></a></li>
+    <li class="reveal"><a class="exhibition-item" href="concert/lfj2023"><div class="exhibition-item__image"><img src="images/lfj2023-cover.jpg" alt="" width="427" height="240" loading="lazy"></div><div class="exhibition-item__content"><p class="exhibition-item__date"><time datetime="2023">2023</time></p><h2 class="exhibition-item__title">ラ・フォル・ジュルネ TOKYO 2023 出演のお知らせ</h2></div></a></li>
+  </ul>
+  <!-- /build:concert -->
 
   <!-- Footer -->
   <footer class="footer">
@@ -128,9 +144,9 @@
   </footer>
 
   <div class="canvas" id="canvas"></div>
-  <script src="js/concerts.js?v=20261105a"></script>
-  <script src="js/information.js?v=20261105a"></script>
-  <script src="js/main.js?v=20261106a"></script>
+  <script src="js/concerts.js?v=20261108a"></script>
+  <script src="js/information.js?v=20261108a"></script>
+  <script src="js/main.js?v=20261108a"></script>
   <script src="js/cursor.js?v=20261025c"></script>
 </body>
 </html>
