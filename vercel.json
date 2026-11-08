@@ -1,7 +1,8 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
-  "buildCommand": "node scripts/build.mjs",
+  "buildCommand": "node scripts/build.mjs --out public",
+  "outputDirectory": "public",
   "redirects": [
     { "source": "/home", "destination": "/", "permanent": true },
     { "source": "/home.html", "destination": "/", "permanent": true },

@@ -13,9 +13,10 @@
  * 公演やお知らせを書き換えたら、プレビューの前にこれを実行します:
  *   node scripts/build.mjs
  * Vercel でもデプロイのたびに自動で実行されます（vercel.json の buildCommand）。
+ * そのときは --out public を付けて、公開するファイル一式を public/ にコピーします（Vercel は public/ を公開します）。
  * 書き出されたところは手で直さず、js/concerts.js・js/information.js か、このファイルを直してください。
  */
-import { readFileSync, writeFileSync, readdirSync, mkdirSync, unlinkSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, readdirSync, mkdirSync, unlinkSync, existsSync, rmSync, cpSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import vm from 'node:vm';
@@ -380,3 +381,22 @@ write('sitemap.xml', '<?xml version="1.0" encoding="UTF-8"?>\n' +
 
 for (const w of warnings) console.warn('  ⚠ ' + w);
 console.log(written ? `Done: ${written} file(s) updated.` : 'Done: everything was already up to date.');
+
+// --out <folder> (Vercel): copy the site into one folder to publish, leaving out what is not part of the site
+const outAt = process.argv.indexOf('--out');
+if (outAt > 0) {
+  const outName = process.argv[outAt + 1];
+  if (!outName || !/^[A-Za-z0-9_-]+$/.test(outName)) throw new Error('--out には公開用フォルダの名前を付けてください（例: --out public）');
+  const NOT_PUBLISHED = new Set([outName, '.git', '.github', '.vercel', '.gitignore', '.vercelignore', '.DS_Store',
+    'node_modules', 'scripts', 'reference', 'README.md', 'vercel.json', 'package.json', 'package-lock.json']);
+  const out = join(ROOT, outName);
+  rmSync(out, { recursive: true, force: true });
+  mkdirSync(out);
+  let copied = 0;
+  for (const name of readdirSync(ROOT)) {
+    if (NOT_PUBLISHED.has(name)) continue;
+    cpSync(join(ROOT, name), join(out, name), { recursive: true, filter: (src) => !src.endsWith('/.DS_Store') });
+    copied++;
+  }
+  console.log(`Copied the site (${copied} top-level items) into ${outName}/ for publishing.`);
+}

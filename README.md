@@ -53,7 +53,7 @@ Every note is in C major pentatonic, which holds all four open strings (G D A E)
 
 1. Put the images in `images/` and add or edit the concert in `js/concerts.js` (news goes in `js/information.js`)
 2. Run `node scripts/build.mjs`. It writes the concert list in `concert.html`, every concert's page `concert/<id>.html`, the news list in `information.html`, the two latest concerts on the home page (`index.html`) and `sitemap.xml`, and removes the page of a concert that was taken out. Running it again changes nothing
-3. Commit and push. Vercel runs the same script on every deploy (`buildCommand` in `vercel.json`), so the published site is up to date even if step 2 was forgotten
+3. Commit and push. Vercel runs the same script on every deploy (`node scripts/build.mjs --out public`, `buildCommand` in `vercel.json`), so the published site is up to date even if step 2 was forgotten. With `--out public` the script also copies the site into `public/`, the folder Vercel publishes (`outputDirectory`); `scripts/`, `README.md` and `vercel.json` are left out. `public/` is only made on Vercel and is not committed (`.gitignore`)
 
 The parts the script writes sit between `<!-- build:… -->` and `<!-- /build:… -->` comments; edit `js/concerts.js`, `js/information.js` or `scripts/build.mjs` rather than those parts. Everything else in `concert.html` (header, menu, footer) is the template for the concert pages. The script needs only Node.js (no packages).
 
@@ -71,7 +71,8 @@ information.html        — News with year filter & pagination
 contact.html            — Contact form
 sitepolicy.html         — Site policy
 404.html                — Page shown at addresses that do not exist
-vercel.json             — Vercel settings: URLs without .html or a trailing slash, the build on each deploy, redirects from /home and the old Adobe Portfolio URLs
+vercel.json             — Vercel settings: URLs without .html or a trailing slash, the build on each deploy (published from public/), redirects from /home and the old Adobe Portfolio URLs
+.gitignore              — Keeps public/ (the copy of the site made on Vercel) out of git
 scripts/
   └── build.mjs         — Writes the concert pages, lists and sitemap from js/concerts.js and js/information.js
 css/
