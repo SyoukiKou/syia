@@ -51,6 +51,78 @@
  *   本文の中で ` （バッククォート）は使えません。
  */
 window.SYIA_CONCERTS = [
+  // 下書き: 日時は MSP事務局へ出した希望日（10/15）。確定した日時と場所（11/4 の事務局PDF）で「@未定」と date / dateEnd / venue を差し替える
+  {
+    id: "msp2026winter",
+    date: "2026-12-12",
+    dateEnd: "2026-12-25",
+    title: "Marunouchi Street Park 2026 winter ストリート演奏のお知らせ",
+    titleEn: "Street performances at Marunouchi Street Park 2026 winter",
+    venue: "丸の内仲通り",
+    cover: "images/msp2026winter-cover.jpg",
+    body: `
+![Marunouchi Street Park](images/msp2025winter-01.jpg)
+
+いつも暖かいご声援をありがとうございます！
+
+今年の冬も、Marunouchi Street Parkでストリート演奏をいたします。
+
+今年のMarunouchi Street Parkは、丸の内仲通りに加えて、北側の丸の内テラス付近にも会場が広がります。
+
+
+美しいイルミネーションのもとで、心温まる冬の音楽をお届けします。
+
+ぜひ暖かくして、特別なひとときをお楽しみください。
+
+## 《演奏スケジュール》
+
+### SYIA×Fumio×Kanade
+
+12月12日（土） 18:20～18:50　@未定
+
+12月13日（日） 18:20～18:50　@未定
+
+12月19日（土） 18:20～18:50　@未定
+
+12月20日（日） 18:20～18:50　@未定
+
+12月22日（火） 18:20～18:50　@未定
+
+12月23日（水） 18:20～18:50　@未定
+
+12月24日（木） 18:20～18:50　@未定
+
+12月25日（金） 18:20～18:50　@未定
+
+※雨天・荒天の場合は中止となることがあります。
+
+## 《演奏場所》
+
+丸の内仲通り
+
+Block1：丸ビル・郵船ビル・三菱商事ビル前
+Block2：丸の内二丁目ビル・丸の内仲通りビル前
+Block3：丸の内パークビル・明治安田生命ビル前
+Block4：新東京ビル・丸の内二重橋ビル前
+
+丸の内テラス付近（丸の内仲通り 北側）
+
+演奏場所の変更につきましては、当日[instagram](https://www.instagram.com/syiaviolin/)のストーリーにてご案内いたします。
+
+また[丸の内公式サイト](https://marunouchi-streetpark.com/)もご確認ください。
+
+[Instagram](https://www.instagram.com/syiaviolin/)
+[丸の内公式サイト](https://marunouchi-streetpark.com/)
+
+@map https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3240.864696659717!2d139.7602214762516!3d35.680333430022515!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188b39eb095801%3A0x64a29f9f2f81d5f7!2z5Li444Gu5YaF5Luy6YCa44KK!5e0!3m2!1sja!2sjp!4v1762265412780!5m2!1sja!2sjp
+
+---
+
+お問い合わせはこちら
+
+[Contact](contact)
+`
+  },
   {
     id: "debussy2026",
     date: "2026-11-14",
