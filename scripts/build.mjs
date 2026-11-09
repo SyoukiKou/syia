@@ -388,7 +388,8 @@ if (outAt > 0) {
   const outName = process.argv[outAt + 1];
   if (!outName || !/^[A-Za-z0-9_-]+$/.test(outName)) throw new Error('--out には公開用フォルダの名前を付けてください（例: --out public）');
   const NOT_PUBLISHED = new Set([outName, '.git', '.github', '.vercel', '.gitignore', '.vercelignore', '.DS_Store',
-    'node_modules', 'scripts', 'reference', 'README.md', 'vercel.json', 'package.json', 'package-lock.json']);
+    'node_modules', 'scripts', 'reference', 'README.md', 'vercel.json', 'package.json', 'package-lock.json',
+    'api']); // api/ holds Vercel Functions (the contact form); Vercel runs them from the project root, so they are not published as files
   const out = join(ROOT, outName);
   rmSync(out, { recursive: true, force: true });
   mkdirSync(out);

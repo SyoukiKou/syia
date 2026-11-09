@@ -153,8 +153,11 @@
           <label class="contact-form__label" for="message">Message / メッセージ</label>
           <textarea class="contact-form__textarea" id="message" name="message" rows="6" required></textarea>
         </div>
+        <div class="contact-form__trap" aria-hidden="true">
+          <label>Website <input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+        </div>
         <button class="contact-form__submit" type="submit">Send</button>
-        <p class="contact-form__note" hidden>メールアプリが開きます。開かない場合は <a href="mailto:syiaviolin@gmail.com">syiaviolin@gmail.com</a> まで直接ご連絡ください。</p>
+        <p class="contact-form__note" role="status" aria-live="polite" hidden></p>
       </form>
     </div>
   </article>

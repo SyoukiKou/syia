@@ -765,6 +765,9 @@ span.page-links__prev,span.page-links__next,span.page-links__prev:hover,span.pag
   transition:all .3s cubic-bezier(.77,0,.175,1);letter-spacing:.05em
 }
 .contact-form__submit:hover{background:var(--ink);color:var(--bg)}
+.contact-form__submit:disabled{opacity:.5;cursor:wait;background:transparent;color:var(--ink)}
+.contact-form__trap{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
+.contact-form__note--error{opacity:1}
 .contact-form__note{
   font-family:var(--jp);font-weight:400;font-size:12px;
   line-height:2;letter-spacing:.05em;margin-top:25px;opacity:.8

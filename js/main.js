@@ -382,21 +382,63 @@
 
   // ========================================
   // Contact Form (Contact, Lesson)
-  // No form backend on this static site: hand the message to the visitor's mail app
+  // Sent to /api/contact (api/contact.js, a Vercel Function), which mails it to syiaviolin@gmail.com.
+  // If that fails, the visitor gets a link that opens their mail app with what they wrote
   // ========================================
+  var CONTACT_MAIL = 'syiaviolin@gmail.com';
   document.querySelectorAll('.contact-form').forEach(function (form) {
+    var button = form.querySelector('.contact-form__submit');
+    var note = form.querySelector('.contact-form__note');
+    var buttonLabel = button ? button.textContent : '';
+    var sending = false;
+    var value = function (name) {
+      return form.elements[name] ? form.elements[name].value.trim() : '';
+    };
+    var showNote = function (html, isError) {
+      if (!note) return;
+      note.innerHTML = html;
+      note.classList.toggle('contact-form__note--error', !!isError);
+      note.hidden = false;
+    };
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      var value = function (name) {
-        return form.elements[name] ? form.elements[name].value.trim() : '';
+      if (sending) return;
+      var data = {
+        name: value('name'),
+        email: value('email'),
+        subject: value('subject'),
+        message: value('message'),
+        form: form.dataset.subject || 'お問い合わせ',
+        website: value('website')
       };
-      var subject = value('subject') || form.dataset.subject || 'お問い合わせ';
-      var body = value('message') + '\n\n' + value('name') + '\n' + value('email');
-      window.location.href = 'mailto:syiaviolin@gmail.com' +
-        '?subject=' + encodeURIComponent(subject) +
-        '&body=' + encodeURIComponent(body);
-      var note = form.querySelector('.contact-form__note');
-      if (note) note.hidden = false;
+      sending = true;
+      if (button) { button.disabled = true; button.textContent = 'Sending…'; }
+      if (note) note.hidden = true;
+      var controller = window.AbortController ? new AbortController() : null;
+      var timer = controller ? setTimeout(function () { controller.abort(); }, 20000) : 0;
+      fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+        signal: controller ? controller.signal : undefined
+      }).then(function (res) {
+        return res.json().catch(function () { return {}; }).then(function (json) {
+          if (!res.ok || !json.ok) throw new Error(json.error || ('HTTP ' + res.status));
+        });
+      }).then(function () {
+        form.reset();
+        showNote('送信しました。お問い合わせありがとうございます。<br>内容を確認のうえ、ご入力のメールアドレスへご連絡いたします。');
+      }).catch(function () {
+        var mailto = 'mailto:' + CONTACT_MAIL +
+          '?subject=' + encodeURIComponent(data.subject || data.form) +
+          '&body=' + encodeURIComponent(data.message + '\n\n' + data.name + '\n' + data.email);
+        showNote('送信できませんでした。お手数ですが、<a href="' + escapeHtml(mailto) + '">メールアプリで送る</a>か、' +
+          '<a href="mailto:' + CONTACT_MAIL + '">' + CONTACT_MAIL + '</a> まで直接ご連絡ください。', true);
+      }).then(function () {
+        clearTimeout(timer);
+        sending = false;
+        if (button) { button.disabled = false; button.textContent = buttonLabel; }
+      });
     });
   });
 

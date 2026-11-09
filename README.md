@@ -20,7 +20,7 @@ Artist portfolio website for **SYIA** (しあ), a Japan-based violinist. This is
 7. **lesson.html** — Lesson information migrated from [syiaviolin.com/lesson](https://syiaviolin.com/lesson), with an inquiry form
 8. **artist-statement.html** — Artist statement (NEURO ROMANTIC) in Japanese and English, from the SYIA world-view document (Oct 24, 2026)
 9. **biography.html** — Biography with artist photo displayed on the right side (sticky on desktop), Profile/Activities/Education sections (profile text from the old site's home page)
-10. **contact.html** — Contact form with Name, Email, Subject, Message fields
+10. **contact.html** — Contact form with Name, Email, Subject, Message fields. Sending it mails the message to syiaviolin@gmail.com (see **Contact form** below)
 11. **sitepolicy.html** — Site policy with copyright, disclaimer, and link policy sections
 12. **404.html** — Shown by Vercel at any address that does not exist (「ページが見つかりませんでした」 with links to Home, Concert, Information and Contact; kept out of search results)
 
@@ -53,9 +53,23 @@ The harmony is G major, which holds all four open strings (G D A E), moving slow
 
 1. Put the images in `images/` and add or edit the concert in `js/concerts.js` (news goes in `js/information.js`)
 2. Run `node scripts/build.mjs`. It writes the concert list in `concert.html`, every concert's page `concert/<id>.html`, the news list in `information.html`, the two latest concerts on the home page (`index.html`) and `sitemap.xml`, and removes the page of a concert that was taken out. Running it again changes nothing
-3. Commit and push. Vercel runs the same script on every deploy (`node scripts/build.mjs --out public`, `buildCommand` in `vercel.json`), so the published site is up to date even if step 2 was forgotten. With `--out public` the script also copies the site into `public/`, the folder Vercel publishes (`outputDirectory`); `scripts/`, `README.md` and `vercel.json` are left out. `public/` is only made on Vercel and is not committed (`.gitignore`)
+3. Commit and push. Vercel runs the same script on every deploy (`node scripts/build.mjs --out public`, `buildCommand` in `vercel.json`), so the published site is up to date even if step 2 was forgotten. With `--out public` the script also copies the site into `public/`, the folder Vercel publishes (`outputDirectory`); `scripts/`, `api/`, `README.md` and `vercel.json` are left out (Vercel runs `api/` as functions from the project root). `public/` is only made on Vercel and is not committed (`.gitignore`)
 
 The parts the script writes sit between `<!-- build:… -->` and `<!-- /build:… -->` comments; edit `js/concerts.js`, `js/information.js` or `scripts/build.mjs` rather than those parts. Everything else in `concert.html` (header, menu, footer) is the template for the concert pages. The script needs only Node.js (no packages).
+
+## 📮 Contact form
+
+The Contact form (and the Lesson form, once that page is published) sends what the visitor wrote to `/api/contact` (`api/contact.js`, a Vercel Function). It mails it to syiaviolin@gmail.com through [Resend](https://resend.com) (free up to 3,000 mails a month, 100 a day). The visitor sees 「送信しました」 under the button; if sending fails, they get a link that opens their mail app with what they wrote. Replying to the mail goes straight to the visitor (`reply_to`).
+
+Settings on Vercel (Project → Settings → Environment Variables), read by `api/contact.js`:
+
+| Name | Needed | What it is |
+|---|---|---|
+| `RESEND_API_KEY` | yes | API key made in Resend (starts with `re_`). Without it the form answers 「送信できませんでした」 |
+| `CONTACT_TO` | no | Where the mail goes (default `syiaviolin@gmail.com`) |
+| `CONTACT_FROM` | no | Sender (default `SYIA Website <onboarding@resend.dev>`, Resend's test address, which can only send to the address the Resend account was made with). After verifying syiaviolin.com in Resend (DNS records at お名前.com), set e.g. `SYIA Website <contact@syiaviolin.com>` |
+
+A change to these takes effect on the next deploy. Against spam: a hidden `website` field that people never fill (when a bot fills it, it is told 「送信しました」 and nothing is sent), and only this site's own pages may post. The function only runs on Vercel; on pages opened from the disk or a plain local server, sending shows the error message.
 
 ## 📁 File Structure
 
@@ -71,6 +85,8 @@ information.html        — News with year filter & pagination
 contact.html            — Contact form
 sitepolicy.html         — Site policy
 404.html                — Page shown at addresses that do not exist
+api/
+  └── contact.js        — Vercel Function behind the Contact / Lesson forms: mails the message through Resend (see **Contact form**)
 vercel.json             — Vercel settings: URLs without .html or a trailing slash, the build on each deploy (published from public/), redirects from /home and the old Adobe Portfolio URLs
 .gitignore              — Keeps public/ (the copy of the site made on Vercel) out of git
 scripts/
@@ -80,7 +96,7 @@ css/
 js/
   ├── concerts.js       — Concert data (edit this file to add or change concerts)
   ├── information.js    — News for the Information page (anything that is not a concert)
-  ├── main.js           — Shared JavaScript (loading screen, menu and its latest items, old concert#id links, filters, contact form)
+  ├── main.js           — Shared JavaScript (loading screen, menu and its latest items, old concert#id links, filters, sending the contact form to /api/contact)
   ├── hero.js           — Home page opening animation (violin line drawing generated in code) and what touching it does
   ├── violin-sound.js   — The violin's sounds, synthesised in the browser (Web Audio API, no audio files)
   └── cursor.js         — Custom cursor on every page (calm glow and a shooting-star tail)
@@ -146,6 +162,5 @@ Every page loads Google Analytics (GA4, measurement ID `G-JX7REYZTQF`, the same 
 ## 🚧 Not Yet Implemented / Recommended Next Steps
 
 1. **Art page** — currently 「準備中」; remove the `<div hidden>` wrapper and the Coming Soon block in `art.html` to publish the index
-2. **Contact form backend** — the Contact and Lesson forms have no server; on submit they open the visitor's mail app with a message addressed to syiaviolin@gmail.com (`js/main.js`). Replace with a form service if server-side submission is needed
-3. **Event details in search results** — each concert now has its own page; adding `MusicEvent` structured data to it (date, venue name and address) would let upcoming concerts show their date and place in Google. The venue addresses are not yet in `js/concerts.js` as separate fields
-4. **Performance optimization** — images could also be offered as WebP; preload critical assets
+2. **Event details in search results** — each concert now has its own page; adding `MusicEvent` structured data to it (date, venue name and address) would let upcoming concerts show their date and place in Google. The venue addresses are not yet in `js/concerts.js` as separate fields
+3. **Performance optimization** — images could also be offered as WebP; preload critical assets
