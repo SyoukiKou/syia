@@ -730,16 +730,23 @@ span.pager__prev:hover,span.pager__next:hover{opacity:.2}
 /* ====== Page Links (prev/next navigation) ====== */
 .page-links{padding:0 8vw;margin:80px 0}
 @media only screen and (min-width:769px){.page-links{padding:0 6.94444vw;margin:120px 0}}
-.page-links__content{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--faint);padding-top:40px}
-.page-links__prev,.page-links__next,.page-links__index{
+.page-links__content{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;border-top:1px solid var(--faint);padding-top:40px}
+.page-links__prev,.page-links__next{flex:1 1 0;min-width:0;text-decoration:none;transition:opacity .3s ease}
+.page-links__next{text-align:right}
+.page-links__label,.page-links__index{
   font-family:var(--en);font-weight:200;font-style:italic;font-size:17px;
-  text-decoration:none;transition:opacity .3s ease;letter-spacing:.03em
+  text-decoration:none;letter-spacing:.03em
 }
-@media only screen and (min-width:769px){.page-links__prev,.page-links__next,.page-links__index{font-size:19px}}
+.page-links__index{flex:none;transition:opacity .3s ease}
+@media only screen and (min-width:769px){.page-links__label,.page-links__index{font-size:19px}}
 .page-links__prev:hover,.page-links__next:hover,.page-links__index:hover{opacity:.5}
 span.page-links__prev,span.page-links__next,span.page-links__prev:hover,span.page-links__next:hover{opacity:.2;cursor:default}
-.page-links__prev:before{content:"← ";opacity:.5}
-.page-links__next:after{content:" →";opacity:.5}
+.page-links__prev .page-links__label:before{content:"← ";opacity:.5}
+.page-links__next .page-links__label:after{content:" →";opacity:.5}
+.page-links__to{display:block;margin-top:10px;font-weight:200;font-size:12px;line-height:1.6;color:var(--mute)}
+@media only screen and (min-width:769px){.page-links__to{font-size:13px;max-width:320px}.page-links__next .page-links__to{margin-left:auto}}
+.page-links__date{display:block;font-family:var(--en);letter-spacing:.05em}
+.page-links__title{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
 
 /* ====== Contact ====== */
 .contact-header{padding:140px 8vw 0}

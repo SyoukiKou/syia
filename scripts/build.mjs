@@ -290,10 +290,19 @@ function concertPage(template, c, i) {
   });
   // the concert's title is the page's main heading; "Concert" above it is a label
   html = html.replace(/<h1 class="archive-header__title">([\s\S]*?)<\/h1>/, '<p class="archive-header__title">$1</p>');
+  // concerts are newest first, so the left link goes to the newer concert and the right one to the older.
+  // Each link shows where it leads (date and title), so the direction is clear without hovering.
+  const pagerLink = (side, label, to) => {
+    const name = '<span class="page-links__label">' + label + '</span>';
+    if (!to) return '<span class="page-links__' + side + '">' + name + '</span>';
+    return '<a class="page-links__' + side + '" href="' + concertPath(to.id) + '">' + name +
+      '<span class="page-links__to"><time class="page-links__date" datetime="' + escapeHtml(to.date) + '">' + escapeHtml(String(to.date).replace(/-/g, '.')) + '</time>' +
+      '<span class="page-links__title">' + escapeHtml(to.title) + '</span></span></a>';
+  };
   const pager =
-    (prev ? '<a class="page-links__prev" href="' + concertPath(prev.id) + '" title="' + escapeHtml(prev.title) + '">Prev</a>' : '<span class="page-links__prev">Prev</span>') +
+    pagerLink('prev', 'Newer', prev) +
     '<a class="page-links__index" href="concert">Concert</a>' +
-    (next ? '<a class="page-links__next" href="' + concertPath(next.id) + '" title="' + escapeHtml(next.title) + '">Next</a>' : '<span class="page-links__next">Next</span>');
+    pagerLink('next', 'Older', next);
   html = region(html, 'concert', indent([
     '<article class="article" id="concertDetail">',
     '  <header class="article__header"><p class="article__date"><time datetime="' + escapeHtml(c.date) + '">' + escapeHtml(concertDate(c)) + '</time></p>' +
